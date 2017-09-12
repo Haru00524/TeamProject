@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Menu</title>
+	<style>
+
+/* 버튼의 속성값 조절해주는 CSS */
+  .menu_table {
+
+  }
+  .dropbtn {
+    padding: 16px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color:#111111;
+    margin:8px;
+  }
+  /* 메뉴 버튼의 하이퍼링크 밑줄을 없애는 CSS */
+    .dropbtn:link {
+      text-decoration:none;
+  }
+ /* 메뉴 버튼을 갔다 댔을 때 밑줄 횩과를 나타내기 위해서 또 하나의 박스를 만들어 class 이름을 underline으로 주고, 해당 박스와 겹치는 CSS */
+  .underline {
+    position:absolute;
+    display:inline-block;
+    border-bottom-width:1px;
+    border-bottom-color:#111111;
+    border-bottom-style:solid;
+    color:white;
+
+  }
+
+/* 버튼을 눌렀을 때의 동작에 대한 속성을 주는 CSS */
+.underline:hover {
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  border-bottom-color:white;
+}
+
+/* 버튼을 클릭했을 때 나타나는 소메뉴에 대한 CSS */
+.menu-content {
+    display:none;
+    position: absolute;
+    background-color: #111111;
+    min-width:100px;
+    }
+.menu-content a {
+    text-decoration: none;
+    list-style-type:none;
+}
+
+.menu-content li {
+    padding:12px 0px  12px 0px;
+   /* 하이퍼링크에 관한 기본 표시방식을 지워주는 CSS */
+   margin-right:40px;
+   text-align:center;
+}
+.menu a:link {
+      color:white;
+      text-decoration:none;
+
+  }
+
+.menu a:active {
+      color:white;
+  }
+  .menu a:hover {
+      color:white;
+  }
+
+.menu a:visited{
+      color:white;
+      text-decoration:none;
+  }
+
+
+	</style>
+</head>
+
+
+
+<body>
+
+
+<div class="menu_table">
+
+<span class="menu">
+ <a href="#Link" class="dropbtn"><span class="underline">Home</span>Home</a>
+</span>
+
+<span class="menu">
+  <a onclick="myFunction(1)" class="dropbtn"><span class="underline">Movie</span>Movie</a>
+  	<ul id="small_menu1" class="menu-content">
+      <li><a href="#Link1"><span class="underline">액션</span>액션</a></li>
+ 	    <li><a href="#Link2"><span class="underline">느와르</span>느와르</a></li>
+    	<li><a href="#Link3"><span class="underline">재난 영화</span>재난 영화</a></li>
+    	<li><a href="#Link4"><span class="underline">SF</span>SF</a></li>
+      <li><a href="#Link5"><span class="underline">공포</span>공포</a></li>
+      <li><a href="#Link6"><span class="underline">판타지</span>판타지</a></li>
+      <li><a href="#Link7"><span class="underline">코미디</span>코미디</a></li>
+    </ul>
+</span>
+
+
+
+<span class="menu">
+  <a onclick="myFunction(2)" class="dropbtn"><span class="underline">Actors</span>Actors</a>
+      <ul id="small_menu2" class="menu-content">
+        <li><a href="#Link1"><span class="underline">국내 주연</span>국내 주연</a></li>
+        <li><a href="#Link2"><span class="underline">해외 주연</span>해외 주연</a></li>
+        <li><a href="#Link3"><span class="underline">국내 조연</span>국내 조연</a></li>
+        <li><a href="#Link4"><span class="underline">해외 조연</span>해외 조연</a></li>
+     </ul>
+</span>
+
+<span class="menu">
+  <a onclick="myFunction(3)" class="dropbtn"><span class="underline">Directors</span>Directors</a>
+      <ul id="small_menu3" class="menu-content">
+        <li><a href="#Link1"><span class="underline">국내 감독</span>국내 감독</a></li>
+        <li><a href="#Link2"><span class="underline">해외 감독</span>해외 감독</a></li>
+      </ul>
+</span>
+
+<span class="menu">
+  <a onclick="myFunction(4)" class="dropbtn"><span class="underline">Cinemas</span>Cinemas</a>
+      <ul id="small_menu4" class="menu-content">
+        <li><a href="#Link1"><span class="underline">2Ds</span>2Ds</a></li>
+        <li><a href="#Link2"><span class="underline">3Ds</span>3Ds</a></li>
+        <li><a href="#Link3"><span class="underline">IMAX</span>IMAX</a></li>
+        <li><a href="#Link4"><span class="underline">Specials</span>Specials</a></li>
+      </ul>
+</span>
+
+<span class="menu">
+ <a href="#Link" class="dropbtn"><span class="underline">OSTs</span>OSTs</a>  
+</span>
+
+<span class="menu">
+ <a href="#Link" class="dropbtn"><span class="underline">About US</span>About US</a>  
+</span>
+
+<span class="menu">
+ <a href="#Link" class="dropbtn"><span class="underline">Events</span>Events</a>  
+</span>
+
+</div>
+
+
+<script>
+function myFunction(i) {
+var input =document.getElementById("small_menu"+i).style.display='block';
+  document.getElementById("small_menu"+i).style.display='block';
+  /* 메뉴별 간격을 따로 두는 로직 */
+  if (i==1){
+  document.getElementById("small_menu"+i).style.margin="16px 0px 0px 79px";
+    for(j=1;j<5;j++){
+      if(i!==j){
+        document.getElementById("small_menu"+j).style.display='none';
+      }
+    }
+  }
+  else if (i==2){
+  document.getElementById("small_menu"+i).style.margin="16px 0px 0px 182px";
+    for(j=1;j<5;j++){
+        if(i!==j){
+         document.getElementById("small_menu"+j).style.display='none';
+        }
+     }
+  }
+  else if (i==3){
+  document.getElementById("small_menu"+i).style.margin="16px 0px 0px 297px";
+    for(j=1;j<5;j++){
+       if(i!==j){
+         document.getElementById("small_menu"+j).style.display='none';
+        }
+     }
+  }
+  else {
+  document.getElementById("small_menu"+i).style.margin="16px 0px 0px 422px";
+    for(j=1;j<5;j++){
+        if(i!==j){
+          document.getElementById("small_menu"+j).style.display='none';
+        }
+      }
+   }
+}
+
+</script>
+</body>
+</html>

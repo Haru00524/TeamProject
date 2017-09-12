@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>우리들 페이지</title>
+</head>
+<style>
+#a {
+
+	display:block;
+	/*background-image:url("Us.png");;*/
+}
+#fuck {
+	width:999999px;
+	height:200px;
+}
+img {
+	float:left;
+	opacity:0.7;
+}
+
+</style>
+<body>
+<div>
+	<marquee direction=left behavior=alternate scrollamount=3>
+	<div id="fuck">
+		<img id="a"></img>
+	</div>
+	</marquee>
+</div>	
+<script>
+
+	var y = document.getElementById("fuck");
+	for(var i=0;i<100;i++) {
+		setTimeout("k(i)", i*13000);
+	}
+	function k(i) {
+		var btn = document.createElement("img");
+		btn.src="Us.png";
+		y.appendChild(btn);
+	}
+</script>
+</body>
+</html>

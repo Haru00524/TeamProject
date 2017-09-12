@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bikoo's Homepage</title>
+	<style>
+		body {
+			font-family:"맑은 고딕", "돋움";
+		}
+		.size {
+			width:1334px;
+			margin:auto;
+		}
+
+		#logo {
+			width:200px;
+			height:200px;
+			float:left;
+			cursor:pointer;
+		}
+
+		.page {
+			cursor:pointer;
+		}
+
+		#logo:hover {
+ 			background-color: #fc9bd2;
+ 			transition: 0.5s;
+ 			-webkit-transition:0.5s;
+ 			-moz-transition:0.5s;
+ 			-ms-transition:0.5s;
+ 			-o-transition:0.5s;
+		}
+		#logo:active {
+			background-color: #fcbee1;
+		}
+		#logo:link {
+			background-color:#fc9bd2;
+		}
+		#logo:visited {
+			background-color:#fc9bd2;
+		}
+
+		#selector {
+			margin-left:10px;
+	}
+
+		#menu1-1 {
+			width:30%;
+			margin-left:-20px;
+	}
+
+		.table1 {
+			width:15%;
+			float:left;
+		}
+
+		.table1 th.menu1 {
+			font-family:"휴먼편지체", "맑은 고딕";
+			font-size:20px;
+			vertical-align:middle;
+			height:30px;
+	}
+		.table1 td {
+			height:30px;
+			font-family:"휴먼편지체", "맑은 고딕";
+			font-size:20px;
+			color:#7f7f7f;
+			vertical-align:middle;
+			margin-left: 40px;
+			font-weight:bold;
+			text-shadow: 0 0 15px #7f7f7f;
+			padding-left:30px;
+	}
+		.table1 a:link {
+			color:#7f7f7f;
+			text-decoration:none;
+	}
+		.table1 a:active {
+			color:#7f7f7f;
+	}
+		.table1 a:visited {
+			color:#7f7f7f;
+			text-decoration:none;
+	}
+		.table1	td:hover {
+			background-color: #c1e1ff;
+			transition:all 0.5s ease;
+			-webkit-transition:all 0.5s ease;
+			-moz-transition:all 0.5s ease;
+			-ms-transition:all 0.5s ease;	
+			-o-transition:all 0.5s ease;
+	}
+		.table1	td:active {
+			background-color: #8abeff;
+	}		
+		.title1 {
+ 			font-family:"HY견고딕";
+			font-size:25px;
+			color:white	;
+		    text-shadow: 2px 2px 5px blue;
+	}
+		#title2 {
+		    background:url(./image/title.png) no-repeat center;
+		    text-align:center;
+		    vertical-align:top;
+		    padding: 80px 190px 80px;
+	}
+		#main1 {
+			width:70%;
+			height:300px;
+			float:right;
+			margin-right:10%;
+			overflow:auto;
+	}
+		.what {
+			display: none;
+			-webkit-animation: fadeEffect 1s;
+			animation: fadeEffect 1s;
+			font-family: "HY견고딕", "맑은 고딕";
+		}
+			#main2_A {
+		height:200px;
+		width:200px;
+		box-shadow:5px 5px 5px black;
+		border-radius:50%;
+		float:left;
+		margin-left:40px;
+	}
+	#main2_B {
+		margin-left:380px;
+		text-shadow: 6px 6px 6px #7f7f7f;
+		margin-bottom: 50px;
+	}
+	.main2_C {
+		margin-left:380px;
+	}
+	.main2_C th, td {
+		font-size : 20px;
+	    border-bottom: 1px solid #ddd;
+	}
+	#main5 {
+		text-align:center;
+	}
+	#box1:hover {
+		color:white;
+		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+ 		-moz-transition: all 0.5s ease;
+ 		-ms-transition: all 0.5s ease;
+ 		-o-transition: all 0.5s ease;
+	}
+	#box2:hover {
+		color:black;
+		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+ 		-moz-transition: all 0.5s ease;
+ 		-ms-transition: all 0.5s ease;
+ 		-o-transition: all 0.5s ease;
+	}
+	#box3:hover {
+		color:white;
+		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+ 		-moz-transition: all 0.5s ease;
+ 		-ms-transition: all 0.5s ease;
+ 		-o-transition: all 0.5s ease;
+	}
+	#box1 {
+	    width: 210px;
+	    height: 25%;
+	    float:left;
+	    margin-right:40px;
+	    margin-left:10px;
+	    background-color: red;
+	    box-shadow: 10px 10px 5px #888888;
+	    color:red;
+	    line-height:25px;
+	    padding-left:30px;
+ 		padding-right:30px;
+ 		font-size:15px;
+	}
+	#box2 {
+		width: 210px;
+	    height: 25%;
+	    float:left;
+   	    margin-right:40px;
+	    background-color: yellow;
+	    box-shadow: 10px 10px 5px #888888;
+	    color:yellow;
+	    line-height:25px;
+	    padding-left:30px;
+ 		padding-right:30px;
+  		font-size:15px;
+	}
+	#box3 {
+		width: 210px;
+	    height: 25%;
+	    float:left;
+	    background-color: blue;
+	    box-shadow: 10px 10px 5px #888888;
+	    color:blue;
+	    line-height:25px;
+	    padding-left:30px;
+ 		padding-right:30px;
+  		font-size:15px;
+	}
+			.table2{
+ 				border: 2px;
+			    border-style: solid;
+ 				border-color: #7f7f7f;
+				border-style: ridge;
+				text-align:center;
+				font-family:"맑은 고딕";
+				
+			}
+			.table2 th{
+				width:200px;
+				height:40px;  
+				font-family:"맑은 고딕";
+			    font-size:25px;
+			    color:white	;
+		    	text-shadow: 2px 2px 5px blue;
+			}
+			.table2 tr{ 
+				border:1px;
+				border-style: ridge;				
+			    border-color: #7f7f7f;
+			}
+			.table2 td{
+				border:1px;
+				border-style: ridge;				
+			    border-color: #7f7f7f;
+			    height:50px;
+			}
+			.table2 tr:hover {background-color: #f5f5f5}
+			#tr1 {
+				background-color: #f2f2f2;			
+			}
+			#cap {
+				font-size:25px;
+				color:black;
+				font-family:"HY견고딕";
+				text-shadow:0px 0px 10px #7f7f7f;
+		    	font-weight:15px;
+			}
+			#th1 {
+				width:130px;
+			}
+
+.travel {
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 210px;
+    box-shadow:3px 3px 4px solid black;
+}	
+
+.travel {
+    box-shadow: 0px 0px 5px #7f7f7f;
+    transition:all 0.3s ease;
+    -webkit-transition:all 0.3s ease;
+    -moz-transition:all 0.3s ease;
+    -ms-transition:all 0.3s ease; 
+    -o-transition:all 0.3s ease;
+}
+
+.travel img {
+    width: 100%;
+    height: auto;
+}
+
+.desc {
+    padding: 15px;
+    text-align: center;
+    font-size:15px;
+    font-weight:bold;
+}
+.desc:hover {
+    background-color:#fcbee1;;
+    transition:all 0.3s ease;
+    -webkit-transition:all 0.3s ease;
+    -moz-transition:all 0.3s ease;
+    -ms-transition:all 0.3s ease; 
+    -o-transition:all 0.3s ease;
+}
+
+	.main6_A {
+		width:200px;
+		height:200px;
+		float:left;
+		margin-right:20px;
+		box-shadow:3px 3px 3px #7f7f7f;
+		transition:all 1s ease;
+		-webkit-transition:all 0.5s ease;
+		-moz-transition:all 0.5s ease;
+		-ms-transition:all 0.5s ease;	
+		-o-transition:all 0.5s ease;
+	}
+	.main6_A:hover {
+		box-shadow:0 0 12px blue;
+		transform:scale(0.9);
+		-webkit-transform:scale(0.8);
+		-moz-transform:scale(0.8);
+		-ms-transform:scale(0.8);
+		-o-transform:scale(0.8);
+	}
+	#dream {
+		float:right;
+		margin-left:20px;
+	}
+	.main6_B {
+		height:200px;
+	}
+	.main6_B p {
+		text-indent:1em;
+		line-height:180%;
+
+	}
+	.developer {
+		color:red;
+		font-size:20px;
+		font-style:italic;
+		font-weight:bold;
+
+	}
+	#hope {
+		font-size:20px;
+		font-weight:bold;
+	}
+
+		section {
+			height:340px;
+			width:1340px;
+		}
+
+		footer {
+			margin: auto;
+			padding:0px 55px 20px;
+			width:80%;
+			margin-right:10%;
+			font-size:15px;
+			background-color:#ffffff;
+			color:white;
+			border-top:2px solid black;
+			float:bottom;
+	}
+		footer:hover {
+			background-color: #55bdff;
+			transition: all 1s ease;
+			-webkit-transition: all 1s ease;
+ 			-moz-transition: all 1s ease;
+ 			-ms-transition: all 1s ease;
+ 			-o-transition: all 1s ease;
+	}
+		footer:active {
+			background-color:black;
+			transition: 0.5s;
+			-webkit-transition:0.5s;
+ 			-moz-transition:0.5s;
+ 			-ms-transition:0.5s;
+ 			-o-transition:0.5s;
+	}
+	#music {
+			margin-left:40px;
+	}
+	@-webkit-keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+
+	@keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+	</style>
+</head>
+<body> 
+<div class="size">
+<header>
+<span onclick="Go(event, document.getElementById('main2'))" class="page" id="logo"><img id="logo" src="./image/Logo.png" alt:"구본일의 홈페이지 로고"></span>
+<span class="title1" alt="홈페이지의 제목"><h1 id="title2">BIKOO's HomePage</h1></span>
+<div id="music">
+<audio id="myAudio" alt="오디오 파일 태그">
+  <source src="bgm/01.ogg" type="audio/ogg">
+  <source src="bgm/02.mp3" type="audio/mpeg">
+  지금 실행하신 브라우저에서는 오디오 태그 기능을 지원하지 않네요. ㅠ_ㅠ
+</audio>
+<button onclick="playAudio()" type="button" alt="음악 듣기">음악 듣기</button>
+<button onclick="pauseAudio()" type="button" alt="그만 듣기">그만 듣기</button>
+</div>
+</header>
+<nav>
+<table class="table1" alt="좌측 메뉴">
+<th class="menu1">
+<img id="menu1-1" src="./image/menu.png"  alt="동상 이몽...">동상이몽..</th>
+<tr>
+	<td>
+	<a onclick="Go(event, document.getElementById('main3'))" class="page" alt="자기소개">同 자기 소개</a>
+	</td>
+</tr>
+<tr>
+	<td>
+	<a onclick="Go(event, document.getElementById('main4'))" class="page" alt="학교 시간표">床 학교 시간표</a>
+	</td>
+</tr>
+<tr>
+	<td>
+	<a onclick="Go(event, document.getElementById('main5'))" class="page" alt="특별한 경험들">異 특별한 경험들</a>
+	</td>
+</tr>
+<tr>
+	<td>
+	<a onclick="Go(event, document.getElementById('main6'))" class="page" alt="장래 희망">夢 장래 희망</a>
+	</td>
+</tr>
+</table>
+</nav>
+<section alt="메인 페이지">
+<div id="main1">
+	<div class="what" id="main2" style="display:block;">
+		<img src="./image/yjc_logo.png" id="main2_A"></img>
+		<a>
+			<h1 id="main2_B" display="block">영진전문대학 JavaScript<br>자기소개 홈페이지</h1>
+
+			<table class="main2_C">
+			<tr>
+			<th><b>담당교수</b></th><th> : 박성철 교수님</th>
+			</tr>
+			<tr>
+			<td><b>학번</b></td><td> : 1201089</td>
+			</tr>
+			<tr>
+			<td><b>이름</b></td><td>: 구본일</td>
+			</tr>
+			</table>
+		</a>
+	</div>
+	<div class="what" id="main3">
+		<div id="box1"><h3>저는 사색을 좋아합니다.</h3><p>어렸을 적 책읽는 것을 좋아했었습니다. 그러다보니 글쓰기에 소질을 갖게 되었습니다. 또한 아버지께서 교육계에 종사하고 계셔서 가끔 지인의 출간회에 따라갈 때도 있습니다. 그러다보니 타인의 심리를 좋아합니다.</p></div>
+		<div id="box2"><h3>저만의 이념은 긍정입니다.</h3><p>하루에 3번씩 힘든 상황이 올때면 긍정적으로 웃어나가는 암시를 하곤 합니다. 그렇게 해서 비관적인 생각을 의지로 이겨내곤 하는데, 그럴 때면 제 스스로 보람을 느끼곤 합니다. </p></div>
+		<div id="box3"><h3>저는 여행가를 존경합니다.</h3><p>저는 국내 여행이든, 해외 여행이든 가리지 않고 의미가 있다고 생각합니다. 의미 속에는 나름의 가치가 있기 마련이며, 그 가치를 보는 것과 체험해보는 것은 다르기에 실천하는 사람들을 간혹 존경합니다.</p></div>
+	</div>
+	<div class="what" id="main4">
+		
+<table class="table2"> 
+	<caption id="cap">WD-A반 학교 수업 시간표</caption>
+	<tr id="tr1">
+		<th id="th1">수업 시간</th>
+		<th>월요일</th>
+		<th>화요일</th>
+		<th>수요일</th>
+		<th>목요일</th>
+	</tr>
+	<tr>
+		<td>1교시<br>09:00 ~ 10:00</td>
+		<td></td>
+		<td></td>
+		<td>시스템구축실무<br>조수연 (본관 - 300)</td>
+		<td>JavaScript<br>박성철 (본관 - 320)</td>
+	</tr>
+	<tr>
+		<td>2교시<br>10:00 ~ 11:00</td>
+		<td></td>
+		<td>JavaScript<br>박성철 (본관 - 320)</td>
+		<td>시스템구축실무<br>조수연 (본관 - 300)</td>
+		<td>JavaScript<br>박성철 (본관 - 320)</td>
+	</tr>
+	<tr>
+		<td>3교시<br>11:00 ~ 12:00</td>
+		<td></td>
+		<td>직업기초능력 Ⅱ<br>박성철 (본관 - 320)</td>
+		<td>시스템구축실무<br>조수연 (본관 - 300)</td>
+		<td>전공영어 Ⅰ<br>이무수 (본관 - 320)</td>
+	</tr>
+	<tr>
+		<td>4교시<br>12:00 ~ 13:00</td>
+		<td></td>
+		<td>DB 언어<br>김우진 (본관 - 320)</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>5교시<br>13:00 ~ 14:00</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>6교시<br>14:00 ~ 15:00</td>
+		<td>객체지향 프로그래밍Ⅰ<br>임덕성 (본관 - 320)</td>
+		<td>컴퓨터 구조와 운영체계<br>김우진 (본관 - 320)</td>
+		<td>DB 언어<br>김우진 (본관 - 320)</td>
+		<td>컴퓨터 구조와 운영체계<br>김우진 (본관 - 320)</td>
+	</tr>
+	<tr>
+		<td>7교시<br>15:00 ~ 16:00</td>
+		<td>객체지향 프로그래밍Ⅰ<br>임덕성 (본관 - 320)</td>
+		<td>컴퓨터 구조와 운영체계<br>김우진 (본관 - 320)</td>
+		<td>DB 언어<br>김우진 (본관 - 320)</td>
+		<td>컴퓨터 구조와 운영체계<br>김우진 (본관 - 320)</td>
+	</tr>
+	<tr>
+		<td>8교시<br>16:00 ~ 17:00</td>
+		<td>객체지향 프로그래밍Ⅰ<br>임덕성 (본관 - 320)</td>
+		<td>전공영어 Ⅰ<br>이무수 (본관 - 320)</td>
+		<td>객체지향 프로그래밍Ⅰ<br>임덕성 (본관 - 320)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>9교시<br>17:00 ~ 18:00</td>
+		<td></td>
+		<td></td>
+		<td>객체지향 프로그래밍Ⅰ<br>임덕성 (본관 - 320)</td>
+		<td></td>
+	</tr>
+</table>
+
+	</div>
+	<div class="what" id="main5">
+		
+<h3>작년 유럽여행을 다녀오고 찍은 사진들 입니다.</h3>  
+<div class="travel">
+  <a target="_blank" href="./image/01.JPG">
+    <img src="./image/01.JPG" alt="함부르크 전경 사진">
+  </a>
+  <div class="desc">함부르크 전경</div>
+</div>
+
+<div class="travel">
+  <a target="_blank" href="./image/02.JPG">
+    <img src="./image/02.JPG" alt="런던 버킹엄 궁전 앞 분수대에서 찍은 사진">
+  </a>
+  <div class="desc">버킹엄 궁전 앞 분수대</div>
+</div>
+
+<div class="travel">
+  <a target="_blank" href="./image/03.JPG">
+    <img src="./image/03.JPG" alt="빅벤 앞에서 포즈를 취하면서 찍은 사진">
+  </a>
+  <div class="desc">런던의 랜드마크 앞에서</div>
+</div>
+
+<div class="travel">
+  <a target="_blank" href="./image/04.JPG">
+    <img src="./image/04.JPG" alt="쾰른 대성당 안에서 찍은 사진">
+  </a>
+  <div class="desc">쾰른 대성당 안</div>
+</div>
+	</div>
+	<div class="what" id="main6">
+	    <div class="main6_B"><a href="https://en.wikipedia.org/wiki/Black_%26_White_(video_game)" target="_self"><img class="main6_A" src="image/mong1.png"></a><p>저의 <span id="hope">꿈</span>은 <span class="developer">게임개발자</span>가 되는 것입니다.  어렸을 적 대구 월드컵경기장이 완공될 무렵 아버지께서 처음으로 컴퓨터를 사주셨습니다. 당시, 컴퓨터를 판매한 매장에서 기념으로 게임 시디를 동봉해주셨는데 이때 태어나서 처음으로 게임을 접하게 되었습니다. 그게임의 이름은 피터 몰리뉴의 'Black And White' 란 시리즈였습니다. 신이 되어 마을을 번영해나가는 방식의 시나리오는 어린 나이의 저에게 사람들의 복지를 위해 어떻게 가꾸어야할지 고민하게 만들었습니다. 고민의 실마리를 찾기위해 오래된 서적이 가득한 아버지 서재에 책을 뽑아 읽어나가게 되었고, 게임을 통해서 시대를 앞선 인문학의 소중함을 알게되었습니다.</p></div>
+   		<div class="main6_B"><a href="http://gotypicks.blogspot.kr/" target="_self"><img id="dream" class="main6_A" src="image/mong2.png"></a><p><span class="developer">게임의 목적은 무엇일까?</span> 중학교 시절 올라와서 생긴 약간은 의문스러웠던 고민들은 하여금 게임개발자란 꿈을 자연히 갖게 해주었습니다. 또한 일반적으로 게임이라 하면 재미있어야 한다는 이념을 가진 사람들이 대다수이긴 하지만, GOTY(Game of the Year; 올해의 게임 수상작)에 올라오는 게임들은 한가지 공통점이었던 재미를 통해 '감동'을 주는 점을 알게 되었습니다. 이는 제게 어떤 게임개발자가 되어야 할지 방향성을 갖게 해주었습니다. 감동을 주는 게임 개발자. 그 길의 진로는 만일 인생의 마지막 목표로 삼았을 때, 웹데이터베이스 반에 온 것은 분명 독자적인 진로이긴 하지만 이또한 하나의 단계이자 과정일 뿐임을 미래로 증명할 것입니다.</p></div>
+    	<div class="main6_B"><a href="https://jobs.disneycareers.com/job/palo-alto/sr-database-administrator/391/407045" target="_self"><img class="main6_A" src="image/mong3.png"></a><P> 그럼, <span class="developer">꿈을 위해 어떤 직장에서 어떠한 방식으로 채용될 것인가?</span> 이에 대해 저는 게임 데이터베이스 관리자가 될 수 있음을 말씀드리고 싶습니다. 요즈음 빅데이터 시대가 도래하였고, 빅 데이터를 통해 사람들의 심리를 알 수 있다는 사실은 이미 공연한 사실입니다. 그러한 정보들은 기업의 매출과 이윤을 산출할 것이고, 게임 유저들의 동향을 파악할 수 있는 게임 데이터베이스를 구축해보고 싶습니다. 만일 꿈의 현실성을 따지지 않는다고 한다면, 저는 해외의 게임 회사에 취업을 하고 싶습니다. 그와중에서 한 기업을 고를 수 있다고 한다면, 'Disney Interactive Studio'에 들어가고 싶습니다. 다음 시대의 주인공인 아동의 심리학을 게임의 데이터에서 알아낼 수 있다면, 가장 순수한 감동을 발견할 수도 있지 않을까 생각합니다. 그런 단계에 이르었을 때 저는 제 꿈의 비전을 자부할 수 있겠습니다. ^_^</P></div>
+</div>
+</section>
+<footer>
+        <ul type="circle" alt="간략한 정보">
+     		<li>이름 : 구본일 </li>
+    		<li>휴대폰 : 010-3002-4199</li>
+			<li>학번 : 1201089</li>
+    		<li><address>이메일 : bikoo3002@naver.com</address></li>
+        </ul>
+</footer>
+</footer>
+</div>
+<script>
+var x = document.getElementById("myAudio"); 
+
+function playAudio() { 
+    x.play(); 
+} 
+
+function pauseAudio() { 
+    x.pause(); 
+} 
+
+	function Go(evt, pageName) {
+	    var i;
+	    var what = [];
+	    var page = [];
+	   what = document.getElementsByClassName("what");
+	    	for(i=0;i<what.length;i++) {
+	        what[i].style.display = "none";
+	    	}
+	    page = document.getElementsByClassName("page");	
+	    for (i = 0; i < what.length; i++) {
+	    //    page[i].className = page[i].className.replace(" active", "");
+	    }
+	    pageName.style.display = "block";
+	    evt.currentTarget.className += " active";
+	}
+
+
+</script>
+</body>
+</html>

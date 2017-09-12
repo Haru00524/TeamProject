@@ -1,0 +1,2878 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>TeamPo</title>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <style type="text/css">
+
+/************************************** Library 영역 **************************************/
+
+/* Slideshow container */
+.slideshow-container {max-width:100%; height:700px; position: relative; margin: 0px auto;}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  top: 45%;
+  width: auto;
+  padding: 50px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  z-index: 5;
+}
+
+/* Position the "next button" to the right */
+.next {right: 0; border-radius: 3px 0 0 3px;}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {background-color: rgba(255,255,255,0.2);}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Slide box 영역 추가 @@@ 수정 */
+.Slide_Box {text-align:center; width:100%; height:20px; margin:16px; auto;}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor:pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border:2px solid  #CBC1C1;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {background-color: #242424;}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name:fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .slprev, .slnext,.text {font-size: 11px}
+}
+
+/************************************** Library 영역 **************************************/
+
+*{margin:0; padding:0; font-family:arial;} /* 초기화 */
+        
+html,body{width:100%; float:left;}
+
+#wrap {width:100%; height:100%; background-color:#070707; overflow-y:hidden; overflow-x:hidden;}
+#header {width:100%; height:70px; background-color:#111111; border-bottom:1px solid #353535;} /* ( +100 ) */
+#section {width:100%;  background-color:#4641D9;} /* ( total_2500 ) */
+#footer {width:100%;  background-color:#070707; border-top:1px solid #353535; clear:both;} /* ( +150 ) */
+
+#logo{margin-left: 100px;}
+
+/************************************** jquery 위한 CSS **************************************/
+
+.Headerspan {margin:5px 0px 0px 5px; float:left;}  /* 포지션 픽스 스크롤내려도 고정*/
+.nav{width:15%; height:94.90%; position:fixed; left:0; top:5%; z-index:7; background:#e8ebf0; 
+border-right:1px solid #bbbbbb; float:left; margin:1px 0 0 -1px; }
+.nav span {position:absolute; cursor:pointer; right:-17px; top:8px;} /* 개인홈페이지부분*/
+
+
+
+::selection {background:transparent;}
+@-webkit-keyframes 'an_box1' {
+  0% {opacity:0;}
+  50% {opacity:1.0;}
+  100% {opacity:0;}
+}
+.an_box1 {
+  width:230px; height:100px; background:#ccc;
+  border-radius:20px;
+  position:absolute; left:50%; top:60%; margin:-100px 0 0 -100px;
+  -webkit-animation-name:'an_box1';
+  -webkit-animation-duration:1s;
+  -webkit-animation-timing-function:ease;
+  -webkit-animation-iteration-count:infinite;
+}
+
+/************************************** jquery 위한 CSS **************************************/
+
+
+/************************************** 동영상 툴 CSS **************************************/
+
+.L_img{ /*재생 버튼 정지 버튼의 css*/
+  position: absolute;
+  width: 900px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  margin-top: -350px;
+  margin-left: -450px;
+  z-index: 2;
+  opacity: 0.7;
+
+}
+.L_click{ /*재생과 정지버튼이 안보이는데*/
+  opacity: 0;
+  transition: 0.5s;
+}
+.L_click:hover{ /*hover시 보인다.*/
+  opacity: 1;
+}
+.L_hide{
+  display: none;
+}
+.L_hight{
+  height: 700px;
+  background-size:100% 700px;
+}
+
+/************************************** 동영상 툴 CSS **************************************/
+
+/************************************** Menu 메뉴부분 **************************************/
+
+.dropbtn {
+  background-color: #111111;
+  color: #9f9f9f;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-right:0px;
+  width:150px;
+  border-right:1px solid #9f9f9f;
+}
+
+
+.dropbtn_1 {
+  background-color: #111111;
+  color: #9f9f9f;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-right:0px;
+  width:150px;
+  border-right:0;
+}
+
+
+
+.dropdown {
+    display: inline-block;
+
+}
+
+.dropdown-content {
+  display:none;
+  background-color: rgba(17,17,17,0.6);
+  width:150px;
+  color:white;
+  position:relative;
+  z-index:4;
+}
+
+.dropdown-content a {
+  color: #9f9f9f; 
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align:center;
+}
+
+
+.underline {
+  display:inline-block;
+  border-bottom-width:1px;
+  border-bottom-color:rgba(17,17,17,0);
+  border-bottom-style:solid;
+  color: #9f9f9f; 
+  font-style:vertical-align:middle;
+  text-align:center;
+}
+
+/* 버튼을 눌렀을 때의 동작에 대한 속성을 주는 CSS */
+
+.pic_width {
+  width:20px;
+  height:20px;
+  margin-right: 8px; 
+  vertical-align:middle;
+}
+
+.menuA {
+  float:left;
+  margin: 20px 0px 0px 0px;
+}
+
+.Search {
+  width:290px;
+  height:30px;
+  background-color: #111111;
+  margin:10px 0px 0px 745px;
+  z-index:1;
+}
+
+.Rank {
+  position:fixed;
+  clear:both;
+  margin:0px 0px 0px 750px;
+  width:290px;
+  height:30px;
+  background-color: #111111;
+  z-index:2;
+}
+
+.gap_left {padding:0px 0px 5px 10px;}
+.gap_rank {margin:10px 0px 10px 70px;}
+
+.num {
+   color:white;
+}
+.liTAG {
+  display: none;
+  list-style-type: none;
+  color:#9f9f9f;  
+}
+.liTAG:hover {
+  color: white;
+  border-bottom: 1px solid white;
+}
+.hide{
+  display: block;
+}
+ .hides{
+  transition: 0.5s;
+  display: block;
+}
+.num_pop{
+  display: block;
+}
+.num_display{
+  display: none;
+}
+
+#other_box{
+  background-color: #111111;
+  position:relative;
+  z-index:4;
+}
+.font_color{
+   color:white;
+}
+
+.auto{
+  line-height : 30px;
+}
+
+.bar {
+  height: 11px;
+  border-left:1px solid #eaeaea;
+}
+.filp{
+  transform: rotateX(90deg);
+}
+
+/*************검색 CSS *************/
+
+.Searchback {
+  background-image: url('./menu/search.png');
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position:11px 2px;
+  background-color:#111111;
+  font-size: 16px;
+  padding-left:40px;
+  width:0px;
+  height:28px;
+  border: 2px solid #9f9f9f;
+  border-radius:10px;
+  line-height:20px;
+  float:left;
+  transition:  0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+} 
+
+.ClickIcon {
+  float:left;
+  margin: 0px;
+  position:relative;
+  height:28px;
+  border: 2px solid #9f9f9f;
+  border-radius:10px;
+  background-color:#111111;
+  cursor:pointer;
+  color:#9f9f9f;
+  width:50px;
+  line-height:1;
+  
+}
+/************************************** Menu 메뉴부분 **************************************/
+
+.centers {width:1200px; height:70px; margin:0px auto; /*border:1px solid white;*/}
+
+.positionA {width:100%; height:70px; position:fixed; z-index:6; background-color:#111111; top:0; left:0; right:0;
+            box-shadow:0 1px 10px 0 rgba(0,0,0,.2);}
+
+.Menu {width:1000px; height:70px; float:left; margin:0px 0px 0px 0px; background-color:#111111; /*border:1px solid white;*/}
+
+
+.Box_A {width:100%; height:700px;} /* ( +700 ) 메인동영상 부분 */
+		
+.Box_B {width:100%; height:50px; background-color:#111111; border-top:1px solid #353535;} /* ( +50 ) */ 
+.push_Box {width:1200px; height:49px; margin:0px auto; color:white; /*border:1px solid white;*/} /* 섹션 중앙정렬박스  */		
+
+.Box_C {width:100%; height:900px; background-color:#251F1F; border-top:1px solid #353535;} /* 900 */
+.Onbox_A {width:1200px; height:600px; margin:0px auto; /*border:1px solid white;*/ color:white;}
+.article_A {width:1200px; height:850px; background-color:#353535; margin:25px 0px 0px 0px;}
+.sname {width:1200px; height:40px; background-color:#353535;}
+.M_1 {margin:9px 0px 0px 20px; float:left}
+
+.bname {width:1170px; height:795px; background-color:#111111; margin:0px 15px 15px 15px;}
+.Movie_1 {width:230px; height:340px; background-color:#454545; margin:40px 0px 0px 50px; float:left;}
+
+.Box_D {width:100%; height:900px; background-color:#251F1F; border-top:1px solid #454545;} /* 600 */
+.Onbox_B {width:1350px; height:900px; margin:0px auto; /*border:1px solid white;*/ color:white; /*background-color:gray;*/}
+
+.article_B_tab {width:75px; height:851px; float:left; margin:25px 0px 0px 0px;}
+.article_B {width:1200px; height:850px; background-color:#BAD0D0; float:left; margin:25px 0px 0px -1px;}
+.arti_B {display:none;}
+.arti_C {display:none;}
+.sname2 {width:1200px; height:40px; background-color:#111111;}
+.cname {width:1170px; height:795px; background-color:#353535; margin:0px 15px 15px 15px; position: relative;}
+
+
+.Box_E {width:100%; height:900px; background-color:#343434;} /* 600 */
+.Onbox_C {width:1200px; height:900px; margin:0px auto; border:1px solid white; color:white;}
+
+.Box_F {width:100%; height:900px; background-color:#343434; } /* 600 */
+.Onbox_D {width:1200px; height:900px; margin:0px auto; border:1px solid white; color:white;}
+
+.Box_G {width:100%; height:900px; background-color:#343434; } /* 600 */
+.Onbox_E {width:1200px; height:900px; margin:0px auto; border:1px solid white; color:white;}
+
+
+
+.FooterPage {width:1200px; height:150px; margin:0px auto; background-color:#121212; border:1px solid white; color:white;} /* 푸터 중앙정렬 박스 */
+.FooterBox {width:100%; border-top:1px solid #353535; color:gray; background-color:#111111; 
+            padding:30px 0px; font-family:"Gotham-Book"; font-weight:100; font-size:0.8em;
+            transition: all 0.3s ease-out; float:left;
+}
+.FooterBox:hover {
+  color:#fefefe;
+  transition: all 0.5s ease-out;
+}
+
+.FooterMAIN {width:1200px; margin:0px auto;}
+.FooterLeft {float:left; padding:0px 0px 0px 10px; cursor:default;}
+
+.FooterRight {float:right; cursor:default;}
+.FooterRight li{display:inline; list-style-type:none; padding:0px 0px 0px 15px;}
+.FooterRight a {text-decoration:none; color:gray; padding:0px 0px 0px 15px;}
+
+/* ================================================== TAB 기능 =============================================== */
+
+ul.tab_A {
+    width:75px;
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    /* border:1px solid #ccc; */
+    background-color:#192525;
+    position:absolute;
+    z-index:2;
+}
+
+/* Float the list items side by side */
+ul.tab_A li {z-index:2;}
+
+/* Style the links inside the list items */
+ul.tab_A li a {
+    display:inline-block;
+    color:black;
+    text-align: center;
+    padding:16px 0px 16px 0px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size:17px;
+    display:block;
+    border-right:1px solid #454545;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display:none;
+    padding:6px 12px;
+    border:1px solid black;
+    border-top: none;
+}
+
+
+/* ==================================================== 바디메뉴얼 =========================================== */ 
+
+.Momenu {
+  transform: rotateY(180deg);
+    color: white;
+    width:228px;
+    height:338px;
+    float:left;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    border:1px solid #ffffff;
+    
+}
+.Momenuhov{
+  background-color: rgba(255, 255, 255, 0);
+    width:228px;
+    height:338px;
+    -webkit-transition: all 0.5s ease-out; /* 크롬,사파리호환 */ 
+    -moz-transition: all 0.5s ease-out; /* 파이어폭스,모질라호환 */ 
+    -ms-transition: all 0.5s ease-out; /* 익스플로러호환 */
+    -o-transition: all 0.5s ease-out; /* 오페라호환 */
+    transition: all 0.5s ease-out;
+}
+.Movie_1:hover .Momenuhov{
+    background-color: rgba(255, 255, 255, 0.15);
+    -webkit-transition: all 0.5s ease-out; /* 크롬,사파리호환 */ 
+    -moz-transition: all 0.5s ease-out; /* 파이어폭스,모질라호환 */ 
+    -ms-transition: all 0.5s ease-out; /* 익스플로러호환 */
+    -o-transition: all 0.5s ease-out; /* 오페라호환 */
+    transition: all 0.5s ease-out;
+    
+}
+.AB_0{
+  transform: rotateY(0deg);
+  border:1px solid #454545;
+}
+.Movie_1:hover .fliper{
+  transform: rotateY(180deg);
+}
+.Momenu, .AB_0{
+  position: absolute;
+  backface-visibility:hidden;
+}
+.fliper{
+  transform-style: preserve-3d;
+    position: relative;
+   transition: 0.5s;
+}
+.AB_1 {background-repeat:no-repeat; height: 338px; width: 230px;}
+.AB_2 {background-repeat:no-repeat; height: 338px; width: 230px;}
+.AB_3 {background-repeat:no-repeat; height: 338px; width: 230px;}
+.AB_4 {background-repeat:no-repeat; height: 338px; width: 230px;}
+.AB_5 {background-repeat:no-repeat; height: 338px; width: 230px;}
+.AB_6 {background-repeat:no-repeat; height: 338px; width: 230px;}
+.AB_7 {background-repeat:no-repeat; height: 338px; width: 230px;}
+.AB_8 {background-repeat:no-repeat; height: 338px; width: 230px;}
+
+
+.refer_A:link, .refer_A:visited {
+  color: white;
+  margin:0px 0px 0px 0px;
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block;
+  float:left;
+  width:228px;
+  line-height:50px;
+  display:inline;
+
+  -webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+  -moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+  -ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+  -o-transition: all 0.3s ease-out; /* 오페라호환 */
+  transition: all 0.3s ease-out;
+}
+
+.refer_A:hover, .refer_A:active {
+  background-color:#ffffff;
+  color: black;
+  -webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+  -moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+  -ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+  -o-transition: all 0.3s ease-out; /* 오페라호환 */
+  transition: all 0.3s ease-out;
+}
+/* ==================================================== 라이트 박스 =========================================== */ 
+#lightbox {
+  display: none;
+  position: fixed;
+  background-color: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+#moviebox {
+  position: absolute;
+  background-color: #251F1F;
+  width: 1200px;
+  height: 800px;
+  top: 50%;
+  left: 50%;
+  margin:-400px 0px 0px -600px;
+  border-radius:20px;
+  box-shadow:0 1px 10px 0 rgba(0,0,0,0.2);
+}
+
+#movieimgbox {
+  width: 280px;
+  height: 799px;
+  float:left;
+}
+.imgboxline {
+  width: 260px;
+  height: 380px;
+  border-bottom:1px solid #454545;
+  margin:0px 0px 0px 10px;
+}
+.imgbox {
+  width: 230px;
+  height: 340px;
+  margin:20px 0px 0px 15px;
+  float:left;
+  border: 1px solid #454545;
+}
+.img11 {background-image:url('./Poster/수정1.png');}
+.img12 {background-image:url('./Poster/수정2.png');}
+.img13 {background-image:url('./Poster/수정3.png');}
+.img14 {background-image:url('./Poster/수정4.png');}
+.img15 {background-image:url('./Poster/수정5.png');}
+.img16 {background-image:url('./Poster/수정6.png');}
+.img17 {background-image:url('./Poster/수정7.png');}
+.img18 {background-image:url('./Poster/수정8.png');}
+
+
+.information {
+  width: 230px;
+  height: 380px;
+  /**border: 1px solid #454545;**/
+  margin:18px 0px 0px 30px;
+  color:#959599;
+}
+.onfont {
+  font-family:"Gotham-Book"; 
+  font-weight:100; 
+  font-size:15px;
+  list-style-type:none;
+}
+
+.onfont2 {
+  font-family:"Gotham-Book"; 
+  font-weight:100; 
+  font-size:18px;
+}
+.onfont3 {
+  font-family:"Gotham-Book"; 
+  font-weight:100; 
+  font-size:15px;
+  color:#959599;
+}
+
+#moviearticlebox {
+  width: 900px;
+  height: 780px;
+  border-left:1px solid #454545;
+  float:left;
+  margin:10px 0px 0px 0px;
+}
+.moviearticle {
+  width: 890px;
+  height: 420px;
+  border-bottom:1px solid #454545;
+  margin:0px 0px 0px 10px;
+  padding:10px 0px 20px 10px;
+  color: #959599;
+}
+
+.moviearticle2 {
+  width: 890px;
+  height: 300px;
+  /* background-color:gray; */
+  margin:20px 0px 0px 20px;
+}
+
+.actor {
+  width:111px;
+  height:139px;
+  float:left;
+  margin:0px 10px 20px 0px;
+  border:1px solid #646464;
+}
+.actorBox {
+  float:left;
+  width:170px;
+  height:140px;
+  /*border:1px solid gray;*/
+  margin:0px 0px 0px 0px; 
+}
+
+#close {
+  position:absolute;
+  top:0%;
+  right: 0%;
+}
+.closepic {
+  width: 30px;
+  height: 30px;
+}
+/* ==================================================== CiNEMA =========================================== */ 
+  .maps {
+    width:500px;
+    height:450px;
+    border:0;
+    float:left;
+    z-index:1;
+    position:absolute;
+  }
+  #list {
+    list-style-type:none;
+
+  }
+  .what {
+    cursor:pointer;
+    font-size:23px;
+    line-height:140%;
+    margin-bottom:20px;
+  }
+  #designForTab {
+    background-color:#111111;
+    color:#9f9f9f;
+    height:50px;
+    width:100px;
+    font-size:17px;
+  }
+  #showcinema {
+    background-color:#353535;
+    width:500px;
+    height:450px;
+    float:left;
+  }
+  .explaincinema {
+    color:white;
+    height:435px;
+    background-color:#353535;
+    padding-left:30px;
+    width:470px;
+    float:left;
+      padding-top:15px;
+  }
+  #point {
+    font-style:italic;
+  }
+  .pointer {
+    z-index:2;
+    position:absolute;
+    cursor:pointer;
+  }
+  .cinema{
+      -webkit-animation: fadeEffect 1s;
+      animation: fadeEffect 1s;
+  }
+   .cinema_Rotte, .cinema_CGV, .cinema_Mega{
+      display: none;
+   }
+  #Rotte_10 {
+    left:253px;
+    top:143px;
+  }
+  #Rotte_11 {
+    left:207px;
+    top:213px;
+  }
+  #Rotte_12 {
+    left:238px;
+    top:207px;
+  }
+  #Rotte_13 {
+    left:278px;
+    top:200px;
+  }
+  #Rotte_14 {
+    left:230px;
+    top:260px;
+  }
+  #Rotte_15 {
+    left:380px;
+    top:180px;
+  }
+  #CGV_10 {
+    left:280px;
+    top:201px;
+  }
+  #CGV_11 {
+    left:320px;
+    top:242px;
+  }
+  #CGV_12 {
+    left:355px;
+    top:237px;
+  }
+  #CGV_13 {
+    left:285px;
+    top:204px;
+  }
+  #CGV_14 {
+    left:310px;
+    top:135px;
+  }
+  #CGV_15 {
+    left:240px;
+    top:130px;
+  }
+  #CGV_16 {
+    left:278px;
+    top:198px;
+  }
+  #CGV_17 {
+    left:281px;
+    top:206px;
+  }
+  #Mega_10 {
+    left:264px;
+    top:170px;
+  }
+  #Mega_11 {
+    left:242px;
+    top:131px;
+  }
+  .size1{
+    width:32px;
+    height:32px;
+    position: absolute;
+  }
+  a:active, a:visited, a:link{
+    color:white;
+  }
+  a {
+    color:white;
+    text-decoration:none;
+  }
+  @-webkit-keyframes fadeEffect {
+      from {opacity: 0;}
+      to {opacity: 1;}
+  }
+
+  @keyframes fadeEffect {
+      from {opacity: 0;}
+      to {opacity: 1;}
+  }
+  .onhover{
+    -webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */
+      -moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+      -ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+      -o-transition: all 0.3s ease-out; /* 오페라호환 */
+      transition: all 0.3s ease-out;
+  }
+</style>
+</head>
+<body>
+    <div class="an_box1"><img src="logo.png"></div>
+    <div class="an_box2"></div>  <!--버튼-->
+    <div id="wrap">
+        <div id="lightbox">
+          <div id="moviebox">
+            <div id="movieimgbox">
+              <div class="imgboxline">
+                <div class="imgbox img11"></div>
+                <div class="imgbox img12"></div>
+                <div class="imgbox img13"></div>
+                <div class="imgbox img14"></div>
+                <div class="imgbox img15"></div>
+                <div class="imgbox img16"></div>
+                <div class="imgbox img17"></div>
+                <div class="imgbox img18"></div>
+              </div>
+              <div class="information">
+                <ul class="onfont">
+                  <li><b>인셉션 </b><br>INCEPTION</li><br>
+                  <li><b>감독：</b>크리스토퍼 놀란</li><br>
+                  <li><b>개봉일：</b>2010.07.21</li><br>
+                  <li><b>장르：</b>액션, 모험, SF, 미스터리 <p>스릴러／147분</li><br>
+                  <li><b>배우：</b>키미키 류노스케</li>
+                </ul>
+                <ul class="onfont">
+                  <li><b>너의 이름은  </b><br>your name</li><br>
+                  <li><b>감독：</b>신카이 마코토</li><br>
+                  <li><b>개봉일：</b>미정</li><br>
+                  <li><b>장르：</b>애니메이션</li><br>
+                  <li><b>배우：</b>레오나르도 디카프리오</li>
+                </ul>
+                <ul class="onfont">
+                  <li><b>캡틴 아메리카：시빌워 </b><br>Captain Ameriz：Civil War</li><br>
+                  <li><b>감독：</b>안소니 루소, 조 루소</li><br>
+                  <li><b>개봉일：</b>2016.04.27</li><br>
+                  <li><b>장르：</b>액션, SF, 스릴러／147분</li><br>
+                  <li><b>배우：</b>크리스 에반스</li>
+                </ul>
+                <ul class="onfont">
+                  <li><b>컨저링 2 </b><br>The Conjuring 2</li><br>
+                  <li><b>감독：</b>제임스 완</li><br>
+                  <li><b>개봉일：</b>2016.06.09</li><br>
+                  <li><b>장르：</b>공포／134분</li><br>
+                  <li><b>배우：</b>베라 파미가</li>
+                </ul>
+                <ul class="onfont">
+                  <li><b>베테랑 </b><br>Veteran</li><br>
+                  <li><b>감독：</b>류승완</li><br>
+                  <li><b>개봉일：</b>2015.08.05</li><br>
+                  <li><b>장르：</b>액션, 드라마／123분</li><br>
+                  <li><b>배우：</b>황정민</li>
+                </ul>
+                <ul class="onfont">
+                  <li><b>주토피아 </b><br>Zootopiz</li><br>
+                  <li><b>감독：</b>바이론 하워드, 리치 무어 </li><br>
+                  <li><b>개봉일：</b>2016.02.17</li><br>
+                  <li><b>장르：</b>액션, 애니메이션／108분</li><br>
+                  <li><b>배우：</b>지니퍼 굿윈</li>
+                </ul>
+                <ul class="onfont">
+                  <li><b>명량 </b><br>ROARING CURRENTS</li><br>
+                  <li><b>감독：</b>김한민</li><br>
+                  <li><b>개봉일：</b>2014.07.30</li><br>
+                  <li><b>장르：</b>액션, 드라마／128분</li><br>
+                  <li><b>배우：</b>최민석</li>
+                </ul>
+                <ul class="onfont">
+                  <li><b>호빗: 다섯 군대 전투 </b><br>The Hobbit: The Battle of Five Armies</li><br>
+                  <li><b>감독：</b>피터잭슨</li><br>
+                  <li><b>개봉일：</b>2014.12.17</li><br>
+                  <li><b>장르：</b>모험, 판타지／144분</li><br>
+                  <li><b>배우：</b>마틴 프리먼</li>
+                </ul>
+              </div>
+            </div>
+            <div id="moviearticlebox">
+              <div class="moviearticle">
+              <h3>줄거리</h3><br><br>
+              <p class="onfont2">
+                <b>다크 나이트의 스케일과 매트릭스의 미래가 만났다 | 생각을 훔치는 거대한 전쟁</b><br>
+                드림머신이라는 기계로 타인의 꿈과 접속해 생각을 빼낼 수 있는 미래사회. <br><br>
+                ‘돔 코브’(레오나르도 디카프리오)는 생각을 지키는 특수보안요원이면서 <br>
+                또한 최고의 실력으로 생각을 훔치는 도둑이다. <br>
+                우연한 사고로 국제적인 수배자가 된 그는 기업간의 전쟁 덕에 <br>
+                모든 것을 되찾을 수 있는 기회를 얻게 된다. <br>
+                하지만 임무는 머릿속의 정보를 훔쳐내는 것이 아니라, <br>
+                반대로 머릿속에 정보를 입력시켜야 하는 것! <br>
+                그는 ‘인셉션’이라 불리는 이 작전을 성공시키기 위해 최강의 팀을 조직한다. <br>
+                불가능에 가까운 게임, 하지만 반드시 이겨야만 한다!
+              </p>  
+              <p class="onfont2">
+                <b>한달 후, 천년 만에 찾아온다는 혜성을 기다리고 있는 일본. </b><br>
+                산골 깊은 시골 마을에 우울한 나날을 보내고 있는 여고생 미츠하.<br><br>
+                촌장인 아버지의 선거활동과 신사 집안의 낡은 풍습. 좁고 작은 마을에서는 <br>
+                주위의 시선이 너무나도 신경 쓰이는 나이인만큼 도시를 향한 동경심은 커지기만 한다. <br>
+                “다음 생은 도쿄의 잘생긴 남자로 태어나게 해주세요ㅡ!!”  <br>
+                그러던 어느 날, 자신이 남자가 되는 꿈을 꾼다.   <br>
+                낯선 방, 처음 보는 얼굴의 친구들, 눈 앞에 펼쳐지는 것은 도쿄의 거리. <br>
+                당황하면서도 꿈에 그리던 도시에서의 생활을 마음껏 즐기는 미츠하. <br>
+                한편, 도쿄에서 살고 있는 남고생 타키도 이상한 꿈을 꾼다. <br>
+                가본적 없는 깊은 산속의 마을에서 여고생이 된 것이다. <br>
+                반복되는 신기한 꿈. 그리고 자신이 인지하고 있는 기억과 시간에서 느끼는 위화감. <br>
+                이윽고, 두 사람은 깨닫는다. “우리, 서로 몸이 바뀐 거야?!”<br>
+                바뀐 몸과 생활에 놀라면서도  그 현실을 조금씩 받아들이는 타키와 미츠하. <br>
+                만난 적 없는 두 사람의 만남. 운명의 톱니바퀴가, 지금 움직이기 시작한다.
+              </p>
+              <p class="onfont2">
+                <b>어벤져스 VS 어벤져스</b><br>
+                 분열은 시작되었다!  <br><br>
+                 어벤져스와 관련된 사고로 부수적인 피해가 일어나자  <br>
+                 정부는 어벤져스를 관리하고 감독하는 <br>
+                 시스템인 일명 ‘슈퍼히어로 등록제’를 내놓는다. <br>
+                 어벤져스 내부는 정부의 입장을 지지하는 찬성파(팀 아이언맨)와 <br>
+                 이전처럼 정부의 개입 없이 자유롭게 인류를 보호해야 한다는 <br>
+                 반대파(팀 캡틴)로 나뉘어 대립하기 시작하는데...
+              </p>
+              <p class="onfont2">
+                <b>믿을 수 없겠지만… 이번에도 실화다!</b><br>
+                1977년 영국 엔필드. 엄마 페기와 네 남매가 살고 있는 <br>
+                가족의 집에 정체를 알 수 없는 존재가 나타난다.   <br><br>
+                일명 폴터가이스트 유령... <br> 
+                벽을 두드리는 소리, 사악한 목소리, 유령은 밤마다 가구와 물건들, <br>
+                심지어 아이들까지 공중에 띄우는 등 기이한 일들을 일으킨다.  <br>
+                결국 교회의 요청을 받은 워렌 부부가 <br>
+                영국 엔필드의 집을 찾아가 사건을 조사한다.  <br>
+                그러나 워렌 부부는 그 집에서 예상보다 더욱 엄청난 상대를 만나게 되고, <br>
+                워렌 부부의 목숨까지 위협받는데…
+              </p>
+              <p class="onfont2">
+                <b>한 번 꽂힌 것은 무조건 끝을 보는 행동파 ‘서도철’(황정민),</b><br>
+                20년 경력의 승부사 ‘오팀장’(오달수), 위장 전문 홍일점 ‘미스봉’(장윤주), 육체파 ‘왕형사’(오대환), <br>
+                막내 ‘윤형사’(김시후)까지 겁 없고, 못 잡는 것 없고, 봐 주는 것 없는 특수 강력사건 담당 광역수사대.<br><br>
+                오랫동안 쫓던 대형 범죄를 해결한 후 숨을 돌리려는 찰나,  <br>
+                서도철은 재벌 3세 ‘조태오’(유아인)를 만나게 된다.   <br>
+                세상 무서울 것 없는 안하무인의 조태오와 언제나 그의 곁을 지키는 오른팔 ‘최상무’(유해진). <br>
+                서도철은 의문의 사건을 쫓던 중 그들이 사건의 배후에 있음을 직감한다.<br><br>
+                건들면 다친다는 충고에도 불구하고 포기하지 않는 서도철의 집념에<br>
+                판은 걷잡을 수 없이 커져가고 <br>
+                조태오는 이를 비웃기라도 하듯 유유히 포위망을 빠져 나가는데… <br><br>
+                베테랑 광역수사대 VS 유아독존 재벌 3세<br>
+                2015년 여름, 자존심을 건 한판 대결이 시작된다!
+              </p>
+              <p class="onfont2">
+                <b>누구나 살고 싶은 도시 1위, 주토피아 </b><br>
+                연쇄 실종 사건 발생! <br>
+                “미치도록 잡고 싶었다!” <br><br>
+                교양 있고 세련된 라이프 스타일을 주도하는 도시 주토피아.  <br>
+                이 곳을 단숨에 혼란에 빠트린 연쇄 실종사건이 발생한다!   <br>
+                주토피아 최초의 토끼 경찰관 주디 홉스는 48시간 안에 사건 해결을 지시 받자 <br>
+                뻔뻔한 사기꾼 여우 닉 와일드에게 협동 수사를 제안하는데… <br><br>
+                스릴 넘치는 추격전의 신세계가 열린다!
+              </p>
+              <p class="onfont2">
+                <b>1597년 임진왜란 6년, </b><br>
+                오랜 전쟁으로 인해 혼란이 극에 달한 조선.<br><br>
+                무서운 속도로 한양으로 북상하는 왜군에 의해 국가존망의 위기에 처하자  <br>
+                누명을 쓰고 파면 당했던 이순신 장군(최민식)이 삼도수군통제사로 재임명된다. <br>
+                하지만 그에게 남은 건 전의를 상실한 병사와 두려움에 가득 찬 백성,<br>
+                그리고 12척의 배 뿐. <br>
+                마지막 희망이었던 거북선마저 불타고<br>
+                잔혹한 성격과 뛰어난 지략을 지닌 용병 구루지마(류승룡)가 왜군 수장으로 나서자 조선은 더욱 술렁인다. <br><br>
+                330척에 달하는 왜군의 배가 속속 집결하고<br>
+                압도적인 수의 열세에 모두가 패배를 직감하는 순간,<br>
+                이순신 장군은 단 12척의 배를 이끌고 명량 바다를 향해 나서는데…!<br>
+                12척의 조선 vs 330척의 왜군<br>
+                역사를 바꾼 위대한 전쟁이 시작된다!
+              </p>
+              <p class="onfont2">
+                <b>마침내 거대한 여정이 끝난다!<br>
+                누군가는 죽고 누군가는 승리한다!</b><br>
+                분열은 시작되었다!  <br><br>
+                빌보 배긴스, 참나무 방패 소린, 난쟁이 족이 떠난 거대한 여정 끝, 난쟁이 족은 원래 자신들의 터전이던 <br>
+                에레보르에 있는 엄청난 보물을 되찾지만 이는 무시무시한 용 스마우그가 호수마을의 <br>
+                무기력한 주민들을 공격하게 되는 결과를 낳는다.   <br>
+                산 아래의 왕 참나무 방패 소린은 탐욕에 서서히 눈이 멀어 <br>
+                우정과 명예를 저버린 채 왕의 보물 아르켄스톤을 찾는다.  <br>
+                소린이 이성을 되찾도록 설득하는데 실패한 빌보는 <br>
+                훨씬 험난한 일이 펼쳐질 줄 모른 채 절박하고 위험한 결정을 내린다.   <br>
+                오래된 적이 중간계로 돌아온 것. 암흑의 군주 사우론은 오크 군대를 보내 외로운 산에 기습 공격을 감행한다. <br>
+                고조된 긴장감 속에 어둠이 깔리자 난쟁이, 엘프, 인간은 단합할 것인지 말살될 것인지 택해야 한다. <br>
+                마침내 다섯 군대의 전투가 시작되고 빌보는 본인과 친구들의 목숨을 걸고 싸워야만 하는데…
+              </p>
+              </div>
+
+              <!--************************************** 1번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부1
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+              <!--************************************** 2번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부2
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+              <!--************************************** 3번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부3
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+              <!--************************************** 4번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부4
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+              <!--************************************** 5번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부5
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+              <!--************************************** 6번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부6
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+              <!--************************************** 7번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부7
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+              <!--************************************** 8번영화정보 **************************************-->
+
+              <div class="moviearticle2">
+                <div class="actor" style="background-image:url('./actor/A_다비치.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">레오나르도 디카프리오</span><br>
+                    Leonardo Dicaprio <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">코브 역</span><br><br>
+                    2017 라이브바이나이트<br>
+                    2016 델리리움
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_와타나베.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">와타나베 켄</span><br>
+                    Watanabe Ken <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">사이토 역</span><br><br>
+                    2016 분노<br>
+                    2016 씨오브트리스
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_마리옹.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">마리옹 꼬띠아르</span><br>
+                    Marion Cotillard <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">맬 역</span><br><br>
+                    2016 얼라이드<br>
+                    2016 어쌔신크리드
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_레빗.jpg'); clear:both;"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">조셉 고든 레빗</span><br>
+                    Joseph Gordon-Levitt <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">아서 역</span><br><br>
+                    2016 스노든<br>
+                    2015 더나이트비포
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_엘렌.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">엘렌 페이지</span><br>
+                    Ellen Page <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">애리어든 역</span><br><br>
+                    2016 윈도우호스<br>
+                    2016 탈룰라
+                  </p>
+                </div>
+                <div class="actor" style="background-image:url('./actor/A_톰하디.jpg');"></div>
+                <div class="actorBox">
+                  <p class="onfont3">
+                    <span style="color: rgb(120, 32, 185); font-weight:bold;">톰 하디</span><br>
+                    Tom Hardy <br>
+                    <span style="color:orange;">주연</span> | <span style="color:#666;">임스 역</span><br><br>
+                    2017 덩케르크<br>
+                    2016 타부8
+                  </p>
+                </div>
+              </div> <!-- moviearticle2 종료 -->
+
+            </div>
+          </div>
+          <div id="close" onclick="hidebox()">
+            <img class="closepic" src="close.png">
+          </div>
+        </div>
+         <script>
+           function hidebox() {
+             document.getElementById('lightbox').style.display="none";
+           }
+       </script>
+        <div id="header">
+          <div class="positionA">
+          <span class="Headerspan"><img src="http://static1.naver.net/w9/btn_next10.gif" alt=""></span>
+          <div class="nav"> <!-- 개인홈페이지 부분-->
+          </div>
+            <div class="centers">
+            <img src="logo.png" id="logo">
+            		<div class="Menu"> <!-- 메뉴부분 -->
+
+                 <div class="menuA">
+                  <button href="#Link" class="dropbtn"><a><img src="./menu/home.png" class="pic_width">
+                  <p class="underline" id="Home" onmouseover="onlight(0)" onmouseout="offlight(0)">Home</p></a></button>
+                </div>
+
+                <div class="menuA">
+                  <div class="dropdown">
+                   <button class="dropbtn"><a style="text-decoration:none"><img src="./menu/movie.png" class="pic_width">
+                   <p class="underline" onmouseover="onlight(1)" onmouseout="offlight()" id="movie">Movie</p></a></button>
+                    
+                  </div>
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn"><a><img src="./menu/tips.png" class="pic_width">
+                 <p class="underline" onmouseover="onlight(2)" onmouseout="offlight()" id="tips">Tips</p></a></button>  
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn"><a><img src="./menu/about.png" class="pic_width">
+                 <p class="underline" onmouseover="onlight(3)" onmouseout="offlight()" id="about">About US</p></a></button>  
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn_1"><a><img src="./menu/event.png" class="pic_width">
+                 <p class="underline" onmouseover="onlight(4)" onmouseout="offlight()" id="evnets">Events</p></a></button>  
+                </div> <!--menuA End-->
+                 <script>
+                  $(document).ready(function (){
+           				   $('#Home').click(function () {
+                      $('html, body').animate({scrollTop:0}, 'slow');
+                      if($.browser.msie){
+                        document.documentElement.scrollTop =0;
+                      }
+						         });
+        			    });
+        			    $(document).ready(function (){
+           				   $('#movie').click(function () {
+                		 $('html, body').animate({scrollTop:790}, 'slow');
+						         });
+        			    });
+                  $(document).ready(function (){
+                     $('#tips').click(function () {
+                     $('html, body').animate({scrollTop:1650}, 'slow');
+                     });
+                  });
+                  $(document).ready(function (){
+                     $('#about').click(function () {
+                     $('html, body').animate({scrollTop:2550}, 'slow');
+                     });
+                  });
+                  $(document).ready(function (){
+                     $('#evnets').click(function () {
+                     $('html, body').animate({scrollTop:3450}, 'slow');
+                     });
+                  });
+                 </script>
+
+                 <!--검색 바 -->
+                  <div class="Search">
+                   <form action="http://www.google.co.kr/cse" id="cse-search-box" target="_blank">
+                    <div class=SearchTest>
+                      <input type="hidden" name="cx" value="008799202013884722713:oelp-m1o9mq">
+                      <input type="hidden" name="ie" value="utf-8">
+                      <input type="search" name="q" onmouseover= "a(this)" oninput="b(this)" onfocusout="c(this)" onmouseout= "j(this)" class="Searchback" placeholder="검색해보세요.." autocomplete="off">
+                      <input type="submit" name="sa" value="검 색" class="ClickIcon">
+                    </div>
+                  </form>
+                  </div>
+                  <!--검색 바 END -->
+                <script>
+                  function a(x) {
+                      x.style.width = "72%";
+                      x.style.backgroundImage = "url('./menu/search.png')";
+                      x.style.backgroundRepeat = "no-repeat";
+                      x.style.backgroundSize = "20px";
+                      x.style.backgroundPosition = "10px 3px";
+                      x.style.backgroundColor = "white";
+                  }
+
+                  function b(x) {
+                    if (x.value!="") {
+                      x.style.width = "72%";
+                      x.style.backgroundImage = "url('./menu/search.png')";
+                      x.style.backgroundRepeat = "no-repeat";
+                      x.style.backgroundSize = "20px";
+                      x.style.backgroundPosition = "10px 3px";
+                      x.style.backgroundColor = "white";
+                    }
+                  }
+                  function c(x) {
+                    if (x.value=="") {
+                      x.style.width="0px";
+                      x.style.background="black";
+                      x.style.backgroundImage = "url('./menu/search.png')";
+                      x.style.backgroundRepeat = "no-repeat";
+                      x.style.backgroundSize = "20px";
+                      x.style.backgroundPosition = "10px 3px";
+                      x.style.backgroundColor = "#111111";
+                    }
+                  }
+                  function j(x) {
+                      x.style.width="72%";
+                      x.style.background = "white";
+                      x.style.backgroundImage = "url('./menu/search.png')";
+                      x.style.backgroundRepeat = "no-repeat";
+                      x.style.backgroundSize = "20px";
+                      x.style.backgroundPosition = "10px 3px";
+                    if (x.value=="") {
+                      x.style.width="0px";
+                      x.style.background="black";
+                      x.style.backgroundImage = "url('./menu/search.png')";
+                      x.style.backgroundRepeat = "no-repeat";
+                      x.style.backgroundSize = "20px";
+                      x.style.backgroundPosition = "10px 3px";
+                      x.style.backgroundColor = "#111111";
+                    }
+                  }
+                </script>
+                  <!--순위표-->
+                  <div class="Rank">
+                      <div>
+                         <ul class="auto">
+                          <li class="liTAG num hide gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                        </ul>
+                      </div>
+                      <div id="other_box">
+                        <ul class="other num_display">
+                          <p class="font_color gap_rank">2015 박스오피스 순위</p>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                        </ul>
+                      </div>
+                    </div>
+              	</div>
+
+                 <script>
+                  var moviewinner = ["베테랑","암살","어벤져스:에이지오브울트론","국제시장","내부자들","사도","킹스맨:시크릿에이전트","미션임파셔블:로그네이션","연평해전","쥬라기월드","검은 사제들","히말라야","인사이드 아웃"]
+                  var ranking = document.getElementsByClassName('num');
+                    var ranking2 = document.getElementsByClassName('hides');
+                    var showrank=1;
+                    var nov;
+                    var nointer=setInterval('rank()',3000);
+                    var Lmove=setInterval('changeset()',10000);
+                    var math,change;
+                    var ceilsing,ceilsing2;
+                    write();
+                    function rank(){
+                    write();
+                      if(showrank>=ranking.length){
+                        showrank=0;
+                      }
+                      for (i = 0; i < ranking.length; i++) {
+                        ranking[i].style.display = "none";
+                      }
+                      showrank++;
+                      ranking[showrank-1].style.display = "block";
+                    }
+                    function changeset() {
+                        math = parseInt(Math.random()*ranking.length);
+                        change = parseInt(Math.random()*moviewinner.length);
+                        while(math == change){
+                        change = parseInt(Math.random()*moviewinner.length);
+                        }
+                      filp();
+                      setTimeout('winnerchange()',700);
+                    }
+                    function winnerchange() {
+                      var temp;
+                      if(math>change){
+                        temp = moviewinner[math];
+                        for(i=math;i>=change;i--){
+                          moviewinner[i]=moviewinner[i-1];
+                        }
+                        moviewinner[change]=temp;
+                      }
+                      else{
+                        temp = moviewinner[change];
+                        for(i=change;i>math;i--){
+                          moviewinner[i]=moviewinner[i-1];
+                        }
+                        moviewinner[math]=temp;
+                      }
+                      write();
+                      add();
+                    }
+                    function write() {
+                      for(i=0;i<ranking.length;i++){
+                        ranking[i].innerHTML =(i+1)+ " 위 : " + moviewinner[i];
+                        ranking2[i].innerHTML =(i+1)+ " 위 : " + moviewinner[i];
+                      }
+                    }
+                    $(document).ready(function(){
+                      $(".Rank").mouseenter(function(){
+                        clearInterval(nointer);
+                          $(".auto").addClass("num_display");
+                          $(".other").removeClass("num_display");
+                      });
+                      $(".Rank").mouseleave(function(){
+                        clearInterval(nointer);
+                        nointer=setInterval('rank()',3000);
+                          $(".auto").removeClass("num_display");
+                          $(".other").addClass("num_display");
+                      });
+                  });
+                  function add(){
+                      if(math<change){
+                      ranks = change - math;
+                      ranking[math].innerHTML += " " + '↑' + " " + ranks;
+                      ranking2[math].innerHTML += " " + '↑' + " " + ranks;
+                    }
+                    else if (math>change){
+                      ranks = math - change;
+                      ranking[change].innerHTML += " " + '↑' + " " + ranks;
+                      ranking2[change].innerHTML += " " + '↑' + " " + ranks;
+                    }
+                  }
+                  function filp(){
+                    if(math<change){
+                      if(change>9){
+                          change=9;
+                      }
+                      ceilsing = math;
+                      ceilsing2 = change;
+                      nov=setInterval('filps()',300);
+                    }
+                    else{
+                      if(math>9){
+                          math=9;
+                      }
+                      ceilsing = change;
+                      ceilsing2 = math;
+                        nov=setInterval('filps()',300);
+                    }
+                  }
+                  function filps(){
+                        ranking2[ceilsing].className += " filp";
+                        ceilsing++;
+                        if(ceilsing>=ceilsing2){
+                          clearInterval(nov);
+                          setTimeout('removes()',500);
+                        }
+                  }
+                  function removes(){
+                    $(".hides").removeClass("filp");
+                    
+                  }
+             </script>
+
+            </div> <!-- centers End 헤더중앙메뉴부분 -->
+          </div> <!-- positionA 헤더중앙메뉴부분 -->
+      	</div> <!-- header End -->
+        <div id="section">
+        
+        	<div class="Box_A" > 
+                   <div class="slideshow-container">
+                        <div class="mySlides fade">
+                          <img src="sivilwar.jpg" id="L_pic1" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played1" onclick="playMovie(1)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused1" onclick="pauseMovie(1)"> <!--스탑시 비디오 정지-->
+                          </div>
+                          <div id="L_hight1" class="L_hide L_hight " style="background-image: url(sivilwar.jpg)"> <!--비디오 div-->
+                            <video id="L_video1" height="100%" width="100%" preload="none"> <!--비디오 div-->
+                            <source src="sivilwar.mp4" type="video/mp4"></source><!--비디오 파일 재생 -->
+                            </video>
+                          </div>
+                          
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="Inception.jpg" id="L_pic2" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played2" onclick="playMovie(2)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused2" onclick="pauseMovie(2)">
+                          </div>
+                          <div id="videoeffect">
+                          </div>
+                          <div id="L_hight2" class="L_hide L_hight " style="background-image: url(Inception.jpg)">
+                            <video id="L_video2" height="100%" width="100%" preload="none">
+                            <source src="Inception.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="베테랑.jpeg" id="L_pic3" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played3" onclick="playMovie(3)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused3" onclick="pauseMovie(3)">
+                          </div>
+                          <div id="L_hight3" class="L_hide L_hight " style="background-image: url(베테랑.jpeg)">
+                            <video id="L_video3" height="100%" width="100%" preload="none">
+                            <source src="베테랑.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="conjuring.jpg" id="L_pic4" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played4" onclick="playMovie(4)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused4" onclick="pauseMovie(4)">
+                          </div>
+                          <div id="L_hight4" class="L_hide L_hight " style="background-image: url(conjuring.jpg)">
+                            <video id="L_video4" height="100%" width="100%" preload="none">
+                            <source src="CONJURING.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="bonil.jpg" id="L_pic5" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played5" onclick="playMovie(5)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused5" onclick="pauseMovie(5)">
+                          </div>
+                          <div id="L_hight5" class="L_hide L_hight " style="background-image: url(bonil.jpg)">
+                            <video id="L_video5" height="100%" width="100%" preload="none">
+                            <source src="bonil.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="A_6.jpg" style="width:100%; height:700px;">
+                          <div class="text">Caption 6</div>
+                        </div>
+                        
+                        <a class="prev" id="changeimg" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" id="changeimg1" onclick="plusSlides(1)">❯</a>
+                        
+                        </div>
+                
+                        <div class="Slide_Box">
+                          <span class="dot" id="dot1" onclick="currentSlide(1)"></span> 
+                          <span class="dot" id="dot2" onclick="currentSlide(2)"></span> 
+                          <span class="dot" id="dot3" onclick="currentSlide(3)"></span> 
+                          <span class="dot" id="dot4" onclick="currentSlide(4)"></span> 
+                          <span class="dot" id="dot5" onclick="currentSlide(5)"></span> 
+                          <span class="dot" id="dot6" onclick="currentSlide(6)"></span> 
+                        </div>
+
+				      <script>
+                var slideIndex = 1;
+                var i=1;
+                showSlides(slideIndex);
+                
+                function plusSlides(n) {
+                  showSlides(slideIndex += n);
+                }
+                
+                function currentSlide(n) {
+                  showSlides(slideIndex = n);
+                }
+                
+                function showSlides(n) {
+                  var i;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (n > slides.length) {slideIndex = 1}    
+                  if (n < 1) {slideIndex = slides.length} ;
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  slides[slideIndex-1].style.display = "block";  
+                  dots[slideIndex-1].classList.add("active");
+                  
+                 
+                }
+
+                
+                /************* 비디오 재생 화면  전환한다. **************/
+                noplay=setInterval('autoSlides()',4000);
+                  function playMovie(i) { //재생 이미지 클릭시 함수 작동 
+                   
+                        clearInterval(noplay);
+                        document.getElementById('L_video'+i).play();  // 비디오를 재생하는 것
+                        document.getElementById('L_video'+i).style.display='block'; //비디오를 재생햇을때 비디오가 보이게
+                        document.getElementById('L_paused'+i).style.display='block'; //비디오를 재생했을때 정지 이미지 소환
+                        document.getElementById('L_played'+i).style.display='none'; //비디오를 재생했을때 재생 이미지 삭제
+                        document.getElementById('L_pic'+i).style.display='none'; //그림이 들어가는 div 삭제
+                        document.getElementById('L_hight'+i).style.display='block'; //비디오를 재생했을때 비디오 밖 div 소환
+                        document.getElementById('changeimg').style.display='none';   //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        document.getElementById('changeimg1').style.display='none'; //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        for(n=1; n<7; n++)
+                          document.getElementById('dot'+ n).style.display='none';
+                     
+                }
+                  function pauseMovie(i) { //정지 이미지 클릭시 함수 적용
+                    
+                        clearInterval(noplay);
+                        noplay=setInterval('autoSlides()',4000);
+                          document.getElementById('L_video'+i).pause(); // 비디오를 멈추는거
+                          document.getElementById('L_video'+i).style.display='none'; //비디오를 멈첫을때 비디오가 안보이게
+                          document.getElementById('L_paused'+i).style.display='none'; //비디오가 멈첬을때 정지 이미지 삭제
+                          document.getElementById('L_played'+i).style.display='block'; //비디오가 정지했을때 재생 이미지 소환
+                          document.getElementById('L_pic'+i).style.display='block'; //비디오가 정지 했을때 이미지 div 소환
+                          document.getElementById('L_hight'+i).style.display='none'; //비디오가 정지했을때 비디오 밖 div 삭제
+                          document.getElementById('changeimg').style.display='block';  //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          document.getElementById('changeimg1').style.display='block'; //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          for(n=1; n<7; n++)
+                            document.getElementById('dot'+ n).style.display='inline-block';
+                           //영상을 정지하면 제이쿼리로 만든 화면이 다시 나옴 
+                   
+                  }
+                  /************* 스크립트제작 자동으로 슬라이드 화면을 3초마다 전환한다. **************/
+              
+                function autoSlides() {
+                  var i;
+                  var cnt;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (slideIndex == slides.length) {
+                    slideIndex = 0; 
+                    cnt=0;
+                  } 
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  cnt++;
+                  slideIndex++;
+                  slides[slideIndex-1].style.display = "block";
+                  dots[slideIndex-1].classList.add("active");
+                }
+                /************* 스크립트제작 **************/
+
+                /************* 제이쿼리 부분 *************/
+
+                    $(document).ready(function() {
+                      $('.nav').css('display','none');
+                      $('.nav').animate({opacity:'0%'}); //처음에 띄워진걸 숨김
+                      $('.nav').css('background-color','#070707');
+                      $('.nav').css('border-radius','10px');
+                      $('.nav').css('border','10px');
+                      $('.Headerspan').toggle(first,second);  // 토글 반복
+                  });
+                  function first(){
+                      $('.nav').css('display','block');
+                      $('.nav').animate({opacity:'0.5'}); //숨긴걸 보여줌
+                      $('.nav').animate({left:'0px'},200);
+                      $('.Headerspan').animate({width:'20px'},200); // 사이즈조정 
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_pre10.gif');
+                  }
+                  function second(){
+                      $('.nav').animate({left:'-2000px'},200); //다시 숨김
+                      $('.Headerspan').animate({width:'-20px'},200); // 사이즈조정
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_next10.gif');
+                  }   // 개인홈페이지 슬라이드
+
+
+                  $('#logo').animate({opacity:'0'});
+                  $('#header').hide();
+                  $('#footer').slideUp(-1);
+                  $('#section').hide();
+                   $('#section').animate({opacity:'0'});
+                  $('body').css('background-color','#111111')
+                $('.an_box1 img').click(function(){
+                  $('#header').show(1000);
+                  $('#footer').slideDown(2000);
+                  $('#section').show(1000);
+                  $('#section').animate({opacity:'+=1'},2000);
+                  $('#logo').css('background-color','black');
+                  $('#logo').css('border-radius','0px');
+                  $('#logo').css('margin','0px 0px 0px 0px');
+                  $('#logo').css('width','160px');
+                  $('#logo').css('float','left');
+                  $('#logo').animate({opacity:'+=1'},4000);
+                  $('.an_box1 , .an_box1 img').hide(1000);
+                });  //도입부분
+
+
+                  /************* 제이쿼리 부분 *************/
+                </script>
+
+			</div> <!-- Box_A End -->
+             <div class="Box_B"> 
+            	<div class="push_Box"></div>
+            </div> <!-- Box_B End -->
+
+            <div class="Box_C" id="movies"> 
+              <div class="Onbox_A">
+                <div class="article_A">
+                  <div class="sname">
+                    <h3 class="M_1"> Movie </h3>
+                  </div> <!--메뉴sname-->
+                  <div class="bname">
+                    <div class="Movie_1"  onmouseover="onmovie(0)" onmouseout="offmovie(0)">
+                      <div class="fliper">
+                        <div class="AB_1 AB_0 " style="background-image:url('./Poster/수정1.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정1.png');">
+                            <div class="Momenuhov">
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(0)"><h2 class="ontext" onmouseover="onbox(0)" onmouseout="offbox(0)" >인셉션</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="Movie_1" onmouseover="onmovie(1)" onmouseout="offmovie(1)" >
+                      <div class="fliper" >
+                        <div class="AB_2 AB_0 " style="background-image:url('./Poster/수정2.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정2.png');">
+                            <div class="Momenuhov">    
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(1)"><h2 class="ontext" onmouseover="onbox(1)" onmouseout="offbox(1)" >너의 이름은</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="Movie_1" onmouseover="onmovie(2)" onmouseout="offmovie(2)" >
+                      <div class="fliper" >
+                        <div class="AB_3 AB_0 " style="background-image:url('./Poster/수정3.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정3.png');">
+                            <div class="Momenuhov">
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(2)"><h2 class="ontext" onmouseover="onbox(2)" onmouseout="offbox(2)" >시빌워</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="Movie_1" onmouseover="onmovie(3)" onmouseout="offmovie(3)" >
+                      <div class="fliper" >
+                        <div class="AB_4 AB_0 " style="background-image:url('./Poster/수정4.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정4.png');">
+                            <div class="Momenuhov">
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(3)"><h2 class="ontext" onmouseover="onbox(3)" onmouseout="offbox(3)" >컨져링 2</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="Movie_1" onmouseover="onmovie(4)" onmouseout="offmovie(4)" >
+                      <div class="fliper" >
+                        <div class="AB_5 AB_0 " style="background-image:url('./Poster/수정5.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정5.png');">
+                            <div class="Momenuhov">
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(4)"><h2 class="ontext" onmouseover="onbox(4)" onmouseout="offbox(4)" >베테랑</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="Movie_1 " onmouseover="onmovie(5)" onmouseout="offmovie(5)" >
+                      <div class="fliper" >
+                        <div class="AB_6 AB_0 " style="background-image:url('./Poster/수정6.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정6.png');">
+                            <div class="Momenuhov">
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(5)"><h2 class="ontext" onmouseover="onbox(5)" onmouseout="offbox(5)" >주토피아</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="Movie_1 " onmouseover="onmovie(6)" onmouseout="offmovie(6)" >
+                      <div class="fliper" >
+                        <div class="AB_7 AB_0 " style="background-image:url('./Poster/수정7.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정7.png');">
+                            <div class="Momenuhov">
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(6)"><h2 class="ontext" onmouseover="onbox(6)" onmouseout="offbox(6)" >명량</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="Movie_1 " onmouseover="onmovie(7)" onmouseout="offmovie(7)" >
+                      <div class="fliper" >
+                        <div class="AB_8 AB_0 " style="background-image:url('./Poster/수정8.png');">
+                        </div>
+                          <div class="Momenu" style="background-image:url('./Poster/수정8.png');">
+                            <div class="Momenuhov">
+                              <a href="#Box_C" class="refer_A" onclick="lightboxs(7)"><h2 class="ontext" onmouseover="onbox(7)" onmouseout="offbox(7)" >호빗 2</h2></a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div> <!--메뉴bname-->
+                </div>
+              </div>
+            </div> <!-- Box_C End -->
+            <script>
+            var info = document.getElementsByClassName('onfont');
+            var infoma = document.getElementsByClassName('onfont2');
+            var imging = document.getElementsByClassName('imgbox');
+            var actors = document.getElementsByClassName('moviearticle2');
+              function lightboxs(i) {
+                document.getElementById('lightbox').style.display='block';
+                infowrite(i);
+              }
+              function infowrite(on){
+                for(var i=0;i<info.length;i++){
+                  info[i].style.display='none';
+                  infoma[i].style.display='none';
+                  imging[i].style.display='none';
+                  actors[i].style.display='none';
+                }
+                info[on].style.display='block';
+                infoma[on].style.display='block';
+                imging[on].style.display="block";
+                actors[on].style.display="block";
+              }
+            </script>
+            <script>
+            var onlinks = document.getElementsByClassName("refer_A");
+            var ontexts = document.getElementsByClassName('ontext');
+             for(var i=0 ;i<ontexts.length;i++){
+                ontexts[i].style.opacity=0;
+            }
+              function onmovie(n) {
+                onlinks[n].style.background ="rgba(" + 0 +","+ 0+"," + 0 +"," + 0.7 +")"
+                onlinks[n].style.borderBottom = 1+"px solid #ffffff";
+                ontexts[n].style.opacity=1;
+              }
+              function offmovie(n) {
+                onlinks[n].style.background ="rgba(" + 0 +","+ 0+"," + 0 +"," + 0 +")"
+                onlinks[n].style.border= "";
+                ontexts[n].style.opacity=0;
+              }
+              function onbox(n){
+                ontexts[n].style.background = "#ffffff";
+              }
+              function offbox(n){
+                ontexts[n].style.background = "";
+              }
+            </script>
+
+            <div class="Box_D"> 
+              <div class="Onbox_B">
+                <div class="article_B_tab">
+                  <ul class="tab_A" onclick="returnmap()">
+                    <li onmouseover="onwhite(0)" onclick="onlighttab(0)" onmouseout="offwhite()" class="changetab"><a href="javascript:void(0);" class="tablinks whereiscinema" onclick="openCity(event, 'A_TEST')" onclick="TogoR(event, document.getElementById('Rotte'))" ><img src="./menu/movieA.png" class="moHover"></a></li>
+                    <li onmouseover="onwhite(1)" onclick="onlighttab(1)" onmouseout="offwhite()" class="changetab"><a href="javascript:void(0);" class="tablinks whereiscinema" onclick="openCity(event, 'B_TEST')" onclick="TogoC(event, document.getElementById('CGV'))" ><img src="./menu/movieA.png" class="moHover"></a></li>
+                    <li onmouseover="onwhite(2)" onclick="onlighttab(2)" onmouseout="offwhite()" class="changetab"><a href="javascript:void(0);" class="tablinks whereiscinema" onclick="openCity(event, 'C_TEST')" onclick="TogoM(event, document.getElementById('Mega'))" ><img src="./menu/movieA.png" class="moHover"></a></li>
+                  </ul>
+                </div> <!-- article_B_tab END -->
+                <script>
+                  var tablink = document.getElementsByClassName('tablinks');
+                  var tabs = document.getElementsByClassName('changetab');
+                  var m=0;
+                  onlighttab(0);
+                  function offwhite() {
+                    for(i=0;i<tablink.length;i++){
+                      if(i!=m){
+                      tablink[i].style.backgroundColor = "#192525";
+                      tablink[i].style.border = "";
+                      tablink[i].style.borderRight = "";
+                      }
+                    }
+                  }
+                  function onwhite(n){
+                    offwhite()
+                    if(m!=n)
+                      tablink[n].style.backgroundColor=" #454545";
+                    
+                  }
+                  function onlighttab(n){
+                    m=n;
+                    for(i=0;i<tablink.length;i++){
+                      tablink[i].style.backgroundColor = "#192525";
+                      tablink[i].style.border = "";
+                      tablink[i].style.borderRight = "";
+                    }
+                      tablink[n].style.backgroundColor = "#111111";
+                      tablink[n].style.border = "1px solid #454545";
+                      tablink[n].style.borderRight = "0";
+                  }
+                </script>
+                <div id="A_TEST" class="article_B arti_A" style="background-color:#111111; border:1px solid #454545;">
+                  <div class="sname2">
+                    <h3 class="M_1">LOTTE CINEMA</h3>
+                  </div> <!-- 영화 네임박스 -->
+                  <div class="cname"><div  id="cinemaL">
+    <div id="showcinema">
+      <img src="./cinema/maps.png" frameborder="0" allowfullscreen class="maps">
+      <img src="./cinema/pointer_B.png" id="Rotte_10" onmouseenter="a1(1,0,243,127)" onmouseleave="a2(1,0,253,143)" class="pointer size1 onhover" onclick="TogoR(event, document.getElementById('Rotte_1'))">
+      <img src="./cinema/pointer_B.png" id="Rotte_11" onmouseenter="a1(1,1,197,197)" onmouseleave="a2(1,1,207,213)" class="pointer size1 onhover" onclick="TogoR(event, document.getElementById('Rotte_2'))">
+      <img src="./cinema/pointer_B.png" id="Rotte_12" onmouseenter="a1(1,2,228,191)" onmouseleave="a2(1,2,238,207)" class="pointer size1 onhover" onclick="TogoR(event, document.getElementById('Rotte_3'))">
+      <img src="./cinema/pointer_B.png" id="Rotte_13" onmouseenter="a1(1,3,268,184)" onmouseleave="a2(1,3,278,200)" class="pointer size1 onhover" onclick="TogoR(event, document.getElementById('Rotte_4'))">
+      <img src="./cinema/pointer_B.png" id="Rotte_14" onmouseenter="a1(1,4,220,244)" onmouseleave="a2(1,4,230,260)" class="pointer size1 onhover" onclick="TogoR(event, document.getElementById('Rotte_5'))">
+      <img src="./cinema/pointer_B.png" id="Rotte_15" onmouseenter="a1(1,5,370,164)" onmouseleave="a2(1,5,380,180)" class="pointer size1 onhover" onclick="TogoR(event, document.getElementById('Rotte_6'))">
+    </div>
+    <div class="explaincinema">
+      <ul id="list">
+        <li class="what" onmouseenter="a1(1,0,243,127)" onmouseleave="a2(1,0,253,143)" onclick="TogoR(event, document.getElementById('Rotte_1'))">롯데 시네마 칠곡 프리미엄</li>
+        <li class="what" onmouseenter="a1(1,1,197,197)" onmouseleave="a2(1,1,207,213)" onclick="TogoR(event, document.getElementById('Rotte_2'))">롯데 시네마 성서점</li>
+        <li class="what" onmouseenter="a1(1,2,228,191)" onmouseleave="a2(1,2,238,207)" onclick="TogoR(event, document.getElementById('Rotte_3'))">롯데 시네마 대구광장</li>
+        <li class="what" onmouseenter="a1(1,3,268,184)" onmouseleave="a2(1,3,278,200)" onclick="TogoR(event, document.getElementById('Rotte_4'))">롯데 시네마 동성로</li>
+        <li class="what" onmouseenter="a1(1,4,220,244)" onmouseleave="a2(1,4,230,260)" onclick="TogoR(event, document.getElementById('Rotte_5'))">롯데 시네마 상인</li>
+        <li class="what" onmouseenter="a1(1,5,370,164)" onmouseleave="a2(1,5,380,180)" onclick="TogoR(event, document.getElementById('Rotte_6'))">롯데 시네마 율하</li>
+      </ul>
+    </div>
+  </div>
+  <!--롯데 시네마 끝-->
+  <!--롯데 시네마 영화관 소개 div -->
+  <div class="cinema_Rotte" id="Rotte_1">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3230.1959304165894!2d128.5617020150916!3d35.94217668013442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e733d5a0bbf1%3A0x834eaa22cc705ceb!2z66Gv642w7Iuc64Sk66eIIOy5oOqzoQ!5e0!3m2!1sko!2skr!4v1463794741452" frameborder="0" allowfullscreen class="maps"></iframe>
+    </div>
+    <div class="explaincinema">
+      <h1 id="point">롯데시네마 칠곡 프리미엄</h1>
+      <ul>
+        <li>위치 : 대구 북구 구암동 694-800,769-1</li>
+        <li>총 상영관수 : 6개관</li>
+        <li>총 좌석수 : 536석</li>
+        <li>전화번호 : 1544-8855</li>
+        - 대중교통 이용시
+        <ul>
+          <li>버스 : 704, 706, 726, 937, 북구1, 칠곡2, 급행2번</li>
+          <li>지하철 : 3호선 팔거역(국립농관원, 통계청)</li>
+          <li>자가용 : 건물 내 지하 주차장 이용가능, 당일 영화 티켓 소지자에 한해 입차시간기준 3시간 무료</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+  <div class="cinema_Rotte" id="Rotte_2">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d808.4438254468579!2d128.5081829270101!3d35.85451290704342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e53f30619dfb%3A0x5d1d21d69bfc593!2z66Gv642w7Iuc64Sk66eIIOyEseyEnOygkA!5e0!3m2!1sko!2skr!4v1464695666354" frameborder="0" allowfullscreen class="maps"></iframe>
+    </div>
+    <div class="explaincinema">
+      <h1 id="point">롯데시네마 성서점</h1>
+      <ul>
+        <li>위치 : 대구 달서구 이곡1동,1244-1 </li>
+        <li>총 상영관수 : 9개관</li>
+        <li>총 좌석수 : 1,644석</li>
+        <li>전화번호 : 1544-8855</li>
+        - 대중교통 이용시
+        <ul>
+          <li>버스 : 305 ,405, 503, 521, 655, 달서 2번, 564번, 425, 805, 성서1, 성서2, 성서3번</li>
+          <li>지하철 : 2호선 성서산업단지역 (7번 출구)</li>
+          <li>자가용 : 신천대로 → 팔달교방면 → 성서,성주방향(성서 I.C하차) → 성서네거리(대구은행네거리) 우회전 → 롯데시네마 성서</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+  <div class="cinema_Rotte" id="Rotte_3">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3233.7289390765636!2d128.54845621508895!3d35.85564958015401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e48c882b61c9%3A0x3226a06d36544973!2z66Gv642w7Ie87ZWR66Gv642w7Iuc64Sk66eI64yA6rWs6rSR7J6l!5e0!3m2!1sko!2skr!4v1464696857514" frameborder="0" allowfullscreen class="maps"></iframe>
+    </div>
+    <div class="explaincinema">
+      <h1 id="point">롯데시네마 대구광장</h1>
+      <ul>
+        <li>위치 : 대구 서구 내당동,M프라자 4층</li>
+        <li>총 상영관수 : 7개관</li>
+        <li>총 좌석수 : 1300석</li>
+        <li>전화번호 : 1544-8855</li>
+        - 대중교통 이용시
+        <ul>
+          <li>버스 : 광장타운 정류소 도보 1분, 두류역 감삼네거리 정류소 도보 3~4분</li>
+          <li>지하철 : 2호선 감삼역 4번출구</li>
+          <li>자가용 : 두류네거리와 감삼네거리 사이에 위치, 달구벌대로에 위치, 지하주차장 : 126대까지 주차가능</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+  <div class="cinema_Rotte" id="Rotte_4">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12932.892179655335!2d128.58702278040542!3d35.86805054419307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e3c4c05eddaf%3A0x229944303a7ded0!2z66Gv642w7Iuc64Sk66eIIOuPmeyEseuhnOygkA!5e0!3m2!1sko!2skr!4v1464697720285" frameborder="0" allowfullscreen class="maps"></iframe>
+  </div>
+    <div class="explaincinema">
+      <h1 id="point">롯데시네마 동성로</h1>
+      <ul>
+        <li>위치 : 대구 중구 동성로2가,66-1 </li>
+        <li>총 상영관수 : 9개관</li>
+        <li>총 좌석수 : 1412석</li>
+        <li>전화번호 : 1544-8855</li>
+        - 대중교통 이용시
+        <ul>
+          <li>버스 : 309, 400, 425, 427, 508, 518, 650, 724, 909, 999, 북구 3, 급행 1, 급행 3, 600, 가창 2, 동구 1, 106, 156, 323-1, 521</li>
+          <li>지하철 : 1호선 중앙로역 3번 출구</li>
+          <li>자가용<br>1) 동대구 IC → 효목네거리 → 동신교 → 롯데시네마 동성로<br>2) 서대구 IC → 성서IC(시내방향) → 달구벌대로→ 두류네거리 → 롯데시네마 동성로<br></li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+  <div class="cinema_Rotte" id="Rotte_5">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3235.3200917576182!2d128.53714591508768!3d35.816621480163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565fb3ae2e95e9b%3A0x4a77ff93fc369727!2z66Gv642w7Iuc64Sk66eIIOyDgeyduOygkA!5e0!3m2!1sko!2skr!4v1464698314773" frameborder="0" allowfullscreen class="maps"></iframe>
+    </div>
+    <div class="explaincinema">
+      <h1 id="point">롯데시네마 상인</h1>
+      <ul>
+        <li>위치 : 대구 달서구 상인동,241 </li>
+        <li>총 상영관수 : 7개관</li>
+        <li>총 좌석수 : 1276석</li>
+        <li>전화번호 : 1544-8855</li>
+        - 대중교통 이용시
+        <ul>
+          <li>버스 : 달서1, 달서3, 달서4-1, 649, 653, 706, 726, 356, 600, 618, 650, 651, 836 지선 달서 5, 달성 2</li>
+          <li>지하철 : 1호선 상인역  4번 출구</li>
+          <li>자가용<br>1) 화원, 대곡 방향 -> 동성로 방면 -> 상인 네거리 -> 롯데시네마 건물로 진입<br>2) 남대구 IC 방향 -> 성서공단로 -> 달서구청  방향 -> 롯데시네마 건물</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+  <div class="cinema_Rotte" id="Rotte_6">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3233.232170572648!2d128.69188621508934!3d35.86782688015119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35660a4cbbb17f73%3A0x31c4a1e81fd18a1!2z66Gv642w7Iuc64Sk66eIIOycqO2VmA!5e0!3m2!1sko!2skr!4v1464698771901" frameborder="0" allowfullscreen class="maps"></iframe>
+    </div>
+  <div class="explaincinema">
+    <h1 id="point">롯데시네마 율하</h1>
+    <ul>
+      <li>위치 : 대구 동구 율하동,1117번지 </li>
+      <li>총 상영관수 : 6개관</li>
+      <li>총 좌석수 : 1394석</li>
+      <li>전화번호 : 1544-8855</li>
+      - 대중교통 이용시
+      <ul>
+        <li>버스 : 518, 618, 719번</li>
+        <li>지하철 : 1호선 율하역 : 3, 4번 출구 앞 </li>
+        <li>자가용<br>1) 수성IC -> 대구부산고속도로 -> 화랑로 동대구IC -> 범물/대구스타디움 방면(우회전) -> 롯데시네마 율하<br>2) 동대구IC -> 화랑 동대구IC 방향 -> 대구 스타디움 방면 (우회전) -> 롯데시네마 율하<br></li>
+      </ul>
+    </ul>
+    </div>
+  </div>
+  </div>
+                </div>
+                 <div id="B_TEST" class="article_B arti_B" style="background-color:#111111; border:1px solid #454545;">
+                  <div class="sname2">
+                    <h3 class="M_1">CGV</h3>
+                  </div> <!-- 영화 네임박스 -->
+                  <div class="cname">
+                    <div id="cinemaC">
+        <div id="showcinema">
+          <img src="./cinema/maps.png" frameborder="0" allowfullscreen class="maps">
+          <img src="./cinema/pointer_B.png" id="CGV_10" onmouseenter="a1(2,0,270,185)" onmouseleave="a2(2,0,280,201)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_1'))">
+          <img src="./cinema/pointer_B.png" id="CGV_11" onmouseenter="a1(2,1,310,226)" onmouseleave="a2(2,1,320,242)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_2'))">
+          <img src="./cinema/pointer_B.png" id="CGV_12" onmouseenter="a1(2,2,345,221)" onmouseleave="a2(2,2,355,237)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_3'))">
+          <img src="./cinema/pointer_B.png" id="CGV_13" onmouseenter="a1(2,3,275,188)" onmouseleave="a2(2,3,285,204)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_4'))">
+          <img src="./cinema/pointer_B.png" id="CGV_14" onmouseenter="a1(2,4,300,119)" onmouseleave="a2(2,4,310,135)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_5'))">
+          <img src="./cinema/pointer_B.png" id="CGV_15" onmouseenter="a1(2,5,230,116)" onmouseleave="a2(2,5,240,130)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_6'))">
+          <img src="./cinema/pointer_B.png" id="CGV_16" onmouseenter="a1(2,6,268,182)" onmouseleave="a2(2,6,278,198)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_7'))">
+          <img src="./cinema/pointer_B.png" id="CGV_17" onmouseenter="a1(2,7,271,190)" onmouseleave="a2(2,7,281,206)" class="pointer size1 onhover" onclick="TogoC(event, document.getElementById('CGV_8'))">
+        </div>
+        <div class="explaincinema">
+          <ul id="list">
+            <li class="what" onmouseenter="a1(2,0,270,185)" onmouseleave="a2(2,0,280,201)" onclick="TogoC(event, document.getElementById('CGV_1'))">CGV 대구</li>
+            <li class="what" onmouseenter="a1(2,1,310,226)" onmouseleave="a2(2,1,320,242)" onclick="TogoC(event, document.getElementById('CGV_2'))">CGV 대구 수성</li>
+            <li class="what" onmouseenter="a1(2,2,345,221)" onmouseleave="a2(2,2,355,237)" onclick="TogoC(event, document.getElementById('CGV_3'))">CGV 대구 스타디움</li>
+            <li class="what" onmouseenter="a1(2,3,275,188)" onmouseleave="a2(2,3,285,204)" onclick="TogoC(event, document.getElementById('CGV_4'))">CGV 대구 아카데미</li>
+            <li class="what" onmouseenter="a1(2,4,300,119)" onmouseleave="a2(2,4,310,135)" onclick="TogoC(event, document.getElementById('CGV_5'))">CGV 대구 이시아</li>
+            <li class="what" onmouseenter="a1(2,5,230,116)" onmouseleave="a2(2,5,240,130)" onclick="TogoC(event, document.getElementById('CGV_6'))">CGV 대구 칠곡</li>
+            <li class="what" onmouseenter="a1(2,6,268,182)" onmouseleave="a2(2,6,278,198)" onclick="TogoC(event, document.getElementById('CGV_7'))">CGV 대구 한일</li>
+            <li class="what" onmouseenter="a1(2,7,271,190)" onmouseleave="a2(2,7,281,206)" onclick="TogoC(event, document.getElementById('CGV_8'))">CGV 대구 현대</li>
+          </ul>
+        </div>
+      </div>
+      <!--CGV 끝-->
+      <!--CGV 영화관 소개 div-->
+      <div class="cinema_CGV" id="CGV_1">
+           <div id="showcinema">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3233.0894398573346!2d128.5927013150894!3d35.8713249801505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e3c342fdb48d%3A0x4f49ea09a2b07723!2zQ0dWIOuMgOq1rOygkA!5e0!3m2!1sko!2skr!4v1464739173259" frameborder="0" allowfullscreen class="maps"></iframe>
+        </div>
+        <div class="explaincinema">
+          <h1 id="point">CGV 대구</h1>
+          <ul>
+            <li>위치 : 대구광역시 중구 사일동 15-1</li>
+            <li>총 상영관수 : 12개관</li>
+            <li>총 좌석수 : 1765석</li>
+            <li>전화번호 : 1544-1122</li>
+            - 대중교통 이용시
+            <ul>
+              <li>버스 : 106, 156, 309, 323, 323-1, 400, 401, 401-1, 425, 427, 508, 518, 521, 600, 650, 724, 909, 980, 939, 급행1, 급행2, 동구1, 북구3</li>
+              <li>지하철 : 지하철 1호선 '중앙로'역 3번 출구(교보빌딩 맞은편) </li>
+              <li>자가용 : 대구역 5분거리 , 반월당 5분거리<br>CGV티켓 + 롯데 영프라자 이용 영수증 제시시 입차 후 4시간
+               무료 이용 가능 이후 10분당 500원 추가</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="cinema_CGV" id="CGV_2">
+        <div id="showcinema">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3235.136074258237!2d128.63819811508793!3d35.82113698016192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e28f188a2f53%3A0x60ebaf7c3b49ccfc!2z64-Z7JWE67Cx7ZmU7KCQIOyImOyEseygkA!5e0!3m2!1sko!2skr!4v1464753774551" frameborder="0" allowfullscreen class="maps"></iframe>
+        </div>
+        <div class="explaincinema">
+          <h1 id="point">CGV 대구 수성</h1>
+          <ul>
+            <li>위치 : 대구광역시 수성구 범물1동 1273 동아백화점 8층</li>
+            <li>총 상영관수 : 4개관</li>
+            <li>총 좌석수 : 804석</li>
+            <li>전화번호 : 1544-1122</li>
+            - 대중교통 이용시
+            <ul>
+              <li>버스 : 급행3, 순환3, 순환3-1, 400, 400-1, 401, 402, 403, 414, 414-1, 564, 604, 수성1, 814, 수성1-1</li>
+              <li>지하철 : 인근 지하철 역 없음</li>
+              <li>자가용 : 주차장 이용: 동아백화점 본관 지하주차장, 별관 주차장(600여대 수용)</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="cinema_CGV" id="CGV_3">
+        <div id="showcinema">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.704712790335!2d128.68502671508824!3d35.83171998015953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356609997658131f%3A0xff6cc8f341e0497a!2zQ0dWIOuMgOq1rOyKpO2DgOuUlOybgA!5e0!3m2!1sko!2skr!4v1464754117660" frameborder="0" allowfullscreen class="maps"></iframe>
+        </div>
+        <div class="explaincinema">
+          <h1 id="point">CGV 대구 스타디움</h1>
+          <ul>
+            <li>위치 : 대구광역시 수성구 범물1동 1273 동아백화점 8층</li>
+            <li>총 상영관수 : 10개관</li>
+            <li>총 좌석수 : 1466석</li>
+            <li>전화번호 : 1544-1122</li>
+            - 대중교통 이용시
+            <ul>
+              <li>버스 : 939, 609, 403</li>
+              <li>지하철<br>2호선 : 대공원역 5번 출구 (도보 25분)<br>3호선 : 용지역 2번 출구 하차 후, 403번 (환승 후, 약 10분)</li>
+              <li>자가용 : 경기장 네거리에서 대구스타디움 방향 200M (서편 주차장 이용)<br>최초 30분 무료, 영화관람고객 4시간 무료 </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="cinema_CGV" id="CGV_4">
+        <div id="showcinema">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d808.2869730472986!2d128.59445038717584!3d35.86989244333155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xe0c37c616c0c516f!2z66Gv642w7Iuc64Sk66eIIOyVhOy5tOuNsOuvuOq0gA!5e0!3m2!1sko!2skr!4v1464755015013" frameborder="0" allowfullscreen class="maps"></iframe>
+        </div>
+        <div class="explaincinema">
+          <h1 id="point">CGV 대구 아카데미</h1>
+            <ul>
+              <li>위치 : 대구광역시 중구 남일동 65-1</li>
+              <li>총 상영관수 : 7개관</li>
+              <li>총 좌석수 : 1171석</li>
+              <li>전화번호 : 1544-1122</li>
+              - 대중교통 이용시
+              <ul>
+                <li>버스 : 106, 156, 202, 303-1, 323-1, 349, 401, 410-1,503, 518, 521,600, 650, 704, 706, 730, 909, 동구1-1, 북구2, 급행2</li>
+                <li>지하철 : 1호선 : 중앙로역 2번 출구 바로 왼편</li>
+                <li>자가용 : 2015년 1월 31일자로 주차장 서비스 종료</li>
+              </ul>
+            </ul>
+        </div>
+      </div>
+      <div class="cinema_CGV" id="CGV_5">
+        <div id="showcinema">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.0368849008305!2d128.63508451509094!3d35.921597180138946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e016077f5517%3A0x34d88cfc8025296f!2zQ0dWIOydtOyLnOyVhO2PtOumrOyKpA!5e0!3m2!1sko!2skr!4v1464755441520" frameborder="0" allowfullscreen class="maps"></iframe>
+        </div>
+        <div class="explaincinema">
+        <h1 id="point">CGV 대구 이시아</h1>
+          <ul>
+            <li>위치 : 대구광역시 동구 봉무동 1545번지 롯데몰 3층</li>
+            <li>총 상영관수 : 7개관</li>
+              <li>총 좌석수 : 1000석</li>
+              <li>전화번호 : 1544-1122</li>
+              - 대중교통 이용시
+              <ul>
+                <li>버스 : 급행 1번. 401번, 101-1,  팔공1번. 팔공2번(주말운행)</li>
+                <li>지하철 : 1호선 아양교역 하차 101-1번 401번 버스이용</li>
+                <li>자가용 : 롯데아울렛 지하주차장 이용 시 극장이용 고객 3시간 무료 주차 <br>(최초 30분 1,000원 , 30분 경과 시마다 500원 추가)</li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+        <div class="cinema_CGV" id="CGV_6">
+          <div id="showcinema">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1615.0624026065268!2d128.55983016440325!3d35.943916759882846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e730ed9c4967%3A0xae9a0924c961e890!2zQ0dWIOy5oOqzoQ!5e0!3m2!1sko!2skr!4v1464771858328" frameborder="0" allowfullscreen class="maps"></iframe>
+          </div>
+          <div class="explaincinema">
+            <h1 id="point">CGV 대구 칠곡</h1>
+            <ul>
+              <li>위치 : 대구광역시 북구 동천동 894-1, 5층</li>
+              <li>총 상영관수 : 7개관</li>
+              <li>총 좌석수 : 1099석</li>
+              <li>전화번호 : 1544-1122</li>
+              - 대중교통 이용시
+              <ul>
+              <li>버스 : 북구1, 칠곡1, 칠곡2, 칠곡2-06, 칠곡2-07, 칠곡2-08, 칠곡2-09,칠곡2-010</li>
+              <li>지하철 : 3호선 팔거역 1번출구</li>
+              <li>자가용
+              <br>1) 팔달교 → 칠곡네거리 → 칠곡홈플러스 → CGV 대구칠곡
+              <br>2) 칠곡IC → 칠곡네거리 → 칠곡홈플러스 → CGV 대구칠곡
+              <br>3) 신천대로 → 국우터널 → 50사단 방면 → CGV 대구칠곡
+              <br>4) 다부,동면 → 진흥교 → 칠곡홈플러스 → CGV 대구칠곡</li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+        <div class="cinema_CGV" id="CGV_7">
+          <div id="showcinema">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3233.1265834004116!2d128.5931552150894!3d35.870414680150546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e3c3627fbbc1%3A0xf7868fccee21ec53!2zQ0dWIOuMgOq1rO2VnOydvA!5e0!3m2!1sko!2skr!4v1464772646139" frameborder="0" allowfullscreen class="maps"></iframe>
+          </div>
+          <div class="explaincinema">
+            <h1 id="point">CGV 대구 한일</h1>
+            <ul>
+              <li>위치 : 대구광역시 중구 동성로 2가 88-22 씨네시티한일 7층</li>
+              <li>총 상영관수 : 5개관</li>
+              <li>총 좌석수 : 832석</li>
+              <li>전화번호 : 1544-1122</li>
+              - 대중교통 이용시
+              <ul>
+                <li>버스 : 425, 724, 309, 156, 323, 980, 939,427, 521, 북구2번, 동구1-1, 가창2, 북구3, 동구1, 동구2</li>
+                <li>지하철 : 1호선 중앙로역 2번 출구</li>
+                <li>자가용 : 씨네시티한일 지하 주차장 이용가능, 영화 관람시 3시간 주차 무료</li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+        <div class="cinema_CGV" id="CGV_8">
+          <div id="showcinema">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d404.1605755446598!2d128.5900621802388!3d35.86654173833149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDUxJzU5LjYiTiAxMjjCsDM1JzIzLjciRQ!5e0!3m2!1sko!2skr!4v1464773538587" frameborder="0" allowfullscreen class="maps"></iframe>
+          </div>
+          <div class="explaincinema">
+          <h1 id="point">CGV 대구 현대</h1>
+          <ul>
+            <li>위치 : 대구광역시 중구 계산동2가 200번지 지하 2층</li>
+            <li>총 상영관수 : 6개관</li>
+            <li>총 좌석수 : 712석</li>
+            <li>전화번호 : 1544-1122</li>
+            - 대중교통 이용시
+              <ul>
+                <li>버스<br>- 일반버스: 305, 북구2, 405, 414, 414-1, 609, 909, 991
+                    <br>- 좌석버스 : 509, 518, 649, 704, 706, 840</li>
+                <li>지하철 : 1/2호선 반월당역 18번 출구 </li>
+                <li>자가용 : 백화점 주차장_지하 / 별관 주차장<br>티켓 소지시 2시간 무료 </li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+                  </div>
+                </div>
+                 <div id="C_TEST" class="article_B arti_C" style="background-color:#111111; border:1px solid #454545;">
+                  <div class="sname2">
+                    <h3 class="M_1">MEGA BOX</h3>
+                  </div> <!-- 영화 네임박스 -->
+                  <div class="cname">
+                      <div id="cinemaM">
+    <div id="showcinema">
+      <img src="./cinema/maps.png" frameborder="0" allowfullscreen class="maps">
+      <img src="./cinema/pointer_B.png" id="Mega_10" onmouseenter="a1(3,0,254,154)" onmouseleave="a2(3,0,264,170)" class="pointer size1 onhover" onclick="MoM(event, document.getElementById('Mega_1'))">
+      <img src="./cinema/pointer_B.png" id="Mega_11" onmouseenter="a1(3,1,232,115)" onmouseleave="a2(3,1,242,131)" class="pointer size1 onhover" onclick="TogoM(event, document.getElementById('Mega_2'))">
+    </div>
+    <div class="explaincinema">
+      <ul id="list">
+        <li class="what" onmouseenter="a1(3,0,254,154)" onmouseleave="a2(3,0,264,170)" onclick="TogoM(event, document.getElementById('Mega_1'))">메가박스 대구(칠성로)</li>
+        <li class="what" onmouseenter="a1(3,1,232,115)" onmouseleave="a2(3,1,242,131)" onclick="TogoM(event, document.getElementById('Mega_2'))">메가박스 북대구(칠곡)</li>
+      </ul>
+    </div>
+  </div>
+  <!--메가박스 끝-->
+  <!--메가박스 영화관 소개 div-->
+  <div class="cinema_Mega" id="Mega_1">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.5363113497842!2d128.58759001508975!3d35.88487848014728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e15fd94bc809%3A0xb25384507f85d7f3!2z66mU6rCA67CV7IqkIOuMgOq1rOygkA!5e0!3m2!1sko!2skr!4v1464774372170" frameborder="0" allowfullscreen class="maps"></iframe>
+    </div>
+    <div class="explaincinema">
+      <h1 id="point">메가박스 대구(칠성로)</h1>
+      <ul>
+        <li>위치 : 대구광역시 북구 칠성동2가 20</li>
+        <li>총 상영관수 : 10개관</li>
+        <li>총 좌석수 : 1951석</li>
+        <li>전화번호 : 1544-0070</li>
+        - 대중교통 이용시
+        <ul>
+          <li>버스 : 300, 323, 323-1, 349, 523, 708, 730, 836, 동구2, 칠곡2, 북구4</li>
+          <li>지하철<br>1) 지하철 1호선 대구역 1,2번 출구
+                <br>2) 지하철 3호선 북구청역 1번 출구</li>
+          <li>자가용 : 지하 4층,    5층 주차장을 이용, 평일 무료 주차 가능</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+  <div class="cinema_Mega" id="Mega_2">
+    <div id="showcinema">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3230.11532532192!2d128.55953541509143!3d35.94414868013378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e73122e19bcb%3A0xe168aeeb1602b67!2z66mU6rCA67CV7IqkIOy5oOqzoeygkA!5e0!3m2!1sko!2skr!4v1464774543250" frameborder="0" allowfullscreen class="maps"></iframe>
+    </div>
+    <div class="explaincinema">
+      <h1 id="point">메가박스 북대구(칠곡)</h1>
+      <ul>
+        <li>위치 : 대구광역시 북구 동암로 100</li>
+        <li>총 상영관수 : 6개관</li>
+        <li>총 좌석수 : 882석</li>
+        <li>전화번호 : 1544-0070</li>
+        - 대중교통 이용시
+        <ul>
+          <li>버스 : 북구1번, 칠곡1번, 칠곡2번, 칠곡2-06번, 칠곡2-07번, 칠곡2-08번, 칠곡2-09번, 칠곡2-010번, 706, 937, 급행2</li>
+          <li>지하철 : 인근 지하철역 없음</li>
+          <li>자가용 : 영화관 건물 지하, 외부 주차타워 이용<br> 영화 관람 고객은 3시간 무료주차 가능</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+                  </div>
+                </div>
+<script>
+  var rottes = new Array(6)
+  var cgvs = new Array(8)
+  var megas = new Array(2)
+  for(i=0;i<rottes.length;i++){
+    rottes[i] = document.getElementById("Rotte_"+(i+10)).style;
+  }
+  for(i=0;i<cgvs.length;i++){
+    cgvs[i] = document.getElementById("CGV_"+(i+10)).style;
+  }
+  for(i=0;i<megas.length;i++){
+    megas[i] = document.getElementById("Mega_"+(i+10)).style;
+  }
+  function a1(mo,i,x,y) {
+    if(mo==1){
+      mv=rottes[i];
+    }else if(mo==2){
+      mv=cgvs[i];
+    }else{
+      mv=megas[i];
+    }
+    mv.width="50px";
+    mv.height="50px";
+    mv.left=x+"px";
+    mv.top=y+"px";
+  }
+  function a2(mo,i,x,y) {
+    if(mo==1){
+      mv=rottes[i];
+    }else if(mo==2){
+      mv=cgvs[i];
+    }else{
+      mv=megas[i];
+    }
+    mv.width="32px";
+    mv.height="32px";
+    mv.left=x+"px";
+    mv.top=y+"px";
+  }
+  // 화면 나타나게 하기
+  var what = document.getElementsByClassName("what"); 
+  var cinemaL = document.getElementById("cinemaL");
+  var cinemaC = document.getElementById("cinemaC");
+  var cinemaM = document.getElementById("cinemaM");
+  var cinema_Rotte = document.getElementsByClassName("cinema_Rotte");
+  var cinema_CGV = document.getElementsByClassName("cinema_CGV");
+  var cinema_Mega = document.getElementsByClassName("cinema_Mega");
+  var whereiscinema = document.getElementsByClassName("whereiscinema"); 
+  function TogoR(evt, cinemaName) {
+          cinemaL.style.display = "none";
+        for(i=0;i<cinema_Rotte.length;i++) {
+          cinema_Rotte[i].style.display = "none";
+        }
+        Hidecinema(evt, cinemaName);
+  }
+  function TogoC(evt, cinemaName){
+     cinemaC.style.display = "none";
+        for(i=0;i<cinema_CGV.length;i++) {
+          cinema_CGV[i].style.display = "none";
+        }
+        Hidecinema(evt, cinemaName);
+  }
+  function TogoM(evt, cinemaName){
+     cinemaM.style.display = "none";
+        for(i=0;i<cinema_Mega.length;i++) {
+          cinema_Mega[i].style.display = "none";
+        }
+        Hidecinema(evt, cinemaName);
+  }
+  function Hidecinema(evt, cinemaName) {
+      for (i = 0; i < 1; i++) {
+          whereiscinema[i].className = whereiscinema[i].className.replace(" active", "");
+      }
+      for (i = 0; i < cinema_Rotte.length; i++) {
+          what[i].className = what[i].className.replace(" active", "");
+      }
+      cinemaName.style.display = "block";
+      evt.currentTarget.className += " active";
+  }
+  function returnmap() {
+      cinemaC.style.display = "block";
+      cinemaL.style.display = "block";
+      cinemaM.style.display = "block";
+      for(i=0;i<cinema_Rotte.length;i++) {
+          cinema_Rotte[i].style.display = "none";
+        }
+        for(i=0;i<cinema_CGV.length;i++) {
+          cinema_CGV[i].style.display = "none";
+        }
+         for(i=0;i<cinema_Mega.length;i++) {
+          cinema_Mega[i].style.display = "none";
+        }
+  }
+</script>
+                <script>
+                function openCity(evt, cityName) {
+                    var i, article_B, tablinks;
+                    article_B = document.getElementsByClassName("article_B");
+                    for (i = 0; i < article_B.length; i++) {
+                        article_B[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < article_B.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace("", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += "";
+                }
+                </script>
+
+              </div> <!-- Onbox_B End --> 
+            </div> <!-- Box_D End -->
+
+            <div class="Box_E"> 
+              <div class="Onbox_C"> menu </div>
+            </div> <!-- Box_D End -->
+
+            <div class="Box_F"> 
+              <div class="Onbox_D"> menu </div>
+            </div> <!-- Box_D End -->
+
+            <div class="Box_G"> 
+              <div class="Onbox_E"> menu </div>
+            </div> <!-- Box_D End -->
+
+        <div id="footer" onmouseover="onlight(1)">
+          <div class="FooterPage"> footer </div>
+          <div class="FooterBox whitehover">
+            <div class="FooterMAIN">
+              <div class="FooterLeft"> © 2016 by TEAM PROJECT </div>
+              <div class="FooterRight">  
+                <ul>
+                  <li>TEST</li>
+                  <li>TEST</li>
+                  <li>TEST</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> <!-- footer End -->
+    </div> <!-- wrap End -->
+
+    <script>
+      var under = document.getElementsByClassName('underline');
+      var picte = document.getElementsByClassName('pic_width');
+      var pic = ["home_hover.png","movie_hover.png","tips_hover.png","about_hover.png","event_hover.png"]
+        var pic2 = ["home.png","movie.png","tips.png","about.png","event.png"]
+        var x=0;
+        var ua = window.navigator.userAgent;
+        window.onscroll = function() {user()};
+        user();
+        function user() {
+          if(ua.indexOf('Chrome') != -1){
+              scrollsch();
+          }
+          else{
+            scrollsie();
+          }
+        }
+        function scrollsch() {
+          if(document.body.scrollTop >= 0 && document.body.scrollTop < 400){
+            x=0;
+            ege();
+            movemove(0);
+          }
+          else if(document.body.scrollTop > 400 && document.body.scrollTop < 1450){
+            x=1
+            ege();
+            movemove(1);          
+          }
+          else if(document.body.scrollTop > 1450 && document.body.scrollTop < 2350){
+            x=2
+            ege();
+            movemove(2);          
+          }
+          else if(document.body.scrollTop > 2350  && document.body.scrollTop < 3200){
+            x=3
+            ege();
+            movemove(3);          
+          }
+          else if(document.body.scrollTop > 3200){
+            x=4
+            ege();
+            movemove(4);          
+          }
+        }
+        function scrollsie() {
+          if(document.documentElement.scrollTop >= 0 && document.documentElement.scrollTop < 400){
+            x=0;
+            ege();
+            movemove(0);
+          }
+          else if(document.documentElement.scrollTop > 400 && document.documentElement.scrollTop < 1450 ){
+            x=1
+            ege();
+            movemove(1);          
+            }
+            else if(document.documentElement.scrollTop > 1450 && document.documentElement.scrollTop  < 2350){
+            x=2
+            ege();
+            movemove(2);          
+            }
+            else if(document.documentElement.scrollTop > 2350 && document.documentElement.scrollTop < 3200 ){
+            x=3
+            ege();
+            movemove(3);          
+            }
+            else if(document.documentElement.scrollTop > 3200 ){
+            x=4
+            ege();
+            movemove(4);          
+            }
+          }
+      function movemove(n) {
+        under[n].style.borderBottom =1+"px solid white";
+            under[n].style.color ="white";
+            picte[n].src= "./menu/"+pic[n];
+      }
+      function ege() {
+        for(i=0;i<under.length;i++){
+                under[i].style.color="#9f9f9f";
+                under[i].style.borderBottom ="";
+                picte[i].src= "./menu/"+pic2[i]
+            }
+          }
+      function onlight(n){
+            movemove(n);
+        }
+        function offlight(){
+          for(i=0;i<under.length;i++){
+            if(i!=x){
+                  under[i].style.color="#9f9f9f";
+                  under[i].style.borderBottom ="";
+                  picte[i].src= "./menu/"+pic2[i];
+                }
+        }
+
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+	#IMG{
+		width: 400px;
+		height: 400px;
+	}
+	</style>
+</head>
+<body>
+<div>
+	<img src="CONJURING.jpg" id="IMG" onclick="changeimg()">
+</div>
+<div id="reads">
+</div>
+	<script>
+		var total = 43;
+		var random = new Array(3);
+		function randoms() {
+			for(i=0;i<random.length;i++){
+			random[i]=parseInt(Math.random()*total+1);
+				for(j=0;j<i;j++){
+					if(random[i]===random[j]){
+						i--;
+					}
+				}
+			}
+		}
+		
+		function changeimg () {
+			document.getElementById('IMG').src= "A_1.jpg"
+			setTimeout('changeimg1()',3000);
+			randoms();
+			document.getElementById('reads').innerHTML="";//출력값 초기화ㅣ
+		}
+		function changeimg1() {
+			document.getElementById('IMG').src= "CONJURING.jpg"
+			k=0;
+			setTimeout('read1(k)',1000);
+			setTimeout('read1(k+1)',2000);
+			setTimeout('read1(k+2)',3000);
+		}
+		function read1(k) {
+				document.getElementById('reads').innerHTML +=random[k] + " ";
+		}
+	</script>
+</body>
+</html>

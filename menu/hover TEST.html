@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Menu</title>
+  <script src="https://code.jquery.com/jquery-1.7.0.min.js"></script>
+	<style>
+  body {
+    background:url(civilwar.jpg);
+  }
+.dropbtn {
+    background-color: #111111;
+    color: #9f9f9f;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right:0px;
+    width:150px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropdown-content {
+    display:none;
+    position: absolute;
+    background-color: rgba(17,17,17,0.6);
+    width:150px;
+    color:white;
+  }
+
+.dropdown-content a {
+    color: #9f9f9f; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align:center;
+    overflow:;
+    vertical-align: middle;
+  }
+
+.dropdown:hover .dropdown-content {
+  }
+
+.dropdown:hover {
+    background-color:;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+
+
+  .underline {
+    position:absolute;
+    display:inline-block;
+    border-bottom-width:1px;
+    border-bottom-color:rgba(17,17,17,0);
+    border-bottom-style:solid;
+    color: #9f9f9f; 
+    font-style: 
+    vertical-align:middle;
+    text-align:center;
+  }
+
+/* 버튼을 눌렀을 때의 동작에 대한 속성을 주는 CSS */
+.underline:hover {
+  transition:  0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  border-bottom-color:white;
+  color:white;
+
+}
+.pic_width {
+  width:20px;
+  height:20px;
+  margin-right: 8px; 
+  vertical-align:middle;
+}
+
+/*.stop_again {
+    position:absolute;
+    display:inline-block;
+    width:150px;
+    background-color:red;
+    height:55px;
+    float:left;
+    z-index:2000;
+    display:none;
+    opacity:100;
+    cursor:pointer;
+    border-bottom-width:1px;
+    border-bottom-color:rgba(17,17,17,0);
+    border-bottom-style:solid;
+    color: #9f9f9f; 
+    font-style: 
+    vertical-align:middle;
+    text-align:center;
+
+  }*/
+
+.menu{
+  float:left;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="menu">
+ <button href="#Link" class="dropbtn"><img src="home.png" class="pic_width"><span class="underline">Home</span>Home</button>
+</div>
+
+<div class="dropdown">
+ <button class="dropbtn" id="movie"><img src="movie.png" class="pic_width"><span class="underline">Movie</span>Movie</button>
+  <div class="dropdown-content">
+      <a href="#Link1"><span class="underline">액션</span>액션</a>
+      <a href="#Link2"><span class="underline">느와르</span>느와르</a>
+      <a href="#Link3"><span class="underline">재난 영화</span>재난 영화</a>
+      <a href="#Link4"><span class="underline">SF</span>SF</a>
+      <a href="#Link5"><span class="underline">공포</span>공포</a>
+      <a href="#Link6"><span class="underline">코미디</span>코미디</a>
+  </div>
+</div>
+
+<div class="menu">
+ <button href="#Link" class="dropbtn"><img src="tips.png" class="pic_width"><span class="underline">Tips</span>Tips</button>  
+</div>
+
+<span class="menu">
+ <button href="#Link" class="dropbtn"><img src="about.png" class="pic_width"><span class="underline">About US</span>About US</button>  
+</div>
+
+<div class="menu">
+ <button href="#Link" class="dropbtn"><img src="event.png" class="pic_width"><span class="underline">Events</span>Events</button>  
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#movie").mouseenter(function(){
+        $(".dropdown-content").slideDown("slow");
+        setTimeout('koo()',0);
+    });
+    $(".dropdown").mouseleave(function(){
+        $(".dropdown-content").slideUp("slow");
+    });
+});
+function koo() {
+  document.getElementById("stop_please").style.display='block';
+  setTimeout('bi()',1200);
+}
+function bi() {
+  document.getElementById("stop_please").style.display='none';
+}
+</script>
+
+</body>
+</html>

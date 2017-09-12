@@ -1,0 +1,1038 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>TeamPo</title>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <style type="text/css">
+
+/************************************** Library 영역 **************************************/
+
+/* Slideshow container */
+.slideshow-container {max-width:100%; height:700px; position: relative; margin: 0px auto;}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  top: 45%;
+  width: auto;
+  padding: 50px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  z-index: 5;
+}
+
+/* Position the "next button" to the right */
+.next {right: 0; border-radius: 3px 0 0 3px;}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {background-color: rgba(255,255,255,0.2);}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Slide box 영역 추가 @@@ 수정 */
+.Slide_Box {text-align:center; width:100%; height:20px; margin:16px; auto;}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor:pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border:2px solid  #CBC1C1;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {background-color: #242424;}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name:fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .slprev, .slnext,.text {font-size: 11px}
+}
+
+/************************************** Library 영역 **************************************/
+
+*{margin:0; padding:0; font-family:arial;} /* 초기화 */
+        
+html,body{width:100%; float:left;}
+
+#wrap {width:100%; height:100%; background-color:#070707; overflow-y:hidden; overflow-x:hidden;}
+#header {width:100%; height:70px; background-color:#111111; border-bottom:1px solid #353535;} /* ( +100 ) */
+#section {width:100%;  background-color:#4641D9;} /* ( total_2500 ) */
+#footer {width:100%;  background-color:#070707; border-top:1px solid #353535; clear:both;} /* ( +150 ) */
+
+#logo{margin-left: 100px;}
+
+/************************************** jquery 위한 CSS **************************************/
+
+.Headerspan {margin:5px 0px 0px 5px; float:left;}  /* 포지션 픽스 스크롤내려도 고정*/
+.nav{width:15%; height:94.90%; position:fixed; left:0; top:5%; z-index:7; background:#e8ebf0; 
+border-right:1px solid #bbbbbb; float:left; margin:1px 0 0 -1px; }
+.nav span {position:absolute; cursor:pointer; right:-17px; top:8px;} /* 개인홈페이지부분*/
+
+
+
+::selection {background:transparent;}
+@-webkit-keyframes 'an_box1' {
+  0% {opacity:0;}
+  50% {opacity:1.0;}
+  100% {opacity:0;}
+}
+.an_box1 {
+  width:230px; height:100px; background:#ccc;
+  border-radius:20px;
+  position:absolute; left:50%; top:60%; margin:-100px 0 0 -100px;
+  -webkit-animation-name:'an_box1';
+  -webkit-animation-duration:1s;
+  -webkit-animation-timing-function:ease;
+  -webkit-animation-iteration-count:infinite;
+}
+
+/************************************** jquery 위한 CSS **************************************/
+
+
+/************************************** 동영상 툴 CSS **************************************/
+
+.L_img{ /*재생 버튼 정지 버튼의 css*/
+  position: absolute;
+  width: 900px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  margin-top: -350px;
+  margin-left: -450px;
+  z-index: 2;
+  opacity: 0.7;
+
+}
+.L_click{ /*재생과 정지버튼이 안보이는데*/
+  opacity: 0;
+  transition: 0.5s;
+}
+.L_click:hover{ /*hover시 보인다.*/
+  opacity: 1;
+}
+.L_hide{
+  display: none;
+}
+.L_hight{
+  height: 700px;
+  background-size:100% 700px;
+}
+
+/************************************** 동영상 툴 CSS **************************************/
+
+/************************************** Menu 메뉴부분 **************************************/
+
+.dropbtn {
+  background-color: #111111;
+  color: #9f9f9f;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-right:0px;
+  width:150px;
+  border-right:1px solid #9f9f9f;
+}
+
+
+.dropbtn_1 {
+  background-color: #111111;
+  color: #9f9f9f;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-right:0px;
+  width:150px;
+  border-right:0;
+}
+
+
+
+.dropdown {
+    display: inline-block;
+
+}
+
+.dropdown-content {
+  display:none;
+  background-color: rgba(17,17,17,0.6);
+  width:150px;
+  color:white;
+  position:relative;
+  z-index:4;
+}
+
+.dropdown-content a {
+  color: #9f9f9f; 
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align:center;
+}
+
+
+.underline {
+  display:inline-block;
+  border-bottom-width:1px;
+  border-bottom-color:rgba(17,17,17,0);
+  border-bottom-style:solid;
+  color: #9f9f9f; 
+  font-style:vertical-align:middle;
+  text-align:center;
+}
+
+/* 버튼을 눌렀을 때의 동작에 대한 속성을 주는 CSS */
+
+.pic_width {
+  width:20px;
+  height:20px;
+  margin-right: 8px; 
+  vertical-align:middle;
+}
+
+.menuA {
+  float:left;
+  margin: 20px 0px 0px 0px;
+}
+
+.Search {
+  width:290px;
+  height:30px;
+  background-color: #111111;
+  margin:10px 0px 0px 745px;
+  z-index:1;
+}
+
+.Rank {
+  position:fixed;
+  clear:both;
+  margin:0px 0px 0px 750px;
+  width:290px;
+  height:30px;
+  background-color: #111111;
+  z-index:2;
+}
+
+.gap_left {padding:0px 0px 5px 10px;}
+.gap_rank {margin:10px 0px 10px 70px;}
+
+.num {
+   color:white;
+}
+.liTAG {
+  display: none;
+  list-style-type: none;
+  color:#9f9f9f;  
+}
+.liTAG:hover {
+  color: white;
+  border-bottom: 1px solid white;
+}
+.hide{
+  display: block;
+}
+ .hides{
+  display: block;
+}
+.num_pop{
+  display: block;
+}
+.num_display{
+  display: none;
+}
+
+#other_box{
+  background-color: #111111;
+  position:relative;
+  z-index:4;
+}
+.font_color{
+   color:white;
+}
+
+.auto{
+  line-height : 30px;
+}
+
+.bar {
+  height: 11px;
+  border-left:1px solid #eaeaea;
+}
+
+
+/************************************** Menu 메뉴부분 **************************************/
+
+.centers {width:1200px; height:70px; margin:0px auto; /*border:1px solid white;*/}
+
+.positionA {width:100%; height:70px; position:fixed; z-index:6; background-color:#111111; top:0; left:0; right:0;
+            box-shadow:0 1px 10px 0 rgba(0,0,0,.2);}
+
+.Menu {width:1000px; height:70px; float:left; margin:0px 0px 0px 0px; background-color:#111111; /*border:1px solid white;*/}
+
+
+.Box_A {width:100%; height:700px;} /* ( +700 ) 메인동영상 부분 */
+		
+.Box_B {width:100%; height:50px; background-color:#111111; border-top:1px solid #353535;} /* ( +50 ) */ 
+.push_Box {width:1200px; height:49px; margin:0px auto; color:white; /*border:1px solid white;*/} /* 섹션 중앙정렬박스  */		
+
+.Box_C {width:100%; height:900px; background-color:#251F1F; border-top:1px solid #353535;} /* 900 */
+.Onbox_A {width:1200px; height:600px; margin:0px auto; /*border:1px solid white;*/ color:white;}
+.article_A {width:1200px; height:850px; background-color:#353535; margin:25px 0px 0px 0px;}
+.sname {width:1200px; height:40px; background-color:#353535;}
+.M_1 {margin:9px 0px 0px 20px; float:left}
+
+.bname {width:1170px; height:795px; background-color:#111111; margin:0px 15px 15px 15px;}
+.Movie_1 {width:230px; height:340px; background-color:#454545; margin:40px 0px 0px 50px; float:left;}
+
+.Box_D {width:100%; height:900px; background-color:#343434; float:left;} /* 600 */
+.Onbox_B {width:1200px; height:900px; margin:0px auto; /*border:1px solid white;*/ color:white;}
+.article_B {width:1200px; height:850px; background-color:#BAD0D0; margin:25px 0px 0px 0px;}
+
+.Box_E {width:100%; height:900px; background-color:#343434;} /* 600 */
+.Onbox_C {width:1200px; height:900px; margin:0px auto; border:1px solid white; color:white;}
+
+.Box_F {width:100%; height:900px; background-color:#343434; } /* 600 */
+.Onbox_D {width:1200px; height:900px; margin:0px auto; border:1px solid white; color:white;}
+
+.Box_G {width:100%; height:900px; background-color:#343434; } /* 600 */
+.Onbox_E {width:1200px; height:900px; margin:0px auto; border:1px solid white; color:white;}
+
+
+
+.FooterPage {width:1200px; height:150px; margin:0px auto; background-color:#121212; border:1px solid white; color:white;} /* 푸터 중앙정렬 박스 */
+.FooterBox {width:100%; border-top:1px solid #353535; color:gray; background-color:#111111; 
+            padding:30px 0px; font-family:"Gotham-Book"; font-weight:100; font-size:0.8em;
+            transition: all 0.3s ease-out; float:left;
+}
+.FooterBox:hover {
+  color:#fefefe;
+  transition: all 0.5s ease-out;
+}
+
+.FooterMAIN {width:1200px; margin:0px auto;}
+.FooterLeft {float:left; padding:0px 0px 0px 10px; cursor:default;}
+
+.FooterRight {float:right; cursor:default;}
+.FooterRight li{display:inline; list-style-type:none; padding:0px 0px 0px 15px;}
+.FooterRight a {text-decoration:none; color:gray; padding:0px 0px 0px 15px;}
+
+
+/* ==================================================== 바디메뉴얼 =========================================== */ 
+
+.Momenu {
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    width:228px;
+    height:338px;
+    float:left;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    border:1px solid #ffffff;
+    -webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+    -moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+    -ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+    -o-transition: all 0.3s ease-out; /* 오페라호환 */
+    transition: all 0.3s ease-out;
+}
+
+.Momenu:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    -webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+    -moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+    -ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+    -o-transition: all 0.3s ease-out; /* 오페라호환 */
+    transition: all 0.3s ease-out;
+    
+}
+
+.AB_1 {background-image:url('./Poster/수정1.png'); background-repeat:no-repeat;}
+.AB_2 {background-image:url('./Poster/수정2.png'); background-repeat:no-repeat;}
+.AB_3 {background-image:url('./Poster/수정3.png'); background-repeat:no-repeat;}
+.AB_4 {background-image:url('./Poster/수정4.png'); background-repeat:no-repeat;}
+.AB_5 {background-image:url('./Poster/수정5.png'); background-repeat:no-repeat;}
+.AB_6 {background-image:url('./Poster/수정6.png'); background-repeat:no-repeat;}
+.AB_7 {background-image:url('./Poster/수정7.png'); background-repeat:no-repeat;}
+.AB_8 {background-image:url('./Poster/수정8.png'); background-repeat:no-repeat;}
+
+.refer_A:link, .refer_A:visited {
+  color: white;
+  margin:0px 0px 0px 0px;
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block;
+  float:left;
+  width:226px;
+  line-height:50px;
+  display:inline;
+
+  -webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+  -moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+  -ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+  -o-transition: all 0.3s ease-out; /* 오페라호환 */
+  transition: all 0.3s ease-out;
+}
+
+.refer_A:hover, .refer_A:active {
+  background-color:#ffffff;
+  color: black;
+  -webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+  -moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+  -ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+  -o-transition: all 0.3s ease-out; /* 오페라호환 */
+  transition: all 0.3s ease-out;
+}
+
+</style>
+</head>
+<body>
+    <div class="an_box1"><img src="logo.png"></div>
+    <div class="an_box2"></div>  <!--버튼-->
+    <div id="wrap">
+        <div id="header">
+          <div class="positionA">
+          <span class="Headerspan"><img src="http://static1.naver.net/w9/btn_next10.gif" alt=""></span>
+          <div class="nav"> <!-- 개인홈페이지 부분-->
+          </div>
+            <div class="centers">
+            <img src="logo.png" id="logo">
+            		<div class="Menu"> <!-- 메뉴부분 -->
+
+                 <div class="menuA">
+                  <button href="#Link" class="dropbtn"><a><img src="./menu/home.png" class="pic_width">
+                  <p class="underline" id="Home" onmouseover="onlight(0)" onmouseout="offlight(0)">Home</p></a></button>
+                </div>
+
+                <div class="menuA">
+                  <div class="dropdown">
+                   <button class="dropbtn"><a style="text-decoration:none"><img src="./menu/movie.png" class="pic_width">
+                   <p class="underline" onmouseover="onlight(1)" onmouseout="offlight()"id="movie">Movie</p></a></button>
+                    
+                  </div>
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn"><a><img src="./menu/tips.png" class="pic_width">
+                 <p class="underline" onmouseover="onlight(2)" onmouseout="offlight()">Tips</p></a></button>  
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn"><a><img src="./menu/about.png" class="pic_width">
+                 <p class="underline" onmouseover="onlight(3)" onmouseout="offlight()">About US</p></a></button>  
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn_1"><a><img src="./menu/event.png" class="pic_width">
+                 <p class="underline" onmouseover="onlight(4)" onmouseout="offlight()">Events</p></a></button>  
+                </div> <!--menuA End-->
+                 <script>
+                  $(document).ready(function (){
+           				   $('#Home').click(function () {
+                	   $('html, body').animate({scrollTop:0}, 'slow');
+						         });
+        			    });
+        			    $(document).ready(function (){
+           				   $('#movie').click(function () {
+                		 $('html, body').animate({scrollTop:790}, 'slow');
+						         });
+        			    });
+                 </script>
+
+                 <!--검색 바 -->
+                  <div class="Search">
+                   <form action="http://www.google.co.kr/cse" id="cse-search-box" target="_blank">
+                    <div>
+                      <input type="hidden" name="cx" value="008799202013884722713:oelp-m1o9mq">
+                      <input type="submit" name="sa" value="Search">
+                      <input type="hidden" name="ie" value="utf-8">
+                      <input type="text" name="q" size="20">
+                    </div>
+                  </form>
+                  </div>
+                  <!--검색 바 END -->
+                  
+                  <!--순위표-->
+                  <div class="Rank">
+                      <div>
+                         <ul class="auto">
+                          <li class="liTAG num hide gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                          <li class="liTAG num gap_left"></li>
+                        </ul>
+                      </div>
+                      <div id="other_box">
+                        <ul class="other num_display">
+                          <p class="font_color gap_rank">2015 박스오피스 순위</p>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                          <li class="liTAG hides gap_left"></li>
+                        </ul>
+                      </div>
+                    </div>
+              	</div>
+
+                <script>
+                  var moviewinner = ["베테랑","암살","어벤져스:에이지오브울트론","국제시장","내부자들","사도","킹스맨:시크릿에이전트","미션임파셔블:로그네이션","연평해전","쥬라기월드","검은 사제들","히말라야","인사이드 아웃"]
+                  var ranking = document.getElementsByClassName('num');
+                    var showrank=1;
+                    var math=0;
+                    var change=0;
+                    var Lmove;
+                    var ranking2 = document.getElementsByClassName('hides');
+                    var ranks=0;
+                    write();
+                    nointer=setInterval('rank()',3000);
+                    non=setInterval('numbers()',3000);
+                    Lmove=setInterval('changeset()',10000);
+                    function rank(){
+                    write();
+                      if(showrank>=ranking.length){
+                        showrank=0;
+                      }
+                      for (i = 0; i < ranking.length; i++) {
+                        ranking[i].style.display = "none";
+                      }
+                      showrank++;
+                      ranking[showrank-1].style.display = "block";
+                    }
+                    function changeset() {
+                        math = parseInt(Math.random()*ranking.length);
+                        change = parseInt(Math.random()*moviewinner.length);
+                        while(math == change){
+                        change = parseInt(Math.random()*moviewinner.length);
+                        }
+                      winnerchange();
+                    }
+                    function winnerchange() {
+                      var temp = moviewinner[math];
+                      var temp1 = moviewinner[change];
+                      var temp2 = moviewinner[change+1];
+                      var temp3 = moviewinner[math+1];
+                      if(math>change){
+                        moviewinner[change]=temp;
+                        moviewinner[change+1]=temp1;
+                        for(i=change+1;i<math;i++){
+                          temp1=moviewinner[i+1];
+                          moviewinner[i+1]=temp2;
+                          temp2=temp1;
+                        }
+                      }
+                      else{
+                        moviewinner[math]=temp1;
+                        moviewinner[math+1]=temp;
+                        for(i=math+1;i<change;i++){
+                          temp1=moviewinner[i+1];
+                          moviewinner[i+1]=temp3;
+                          temp3=temp1;
+                        }
+                      } 
+                        
+                      write();
+                      add();
+                    }
+                    function write() {
+                      for(i=0;i<ranking.length;i++){
+                        ranking[i].innerHTML =(i+1)+ " 위 : " + moviewinner[i];
+                        ranking2[i].innerHTML =(i+1)+ " 위 : " + moviewinner[i]
+                      }
+                    }
+                    $(document).ready(function(){
+                      $(".Rank").mouseenter(function(){
+                        clearInterval(nointer);
+                        clearInterval(non);
+                          $(".auto").addClass("num_display");
+                          $(".other").removeClass("num_display");
+                      });
+                      $(".Rank").mouseleave(function(){
+                        clearInterval(nointer);
+                        clearInterval(non);
+                        nointer=setInterval('rank()',3000);
+                        non=setInterval('numbers()',3000);
+                          $(".auto").removeClass("num_display");
+                          $(".other").addClass("num_display");
+                      });
+                  });
+                  function numbers(){
+                      $('.num').animate({opacity:'0'},-1000);
+                      $('.num').animate({opacity:'1'},1000);
+                      $('.num').toggle(aa,bb); // 토글 반복
+                      function aa(){
+                          $('.num').animate({opacity:'+=1'},1000);
+                      }
+                      function bb(){
+                          $('.num').animate({opacity:'0'},-1000);
+                      }
+                  }
+                  function add(){
+                      if(math<change){
+                      ranks = change - math;
+                      ranking[math].innerHTML += " " + '↑' + " " + ranks;
+                      ranking2[math].innerHTML += " " + '↑' + " " + ranks;
+                    }
+                    else if (math>change){
+                      ranks = math - change;
+                      ranking[change].innerHTML += " " + '↑' + " " + ranks;
+                      ranking2[change].innerHTML += " " + '↑' + " " + ranks;
+                    }
+                  }
+             </script>
+
+            </div> <!-- centers End 헤더중앙메뉴부분 -->
+          </div> <!-- positionA 헤더중앙메뉴부분 -->
+      	</div> <!-- header End -->
+        <div id="section">
+        
+        	<div class="Box_A" > 
+                   <div class="slideshow-container">
+                        <div class="mySlides fade">
+                          <img src="sivilwar.jpg" id="L_pic1" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played1" onclick="playMovie(1)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused1" onclick="pauseMovie(1)"> <!--스탑시 비디오 정지-->
+                          </div>
+                          <div id="L_hight1" class="L_hide L_hight " style="background-image: url(sivilwar.jpg)"> <!--비디오 div-->
+                            <video id="L_video1" height="100%" width="100%" preload="none"> <!--비디오 div-->
+                            <source src="sivilwar.mp4" type="video/mp4"></source><!--비디오 파일 재생 -->
+                            </video>
+                          </div>
+                          
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="Inception.jpg" id="L_pic2" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played2" onclick="playMovie(2)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused2" onclick="pauseMovie(2)">
+                          </div>
+                          <div id="videoeffect">
+                          </div>
+                          <div id="L_hight2" class="L_hide L_hight " style="background-image: url(Inception.jpg)">
+                            <video id="L_video2" height="100%" width="100%" preload="none">
+                            <source src="Inception.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="베테랑.jpeg" id="L_pic3" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played3" onclick="playMovie(3)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused3" onclick="pauseMovie(3)">
+                          </div>
+                          <div id="L_hight3" class="L_hide L_hight " style="background-image: url(베테랑.jpeg)">
+                            <video id="L_video3" height="100%" width="100%" preload="none">
+                            <source src="베테랑.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="conjuring.jpg" id="L_pic4" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played4" onclick="playMovie(4)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused4" onclick="pauseMovie(4)">
+                          </div>
+                          <div id="L_hight4" class="L_hide L_hight " style="background-image: url(conjuring.jpg)">
+                            <video id="L_video4" height="100%" width="100%" preload="none">
+                            <source src="CONJURING.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="bonil.jpg" id="L_pic5" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played5" onclick="playMovie(5)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused5" onclick="pauseMovie(5)">
+                          </div>
+                          <div id="L_hight5" class="L_hide L_hight " style="background-image: url(bonil.jpg)">
+                            <video id="L_video5" height="100%" width="100%" preload="none">
+                            <source src="bonil.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="A_6.jpg" style="width:100%; height:700px;">
+                          <div class="text">Caption 6</div>
+                        </div>
+                        
+                        <a class="prev" id="changeimg" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" id="changeimg1" onclick="plusSlides(1)">❯</a>
+                        
+                        </div>
+                
+                        <div class="Slide_Box">
+                          <span class="dot" id="dot1" onclick="currentSlide(1)"></span> 
+                          <span class="dot" id="dot2" onclick="currentSlide(2)"></span> 
+                          <span class="dot" id="dot3" onclick="currentSlide(3)"></span> 
+                          <span class="dot" id="dot4" onclick="currentSlide(4)"></span> 
+                          <span class="dot" id="dot5" onclick="currentSlide(5)"></span> 
+                          <span class="dot" id="dot6" onclick="currentSlide(6)"></span> 
+                        </div>
+
+				      <script>
+                var slideIndex = 1;
+                var i=1;
+                showSlides(slideIndex);
+                
+                function plusSlides(n) {
+                  showSlides(slideIndex += n);
+                }
+                
+                function currentSlide(n) {
+                  showSlides(slideIndex = n);
+                }
+                
+                function showSlides(n) {
+                  var i;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (n > slides.length) {slideIndex = 1}    
+                  if (n < 1) {slideIndex = slides.length} ;
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  slides[slideIndex-1].style.display = "block";  
+                  dots[slideIndex-1].classList.add("active");
+                  
+                 
+                }
+
+                
+                /************* 비디오 재생 화면  전환한다. **************/
+                noplay=setInterval('autoSlides()',4000);
+                  function playMovie(i) { //재생 이미지 클릭시 함수 작동 
+                   
+                        clearInterval(noplay);
+                        document.getElementById('L_video'+i).play();  // 비디오를 재생하는 것
+                        document.getElementById('L_video'+i).style.display='block'; //비디오를 재생햇을때 비디오가 보이게
+                        document.getElementById('L_paused'+i).style.display='block'; //비디오를 재생했을때 정지 이미지 소환
+                        document.getElementById('L_played'+i).style.display='none'; //비디오를 재생했을때 재생 이미지 삭제
+                        document.getElementById('L_pic'+i).style.display='none'; //그림이 들어가는 div 삭제
+                        document.getElementById('L_hight'+i).style.display='block'; //비디오를 재생했을때 비디오 밖 div 소환
+                        document.getElementById('changeimg').style.display='none';   //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        document.getElementById('changeimg1').style.display='none'; //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        for(n=1; n<7; n++)
+                          document.getElementById('dot'+ n).style.display='none';
+                     
+                }
+                  function pauseMovie(i) { //정지 이미지 클릭시 함수 적용
+                    
+                        clearInterval(noplay);
+                        noplay=setInterval('autoSlides()',4000);
+                          document.getElementById('L_video'+i).pause(); // 비디오를 멈추는거
+                          document.getElementById('L_video'+i).style.display='none'; //비디오를 멈첫을때 비디오가 안보이게
+                          document.getElementById('L_paused'+i).style.display='none'; //비디오가 멈첬을때 정지 이미지 삭제
+                          document.getElementById('L_played'+i).style.display='block'; //비디오가 정지했을때 재생 이미지 소환
+                          document.getElementById('L_pic'+i).style.display='block'; //비디오가 정지 했을때 이미지 div 소환
+                          document.getElementById('L_hight'+i).style.display='none'; //비디오가 정지했을때 비디오 밖 div 삭제
+                          document.getElementById('changeimg').style.display='block';  //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          document.getElementById('changeimg1').style.display='block'; //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          for(n=1; n<7; n++)
+                            document.getElementById('dot'+ n).style.display='inline-block';
+                           //영상을 정지하면 제이쿼리로 만든 화면이 다시 나옴 
+                   
+                  }
+                  /************* 스크립트제작 자동으로 슬라이드 화면을 3초마다 전환한다. **************/
+              
+                function autoSlides() {
+                  var i;
+                  var cnt;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (slideIndex == slides.length) {
+                    slideIndex = 0; 
+                    cnt=0;
+                  } 
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  cnt++;
+                  slideIndex++;
+                  slides[slideIndex-1].style.display = "block";
+                  dots[slideIndex-1].classList.add("active");
+                }
+                /************* 스크립트제작 **************/
+
+                /************* 제이쿼리 부분 *************/
+
+                    $(document).ready(function() {
+                      $('.nav').css('display','none');
+                      $('.nav').animate({opacity:'0%'}); //처음에 띄워진걸 숨김
+                      $('.nav').css('background-color','#070707');
+                      $('.nav').css('border-radius','10px');
+                      $('.nav').css('border','10px');
+                      $('.Headerspan').toggle(first,second);  // 토글 반복
+                  });
+                  function first(){
+                      $('.nav').css('display','block');
+                      $('.nav').animate({opacity:'0.5'}); //숨긴걸 보여줌
+                      $('.nav').animate({left:'0px'},200);
+                      $('.Headerspan').animate({width:'20px'},200); // 사이즈조정 
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_pre10.gif');
+                  }
+                  function second(){
+                      $('.nav').animate({left:'-2000px'},200); //다시 숨김
+                      $('.Headerspan').animate({width:'-20px'},200); // 사이즈조정
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_next10.gif');
+                  }   // 개인홈페이지 슬라이드
+
+
+                  $('#logo').animate({opacity:'0'});
+                  $('#header').hide();
+                  $('#footer').slideUp(-1);
+                  $('#section').hide();
+                   $('#section').animate({opacity:'0'});
+                  $('body').css('background-color','#111111')
+                $('.an_box1 img').click(function(){
+                  $('#header').show(1000);
+                  $('#footer').slideDown(2000);
+                  $('#section').show(1000);
+                  $('#section').animate({opacity:'+=1'},2000);
+                  $('#logo').css('background-color','black');
+                  $('#logo').css('border-radius','0px');
+                  $('#logo').css('margin','0px 0px 0px 0px');
+                  $('#logo').css('width','160px');
+                  $('#logo').css('float','left');
+                  $('#logo').animate({opacity:'+=1'},4000);
+                  $('.an_box1 , .an_box1 img').hide(1000);
+                });  //도입부분
+
+
+                  /************* 제이쿼리 부분 *************/
+                </script>
+
+			</div> <!-- Box_A End -->
+             <div class="Box_B"> 
+            	<div class="push_Box"> Menual </div>
+            </div> <!-- Box_B End -->
+
+            <div class="Box_C" id="movies"> 
+              <div class="Onbox_A">
+                <div class="article_A">
+                  <div class="sname">
+                    <h3 class="M_1"> Movie </h3>
+                  </div> <!--메뉴sname-->
+                  <div class="bname">
+                    <div class="Movie_1 AB_1">
+                      <div class="Momenu" onmouseover="onmovie(0)" onmouseout="offmovie(0)">
+                        <a href="#" target="_blank" class="refer_A" ><h2 class="ontext" onmouseover="onbox(0)" onmouseout="offbox(0)">This is a link</h2></a>
+                      </div>
+                    </div>
+                    <div class="Movie_1 AB_2">
+                      <div class="Momenu" onmouseover="onmovie(1)" onmouseout="offmovie(1)">
+                        <a href="#" target="_blank" class="refer_A"><h2 class="ontext" onmouseover="onbox(1)" onmouseout="offbox(1)">This is a link</h2></a>
+                      </div>
+                    </div>
+                    <div class="Movie_1 AB_3">
+                      <div class="Momenu" onmouseover="onmovie(2)" onmouseout="offmovie(2)">
+                        <a href="#" target="_blank" class="refer_A"><h2 class="ontext" onmouseover="onbox(2)" onmouseout="offbox(2)">This is a link</h2></a>
+                      </div>
+                    </div>
+                    <div class="Movie_1 AB_4">
+                      <div class="Momenu" onmouseover="onmovie(3)" onmouseout="offmovie(3)">
+                        <a href="#" target="_blank" class="refer_A"><h2 class="ontext" onmouseover="onbox(3)" onmouseout="offbox(3)">This is a link</h2></a>
+                      </div>
+                    </div>
+                    <div class="Movie_1 AB_5">
+                      <div class="Momenu" onmouseover="onmovie(4)" onmouseout="offmovie(4)">
+                        <a href="#" target="_blank" class="refer_A"><h2 class="ontext" onmouseover="onbox(4)" onmouseout="offbox(4)">This is a link</h2></a>
+                      </div>
+                    </div>
+                    <div class="Movie_1 AB_6">
+                      <div class="Momenu" onmouseover="onmovie(5)" onmouseout="offmovie(5)">
+                        <a href="#" target="_blank" class="refer_A"><h2 class="ontext" onmouseover="onbox(5)" onmouseout="offbox(5)">This is a link</h2></a>
+                      </div>
+                    </div>
+                    <div class="Movie_1 AB_7">
+                      <div class="Momenu" onmouseover="onmovie(6)" onmouseout="offmovie(6)">
+                        <a href="#" target="_blank" class="refer_A" ><h2 class="ontext" onmouseover="onbox(6)" onmouseout="offbox(6)">This is a link</h2></a>
+                      </div>
+                    </div>
+                    <div class="Movie_1 AB_8">
+                      <div class="Momenu" onmouseover="onmovie(7)" onmouseout="offmovie(7)">
+                        <a href="#" target="_blank" class="refer_A" ><h2 class="ontext" onmouseover="onbox(7)" onmouseout="offbox(7)">This is a link</h2></a>
+                      </div>
+                    </div>
+                  </div> <!--메뉴bname-->
+                </div>
+              </div>
+            </div> <!-- Box_C End -->
+
+            <script>
+            var onlinks = document.getElementsByClassName("refer_A");
+            var ontexts = document.getElementsByClassName('ontext');
+             for(var i=0 ;i<ontexts.length;i++){
+                ontexts[i].style.opacity=0;
+            }
+              function onmovie(n) {
+                onlinks[n].style.background ="rgba(" + 0 +","+ 0+"," + 0 +"," + 0.7 +")"
+                onlinks[n].style.border= 1+"px solid #ffffff";
+                ontexts[n].style.opacity=1;
+              }
+              function offmovie(n) {
+                onlinks[n].style.background ="rgba(" + 0 +","+ 0+"," + 0 +"," + 0 +")"
+                onlinks[n].style.border= "";
+                ontexts[n].style.opacity=0;
+              }
+              function onbox(n){
+                ontexts[n].style.background = "#ffffff";
+              }
+              function offbox(n){
+                ontexts[n].style.background = "";
+              }
+            </script>
+
+            <div class="Box_D"> 
+              <div class="Onbox_B">
+                <div class="article_B">
+                </div>
+              </div>
+            </div> <!-- Box_D End -->
+
+            <div class="Box_E"> 
+              <div class="Onbox_C"> menu </div>
+            </div> <!-- Box_D End -->
+
+            <div class="Box_F"> 
+              <div class="Onbox_D"> menu </div>
+            </div> <!-- Box_D End -->
+
+            <div class="Box_G"> 
+              <div class="Onbox_E"> menu </div>
+            </div> <!-- Box_D End -->
+
+        <div id="footer" onmouseover="onlight(1)">
+          <div class="FooterPage"> footer </div>
+          <div class="FooterBox whitehover">
+            <div class="FooterMAIN">
+              <div class="FooterLeft"> © 2016 by TEAM PROJECT </div>
+              <div class="FooterRight">  
+                <ul>
+                  <li>TEST</li>
+                  <li>TEST</li>
+                  <li>TEST</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> <!-- footer End -->
+    </div> <!-- wrap End -->
+
+    <script>
+      var under = document.getElementsByClassName('underline');
+      var picte = document.getElementsByClassName('pic_width');
+      var pic = ["home_hover.png","movie_hover.png","tips_hover.png","about_hover.png","event_hover.png"]
+        var pic2 = ["home.png","movie.png","tips.png","about.png","event.png"]
+        var x=0;
+        window.onscroll = function() {scrolls()};
+        scrolls();
+        function scrolls() {
+          if(document.body.scrollTop >= 0 && document.body.scrollTop < 400){
+            x=0;
+            ege();
+            movemove(0);
+          }
+          else if(document.body.scrollTop > 400 ){
+            x=1
+            ege();
+            movemove(1);          }
+          }
+   
+      function movemove(n) {
+        under[n].style.borderBottom =1+"px solid white";
+            under[n].style.color ="white";
+            picte[n].src= "./menu/"+pic[n];
+      }
+      function ege() {
+        for(i=0;i<under.length;i++){
+                under[i].style.color="#9f9f9f";
+                under[i].style.borderBottom ="";
+                picte[i].src= "./menu/"+pic2[i]
+            }
+          }
+      function onlight(n){
+            movemove(n);
+        }
+        function offlight(){
+          for(i=0;i<under.length;i++){
+            if(i!=x){
+                  under[i].style.color="#9f9f9f";
+                  under[i].style.borderBottom ="";
+                  picte[i].src= "./menu/"+pic2[i];
+                }
+        }
+
+        }
+    </script>
+</body>
+</html>

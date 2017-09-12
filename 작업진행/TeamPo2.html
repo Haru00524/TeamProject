@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>TeamPo</title>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <style type="text/css">
+
+/************************************** Library 영역 **************************************/
+
+/* Slideshow container */
+.slideshow-container {max-width:100%; height:700px; position: relative; margin: 0px; auto;}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  top: 45%;
+  width: auto;
+  padding: 50px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {right: 0; border-radius: 3px 0 0 3px;}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {background-color: rgba(255,255,255,0.2);}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Slide box 영역 추가 @@@ 수정 */
+.Slide_Box {text-align:center; wdith:100%; height:25px; margin-top:-5px;}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor:pointer;
+  height: 20px;
+  width: 20px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border:2px solid  #CBC1C1;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {background-color: #5D7976;}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name:fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .slprev, .slnext,.text {font-size: 11px}
+}
+
+/************************************** Library 영역 **************************************/
+
+*{margin:0; padding:0;} /* 초기화 */
+        
+html,body{width:100%; height:100%; overflow-x:hidden; float:left;}
+
+#wrap {width:100%; height:100%;}
+#header {width:100%; height:100px; background-color:#f1f1f1;} /* ( +100 ) */
+
+/************************************** jquery 위한 CSS **************************************/
+   #header span {position:absolute; left:0; top:7px;}
+
+        .nav{width:15%; height:20%; position:absolute; left:0; top:6%; z-index:5; background:#e8ebf0; border-right:1px solid #bbbbbb; float:left; margin:1px 0 0 -1px;}
+        .nav span    {position:absolute; cursor:pointer; right:-17px; top:8px;} /* 개인홈페이지부분*/
+
+/************************************** jquery 위한 CSS **************************************/
+
+
+#section {width:100%; height:750px; background-color:#4641D9;} /* ( total_750 ) */
+#footer {width:100%; height:120px; background-color:#99004C; clear:both;} /* ( +120 ) */
+
+.centers {width:1900px; height:100px; margin:0px auto; }
+.centersA {width:1800px; height:100px; margin:0px auto; }
+.centers1 {width:420px; height:98px; float:left; border:1px solid black;}
+.centers2 {width:420px; height:98px; float:right; border:1px solid black;}
+.centersMenu {width:1000px; height:100px; background-color:white; margin:0px auto;}
+
+
+
+
+.Box_A {width:100%; height:700px;} /* ( +700 ) */
+		
+.Box_B {width:100%; height:50px; background-color:#D5D5D5;} /* ( +50 ) */
+.push_Box {width:1000px; height:49px; margin:0px auto; border:1px solid black;}
+		
+.AddressPage {width:1000px; height:118px; margin:0px auto; border:1px solid black;}
+
+.L_img{ /*재생 버튼 정지 버튼의 css*/
+  position: absolute;
+  width: 900px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  margin-top: -350px;
+  margin-left: -450px;
+  z-index: 2;
+  opacity: 0.7;
+
+}
+.L_click{ /*재생과 정지버튼이 안보이는데*/
+  opacity: 0;
+  transition: 0.5s;
+}
+.L_click:hover{ /*hover시 보인다.*/
+  opacity: 1;
+}
+.L_hide{
+  display: none;
+}
+.L_hight{
+  height: 700px;
+  background: black;
+}
+#videoeffect{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba( 0 , 0 , 0 , 0.7);
+  display: none;
+  z-index: 0.5;
+}
+
+</style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+        	<div class="centers">
+          <div class="centers1">
+             <span><img src="http://static1.naver.net/w9/btn_pre10.gif" id="L_display" alt=""></span>
+          <div class="nav"> <!-- 개인홈페이지 부분--></div>
+          </div> <!--좌측 네비게이션-->
+          <div class="centers2"></div> <!--우-->
+          <div class="centersA"> <!--1800 사이즈를 준다. -->
+            <div class="centersMenu">
+              
+            </div>
+          </div> <!-- A-->
+
+            </div> <!-- centers End 헤더중앙메뉴부분 -->
+      	</div> <!-- header End -->
+        <div id="section">
+        <div id="videoeffect"><!--비디오가 재생시 어두워짐-->
+        </div>
+        	<div class="Box_A"> 
+                   <div class="slideshow-container">
+                   
+                        <div class="mySlides fade">
+                          <img src="sivilwar.jpg" id="L_pic1" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played1" onclick="playMovie(1)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused1" onclick="pauseMovie(1)"> <!--스탑시 비디오 정지-->
+                          </div>
+                          <div id="L_hight1" class="L_hide L_hight"> <!--비디오 div-->
+                            <video id="L_video1" height="100%" width="100%" preload="none"> <!--비디오 div-->
+                            <source src="Orphan.mp4" type="video/mp4"> </source> <!--비디오 파일 재생 -->
+                            </video>
+                          </div>
+                          
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="Inception.jpg" id="L_pic2" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played2" onclick="playMovie(2)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused2" onclick="pauseMovie(2)">
+                          </div>
+                          <div id="L_hight2" class="L_hide L_hight">
+                            <video id="L_video2" height="100%" width="100%" preload="none">
+                            <source src="CONJURING.mp4" type="video/mp4"> </source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="베테랑.jpeg" style="width:100%; height:700px;">
+                          <div class="text">Caption 3</div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="conjuring.jpg" style="width:100%; height:700px;">
+                          <div class="text">Caption 4</div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="bonil.jpg" style="width:100%; height:700px;">
+                          <div class="text">Caption 5</div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="A_6.jpg" style="width:100%; height:700px;">
+                          <div class="text">Caption 6</div>
+                        </div>
+                        
+                        <a class="prev" id="changeimg" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" id="changeimg1" onclick="plusSlides(1)">❯</a>
+                        
+                        </div>
+                        <br>
+                        <div class="Slide_Box">
+                          <span class="dot" onclick="currentSlide(1)"></span> 
+                          <span class="dot" onclick="currentSlide(2)"></span> 
+                          <span class="dot" onclick="currentSlide(3)"></span> 
+                          <span class="dot" onclick="currentSlide(4)"></span> 
+                          <span class="dot" onclick="currentSlide(5)"></span> 
+                          <span class="dot" onclick="currentSlide(6)"></span> 
+                        </div>
+                        
+				<script>
+                var slideIndex = 1;
+                showSlides(slideIndex);
+                
+                function plusSlides(n) {
+                  showSlides(slideIndex += n);
+                }
+                
+                function currentSlide(n) {
+                  showSlides(slideIndex = n);
+                }
+                
+                function showSlides(n) {
+                  var i;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (n > slides.length) {slideIndex = 1}    
+                  if (n < 1) {slideIndex = slides.length} ;
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  slides[slideIndex-1].style.display = "block";
+                  dots[slideIndex-1].classList.add("active");
+                }
+                
+                /************* 비디오 재생 화면  전환한다. **************/
+                noplay=setInterval('autoSlides()',3000);
+                  function playMovie(i) { //재생 이미지 클릭시 함수 작동
+                   
+                   switch(i){
+                    case 1:
+                    case 2: {
+                        clearInterval(noplay);
+                        document.getElementById('L_video'+i).play();  // 비디오를 재생하는 것
+                        document.getElementById('L_video'+i).style.display='block'; //비디오를 재생햇을때 비디오가 보이게
+                        document.getElementById('L_paused'+i).style.display='block'; //비디오를 재생했을때 정지 이미지 소환
+                        document.getElementById('L_played'+i).style.display='none'; //비디오를 재생했을때 재생 이미지 삭제
+                        document.getElementById('L_pic'+i).style.display='none'; //그림이 들어가는 div 삭제
+                        document.getElementById('L_hight'+i).style.display='block'; //비디오를 재생했을때 비디오 밖 div block
+                        document.getElementById('videoeffect').style.display='block' //동영상 재생 뒷 배경 어두워짐
+                        document.getElementById('changeimg').style.display='none';   //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        document.getElementById('changeimg1').style.display='none'; //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        first(); //영상 재생시제이쿼리가 들어감
+
+                    break;
+
+                    }
+
+
+                  }
+                }
+                  function pauseMovie(i) { //정지 이미지 클릭시 함수 적용
+                    
+                    switch(i){
+                      case 1:
+                      case 2: {
+                          document.getElementById('L_video'+i).pause(); // 비디오를 멈추는거
+                          document.getElementById('L_video'+i).style.display='none'; //비디오를 멈첫을때 비디오가 안보이게
+                          document.getElementById('L_paused'+i).style.display='none'; //비디오가 멈첬을때 정지 이미지 삭제
+                          document.getElementById('L_played'+i).style.display='block'; //비디오가 정지했을때 재생 이미지 소환
+                          document.getElementById('L_pic'+i).style.display='block'; //비디오가 정지 했을때 이미지 div 소환
+                          document.getElementById('L_hight'+i).style.display='none'; //비디오가 정지했을때 비디오 밖 div 사라짐
+                          document.getElementById('videoeffect').style.display='none'; //동영상 정지 뒷 배경 밝아짐
+                          document.getElementById('changeimg').style.display='block';  //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          document.getElementById('changeimg1').style.display='block'; //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          second(); //영상을 정지하면 제이쿼리로 만든 화면이 다시 나옴 
+                    break;
+                      }
+
+                    }
+                  }
+                  /************* 스크립트제작 자동으로 슬라이드 화면을 3초마다 전환한다. **************/
+              
+                function autoSlides() {
+                  var i;
+                  var cnt;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (slideIndex == slides.length) {
+                    slideIndex = 0; 
+                    cnt=0;
+                  } 
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  cnt++;
+                  slideIndex++;
+                  slides[slideIndex-1].style.display = "block";
+                  dots[slideIndex-1].classList.add("active");
+                  
+                }
+                /************* 스크립트제작 **************/
+
+                /************* 제이쿼리 부분 *************/
+
+                   $(document).ready(function() {
+                      $('#header span').toggle(first,second);
+                  });
+                  function first(){
+                      $('.nav').animate({left:'-=25%'},200);
+                      $('#header span').animate({width:'100%'},200);   
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_next10.gif'); 
+
+                  }
+                  function second(){
+                      $('.nav').animate({left:'+=25%'},200);
+                      $('#header span').animate({width:'100%'},200);
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_pre10.gif');
+
+                  }   // 개인홈페이지 슬라이드
+
+                  /************* 제이쿼리 부분 *************/
+                </script>
+
+			</div> <!-- Box_A End -->
+             <div class="Box_B"> 
+            	<div class="push_Box"> 긴버튼 메뉴얼 </div>
+            </div> <!-- Box_B End -->
+        </div> 
+        <div id="footer">
+        	<div class="AddressPage"> 푸터영역 </div>
+        </div> <!-- footer End -->
+    </div> <!-- wrap End -->
+</body>
+</html>

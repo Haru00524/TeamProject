@@ -1,0 +1,310 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>자기소개 웹페이지</title>
+  <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script> 
+  <!-- jquery라이브러리 사용링크-->
+ <style>
+
+ 
+
+
+  #tbox{
+    
+    margin:20px auto;
+     
+    text-align:center; /* 밑에 태그가 일일이 영향받음*/
+  }
+
+  #header{
+    height:120px;
+    margin-top:15px;
+    margin-bottom: 10px;
+    margin-left:6px;
+    margin-right:6px;
+    border-bottom:solid black 2px ;
+    border-style: dashed; /* 점선으로 표현*/
+    border-top: none;
+    border-left:none;
+    border-right: none;
+    line-height:120px; 
+    font-size:250%;  
+    font-weight: bold;
+    text-align: left;
+  }
+
+    #main{width:1500px;
+    height:500px;
+    margin-top:20px;
+    margin:0px auto;
+
+  }
+
+
+  #menu{
+    width:1500px;
+    height:100px;
+    margin-top:15px;
+    margin-left:none;
+    margin-right:2px;
+    border:solid 2px;
+  }
+
+  #menu1{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      line-height: 80px;
+      border:solid 2px;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  #menu1:active{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      line-height: 80px;
+      border:solid 2px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+  #menu2{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      border:solid 2px;
+      line-height:80px;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  #menu2:active{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      border:solid 2px;
+      line-height:80px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+  #menu3{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      border:solid 2px ;
+      line-height:80px;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  #menu3:active{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      border:solid 2px ;
+      line-height:80px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+  #menu4{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      border:solid 2px;
+      line-height:80px;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+  #menu4:active{
+      width:120px;
+      height:80px;
+      margin-top:7px;
+      margin-left:12px;
+      margin-right:12px;
+      float:left;
+      border:solid 2px;
+      line-height:80px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+  .content{
+    width:1200px;
+    height:300px;
+    margin-top:5px;
+    float:left;
+  }
+
+  #content1{
+      width:1200px;
+      height:330px;
+      margin-top:10px;
+      border:solid 2px;
+      border-bottom-style: dashed;
+      float:left;
+      text-align: left;
+    }
+
+  .content2{
+      width:1200px;
+      height:116px;
+      border:solid 2px;
+      border-top-style: dashed;
+      text-align: left;
+      font-size: 20px;
+      font-weight: bold;
+      position: relative; /* 상위 태그 */
+      display: inline-block;
+   }
+
+  .content2-content{
+      position:absolute; /* 하위 태그 = 상위 테이블에서 절대적인 위치*/
+      display: none;
+  }
+                                     /* :hover 반응형 선택자로 커서를 놓을때 반응함*/
+  .content2:hover > .content2-content{ /* content2의 자손인 content2-content 선택*/
+      display: inline-block;
+      margin-bottom: 100px;
+      box-shadow: 0px 0px 20px black;
+      z-index: 1;  /* 어떤 것이 겹쳤을때 보여주는 순서를 정함 값이 높을수록 먼저나옴*/
+  } 
+
+  #time1{
+    width: 50px;
+    height: 50px;
+    float: left;
+   }
+
+  #time2{
+    width: 600px;
+    height: 500px;
+  }
+
+  .desc1{
+      padding: 20px;
+      box-shadow: 0px 0px 10px black;
+  }
+
+  #aside{
+    width:200px;
+    height:450px;
+    margin-top:15px;
+    border:solid 2px;
+    float:right;
+  }
+
+  #footer{
+    font-size:40px;
+    font-weight: bold;
+    height:100px;
+    margin-top:90px;
+    margin-bottom: 20px;
+    margin-left:6px;
+    margin-right:6px;
+    border:solid black 2px ;
+    border-top: none;
+    border-left:none;
+    border-right: none;
+    border-bottom-style: dashed;
+    line-height:100px; 
+    padding-top:10px;
+    padding-bottom:-10px; 
+  }
+  
+
+ </style>
+ </head>
+ <body>
+ <div id="tbox">
+  <div id="header">1301075 2WDA 김태영</div> <!-- header-->
+  <div id="main">
+    <div id="menu">
+    <div id="menu1" onclick="menu(1)">자기소개</div>
+    <div id="menu2" onclick="menu(2)">시간표</div>
+    <div id="menu3" onclick="menu(3)">다시보기</div>
+    <div id="menu4" onclick="menu(4)">Return</div>
+  </div> <!--menu-->
+
+   <div class="content">
+      <div id="content1"></div> <!-- content1-->
+      <div class="content2">mouse over me<img src="time.jpg" id="time1" alt="시간표">
+      <div class="content2-content"><img src="time.jpg" id="time2" alt="시간표">
+        <div class="desc1">2WDA 시간표입니다.</div>
+      </div>
+   </div> <!-- content2-->
+   </div> <!-- content -->
+
+    <div id="aside"></div> <!-- aside -->
+    </div> <!-- main-->
+  <div id="footer">영진전문대학 컴퓨터정보계열</div>
+</div> <!-- 전체 tbox-->
+<script>
+    function menu(num) {
+      if(num==1){ //클릭한게 메뉴1이면
+        document.getElementById('content1').innerHTML="나이는 24살이고, 현재 청도에서 통학이 힘들어서 자취중입니다. 이 JavaScript를 잘해낼 수 있을진 모르겠지만 열심히 해보겠습니다.";
+        $('#menu1').click(function(){ //클릭한게 메뉴1이면 함수를 실행, jquery
+        $('#header').slideUp(1000);   //헤더부분을 1000값의 속도로 올려라
+        $('#footer').slideUp(1000);   //푸터부분을 1000값의 속도로 올려라
+        });
+      }
+      else if(num==2){
+        document.getElementById('content1').innerHTML= "2DWA 시간표입니다.";
+        $('#content1').slideUp(); 
+        $('#menu2').click(function(){
+        $('#header').slideUp(1000);
+        $('#footer').slideUp(1000);
+        $('#content1').slideDown(5000); //값이 클수록 느림
+        });
+      }
+      else if(num==3){
+        $('#menu3').click(function(){
+        $('#aside').slideUp(1000);
+        $('#content1').slideUp(1000);
+        });
+      }
+      else if(num==4){  //다시 원상복귀
+        document.getElementById('content1').innerHTML="";
+        $('#menu4').click(function(){
+        $('#header').slideDown(1000);
+        $('#aside').slideDown(1000);
+        $('#content1').slideDown(1000);
+        $('#footer').slideDown(1000);
+        });
+      }
+    }
+  
+</script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+</head>
+<body>
+<div>
+	<div id="question">액션영화를 좋아해여?</div>
+<label><input type="radio" name="Movie" value="1" id="true">YES</label>
+<label><input type="radio" name="Movie" value="2" class="sel">NO</label><br>
+<button id="selector" onclick="selectMovie()">제출</button>
+<div id="result">
+
+</div>
+</div>
+<script>
+	var Random;
+	var object = document.getElementsByName('Movie');
+	var questions=document.getElementById('question');
+	var actions = ["레이드", "옹박", "이퀄리브리엄", "매트릭스", "쾌찬차"];
+	var blockbuster = ["매드 맥스", "어벤져스", "다이하드4", "터미네이터2", "프로메테우스"];
+	var Music =["위플래쉬(강추)", "송포유", "스쿨오브락", "어거스트 러쉬", "미녀는 괴로워"];
+	var Melo =["노트북", "지금 만나러 갑니다", "인생은 아름다워", "티파니의 아침", "엽기적인 그녀"];
+	var thriller =["파라노말 액티비티", "REC", "스승의 은혜", "GP506", "액소시스트"];
+	var sport =["국가대표", "넉아웃", "워터보이즈", "코리아", "퍼펙트게임"];
+	var noir = ["무간도1", "대부2", "신세계", "올드보이", "아저씨"];
+	var animation =["언어의 정원", "인사이드 아웃", "샌과 치히로의 행방불명", "크리스마스의 악몽", "시간을 달리는 소녀"];
+	var disater =["베리드", "탕산대지진" , "산안드레아스" , "해운대", "미스트"];
+	function selectMovie() {
+		Random = parseInt(Math.random()*5);
+		check();
+		if(select==1){
+			document.getElementById('result').innerHTML=actions[Random];
+		}
+		else if(select==2){
+			check2();
+			document.getElementById('question').innerHTML="블록버스터 영화를 좋아해여?";
+			document.getElementById('selector').setAttribute('onclick','selectMoviel()');
+		}
+	}
+	function check() {
+		for(i=0;i<object.length;i++){
+			if(object[i].checked){
+				select = object[i].value;
+			}
+		}
+	}
+	function check2() {
+		for(i=0;i<object.length;i++){
+			if(object[i].checked){
+				object[i].checked=false;
+			}
+		}
+	}
+	function selectMoviel() {
+		Random = parseInt(Math.random()*5);
+		check();
+		if(select==1){
+			document.getElementById('result').innerHTML=blockbuster[Random];
+		}
+		else if(select==2){
+			check2();
+			document.getElementById('question').innerHTML="블록버스터 영화를 좋아해여?";
+			document.getElementById('selector').setAttribute('onclick','selectMovie2()');
+		}
+	}
+</script>
+</body>
+</html> 

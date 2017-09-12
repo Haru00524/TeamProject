@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+	<style type="text/css">
+	/*body {margin: 10px}*/
+	
+	.gradeE {float:left;}
+
+	.fave{
+	 float:right;
+ 	 width: 54px;
+ 	 height: 50px;
+ 	 background: url(twitter_fave.png) no-repeat;
+ 	 background-position: 0 0;
+ 	 margin:0px 0px 0px -10px;
+	}
+	
+	.fave:hover {
+ 	 transition: background 1s steps(55);
+ 	 z-index:5;
+	</style>
+
+		
+</head>
+<body>
+	<div class="gradeE">
+		<div class="fave" onmouseover="faves(0)" onmouseout="offfaves(0)" onclick="stay()"></div>
+		<div class="fave" onmouseover="faves(1)" onmouseout="offfaves(1)" onclick="stay()"></div>
+		<div class="fave" onmouseover="faves(2)" onmouseout="offfaves(2)" onclick="stay()"></div>
+		<div class="fave" onmouseover="faves(3)" onmouseout="offfaves(3)" onclick="stay()"></div>
+		<div class="fave" onmouseover="faves(4)" onmouseout="offfaves(4)" onclick="stay()"></div>
+	</div>
+</body>
+	<script type="text/javascript">
+		var fave1 = document.getElementsByClassName('fave');
+		function faves(star){
+			for(i=0;i<=star;i++){
+				fave1[i].style.backgroundPosition = ' -3519px 0';
+				fave1[i].style.transition = 'background 1s steps(55)';
+			}
+		}
+		function offfaves(star){
+			for(i=0;i<=star;i++){
+				fave1[i].style.backgroundPosition = '';
+				fave1[i].style.transition = '';
+			}
+		}
+		function stay(){
+			for(i=0;i<=fave1.length;i++){
+				fave1[i].setAttribute('onmouseover', ' ');
+				fave1[i].setAttribute('onmouseout', ' ');
+			}
+		}
+	</script>
+</html>

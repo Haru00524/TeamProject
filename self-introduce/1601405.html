@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset = "utf-8">
+   <title></title>
+   <style>
+
+
+      #m2{
+         text-align: center;
+      }
+      #ma{
+         height: 500px;
+         border: 1px;
+         line-height: 80px;
+      }
+      .mme {
+         width: 700px;
+         height: 500px;
+      }
+   
+      
+      header{
+         background-color:black;
+         text-align: center;
+         color: white;
+         line-height: 130px;
+      }
+      .tabletit{
+         text-align: center;
+         display: none;
+
+      }
+
+
+      section {
+         height: 100%; 
+         overflow-y: auto;
+         overflow-x: auto;
+      }
+
+      .hobby {
+         display: none;
+         margin-left: 60px;
+      }
+      nav {
+         text-align: center;
+         float: left;
+         width: 250px;
+         height: 500px;
+         border: 1px solid black;
+         border-left: 0;
+         border-top: 0;
+         border-bottom: 0;
+      }
+      footer {
+         background-color:black;
+         text-align: center;
+         line-height: 40px;
+         height: 50px; 
+         border: 2px 
+         font-size: 22px;
+         color: white;
+      }
+
+      .pmain{
+         float: left;
+         height: 20px; 
+         margin-left: 20px;
+         width: 200px;
+         height: 200px;
+         font-size: 20px;
+      }
+      #ppmain{
+         float: left;
+         margin-left: 50px;
+         font-weight: bold;
+         font-size: 25px;
+
+      }
+      #scd {
+         height: 400px;
+         width: 700px;
+         margin-top: -525px;
+         margin-left: 40px;
+      }
+
+      th {
+         width: 200px;
+         height: 50px;
+         font-size: 20px;
+
+
+      }
+
+      td {
+         height: 50px;
+         text-align: center;
+         font-size: 15px;
+      }
+
+
+      .profile {
+         display: block;
+      }
+      caption {
+         margin-bottom: 25px;
+      }
+      .head{
+         font-size:40px; 
+         font-weight: bold
+
+      }
+
+   </style>
+</head>
+
+
+<!--바디 시작-->
+<body>
+   
+   <!--헤더 시작-->
+   <header>
+   <div class ="head">
+      1601405 - 정성재 
+   </div>
+   </header>
+   <!--헤더 끝-->
+   
+
+   <div id = "ma">
+   <!--메뉴 클릭시 화면 바뀜-->
+      <nav>
+         <div>
+         <a href="#" onclick="menu(0)"><div class="m2"><h2>Profile</h2></a>
+         <a href="#" onclick="menu(1)"><div class="m2"><h2>Schdule</h2></a>
+         <a href="#" onclick="menu(2)"><div class="m2"><h2>Hobby</h2></a>
+         </div>
+      </nav>
+<section>
+      <div class = "mme">
+         <div class = "profile">
+            <div id="ppmain">
+               <img src = "사진2.png">
+               안녕하세요 컴퓨터 정보계열 2학년<br>재학중인 정성재 자기소개 페이지 입니다<br>아직 다룰줄도 잘 모르고 최대한 만드는 데로<br>만들어 봤으니 잘봐주셨으면 좋겠습니다.<br>
+               아울러 앞으로 2년이라는 시간이 남은 만큼 <br>
+               잘지냈으면 좋겠습니다.
+            </div>
+         </div>   
+      </div>
+      
+      <div id = "schdule">
+         <div id="scd">
+         <TABLE border="2">
+         <CAPTION><h1>WDA시간표</h1></CAPTION>
+            <TR id = "tabletit">
+               <th> </th>
+                <th>월</th>  
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>                      
+                <th>일</th>
+                   
+            </TR>
+            <TR>
+               <td>1</td>
+               <td></td>  
+               <td></td> 
+               <td>리눅스</td>
+               <td>JavaScript</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>2</td>
+               <td></td>  
+               <td>JavaScript</td>
+               <td>리눅스</td>
+               <td>JavaScript</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>3</td>
+               <td></td>  
+               <td>직업기초능력</td>
+               <td>리눅스</td>
+               <td>전공영어</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>4</td>
+               <td></td>  
+               <td>DB언어</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>5</td>
+               <td></td>  
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>6</td>
+               <td>Java</td>  
+               <td>컴퓨터구조</td>
+               <td>DB언어</td>
+               <td>컴퓨터구조</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>7</td>
+               <td>Java</td>  
+               <td>컴퓨터구조</td>
+               <td>DB언어</td>
+               <td>컴퓨터구조</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>8</td>
+               <td>Java</td>  
+               <td>전공영어</td>
+               <td>Java</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            <TR>
+               <td>9</td>
+               <td></td>  
+               <td></td>
+               <td>Java</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </TR>
+            </TABLE>      
+         </div>
+         </div>
+         </div>
+         
+
+         
+         <div class = "hobby">
+         <CAPTION><h1 align="center">Hobby</h1></CAPTION>
+         저의 취미는 축구와 자전거 타기 입니다.<br>
+         축구는 매주 일요일 칠성고에서 하고 있으며,<br>
+         자전거는 매년 4대강길 꾸준히 가고 있습니다.<br>
+          </div>
+          </div>
+
+      </div>
+      </section>
+      <footer>
+
+         1601405 - Jung Sung Jae
+      </footer>   
+
+
+   </div>
+   <script>
+      function menu(num){
+         if(num==0){
+            document.getElementById("ppmain").innerHTML=
+            "자기소개<br>안녕하세요 저의 이름은 정성재 입니다<br>나이는 25살이고<br>사는 곳은 대구 비산동에 살고 있습니다.<br>1남 1녀이고 아래로는 동생 1명있습니다<br>Phone : 010 - 9554 - 6737<br>E-mail : tjdwo564@naver.com"
+         }
+         else if(num==1){
+            document.getElementById("ppmain").innerHTML="";
+         }
+         else if(num==2){
+            document.getElementById("ppmain").innerHTML="저의 취미는 축구와 자전거 타기 입니다.<br>축구는 매주 일요일 칠성고에서 하고 있습니다<br>혹시 축구에 관심이 많다거나<br>하고 싶으신 분들은 오전 7시30분까지 칠성고 운동장 오시면 됩니다.<br> 자전거는 매년 4대강길 꾸준히 종주 중입니다.";
+         }
+      }
+
+
+</script>
+
+</body>
+</html>

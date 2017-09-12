@@ -1,0 +1,453 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>1201256 장재민 사이트</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{margin:0; padding:0;} /* 초기화 */
+		
+		html,body{width:100%; height:100%; overflow-x:hidden;}
+
+		li {float:left;}
+
+		#frame {
+			width:100%;
+			height:100%;	
+		}
+		.header {
+			background-color:#f1f1f1;
+			width:100%;
+			height:170px;
+			margin-bottom:15px;
+			border-top:1px solid #f1f1f1; /*헤더값 줄선없애기 */
+			display:block;
+		}
+		.enoughB {
+			width:100%;
+			float:left;
+			margin-top:22px; /* 빈공간을 이용하여 폰트상하 조절장치 */
+		}
+		.headerA {
+			width:1000px;
+			margin:0 auto; /*폰트 가운데 정렬 박스 */
+		}
+		.headerText {
+		}
+		.headerText a{ 
+			text-decoration: none;
+    		font-weight:bolder;
+    		font-size:30pt;
+    		color:gray; /*그레이색 폰트 */
+		}
+		.enoughA {
+			height:95px; /* 빈공간을 이용하여 메뉴 조절장치 */
+		}
+		.menu {
+			background:#BDBDBD;
+			width:100%;
+			height:61px;
+			border-top:1px solid #6799FF;
+		}
+		.fontS {
+			width:1000px;
+			height:61px;
+			margin:0 auto;
+		}
+		.layer1 {
+			float:right;
+			margin:0px auto; /*<! 폰트박스 위아래, 폰트좌우 조절 */
+			width:760px;
+			height:60px;
+			/*border:1px solid black;*/
+		}
+		.layer1 li{
+			padding:0px 20px;
+			line-height:60px;
+        	display:inline-block;
+			/*background-color: #eca86f;*/
+        }
+    	.layer1 a {
+    		text-decoration:none;
+    		font-weight:normal;
+    		color: #FFFFFF; /*폰트 하얀색 */
+    		-webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+    		-moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+    		-ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+    		-o-transition: all 0.3s ease-out; /* 오페라호환 */
+    		transition: all 0.3s ease-out;  /* 마우스 커서 갖다대면 느리게. */
+    	}
+    	.layer1 a:hover {
+    		background-color:#BDBDBD; /*색이 겹치지않게 헤더 메뉴색깔을줌 네모박스를 없앰*/
+			color: #717070;
+			cursor: pointer; /*폰트오버 태그 */
+    	}
+/*========================================================*/
+    	#warp_img {
+    	}
+		.wrap { /*aside contens 감싸는 태그 */
+			width:1000px;
+			height:800px;
+			margin:0 auto;
+		}
+		.aside {
+			/*border:1px solid green;*/
+			float:left;
+			width:240px;
+			height:800px;
+			margin-bottom:15px;
+			border-top:1px solid #BDBDBD;
+			border-bottom:1px solid #BDBDBD;
+		}
+		.aside_A {
+			/*background-color:gray;*/
+			width:200px;
+			height:760px;
+			margin:auto 20px;
+		}
+		.aside_A_top {
+			width:198px;
+			height:400px;	
+		}
+
+		.aside_A_top li {
+			width:100%;
+			height:60px;
+			line-height:60px;
+			text-align:center;
+			list-style:none;
+        }
+        .aside_A_top a {
+        	color: #008299;
+        	border-bottom:1px solid black;
+    		text-decoration:none;
+    		font-weight:14px;
+    		display:block;
+			width:100%;
+			height:100%;
+    		/*border-bottom:1px solid black; *
+    		color: #677284; /*폰트 하얀색 */
+    		-webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+    		-moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+    		-ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+    		-o-transition: all 0.3s ease-out; /* 오페라호환 */
+    		transition: all 0.3s ease-out;  /* 마우스 커서 갖다대면 느리게. */
+    	}		
+    	.aside_A_top a:hover, a:active {
+			background-color:#65647b;
+			color:white; /*클릭시 화이트 */
+			cursor: pointer;
+			/*폰트오버 태그 */
+		}
+		.aside_A_center {
+			/*border:1px solid black;*/
+			height:360px;
+		}
+		.aside_A_bottom {
+			width: 100%;
+			/*border:1px solid black;*/
+		}
+		.bottom_controller {
+			width: 100%;
+			height:40px;
+		}
+		.bottom_controller li {
+			margin-left:5px;
+			list-style:none;
+			padding-left:10px;
+		}
+		.Time {
+		height:290px;
+		}
+		.Time 2 {
+			margin-left: 20px;
+			width: 180px;
+			height: 42px;
+		}
+
+
+		.contens {
+			/*border:1px solid black;*/
+			float:right;
+			width:740px;
+			height:800px;
+			margin-bottom:15px;
+			border-top:1px solid #BDBDBD;
+			border-bottom:1px solid #BDBDBD;
+		}
+		.section_body {
+			margin:20px 20px;
+			width:700px;
+			height:760px;
+			border:1px solid black;
+		}
+		.body_A {
+			float:left;
+			width:40px;
+			height:760px;
+			/*border:1px solid black;*/
+		}
+/*========================================================*/
+		.wrap_footer {
+			width:100%; /* 푸터 전체 100% */
+			height:180px;
+			clear:both;
+			border-top:1px solid white;
+			background-color:#131631;
+			position:absolute
+			z-index: 1900;
+		}
+		.footer {
+			width:1000px;
+			height:180px;
+			/*border:1px solid black; 푸터중앙정렬 박스 */
+			margin:0 auto;
+		}
+		.box_top {
+			height:60px;
+		}
+		.box_center {
+			height:60px;
+			border:1px solid white;
+		}
+		.left_AAA {
+			margin:9px 0px 0px 0px;
+			float:left;
+		}
+		.left_AAA li {
+			display:inline;
+			padding:10px;	
+        }
+        .left_AAA a {
+    		text-decoration:none;
+    		text-align:left;
+    		font-weight:14;
+    		color: #FFFFFF; /*폰트 하얀색 */
+   			-webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+  			-moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+			-ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+			-o-transition: all 0.3s ease-out; /* 오페라호환 */
+    		transition: all 0.3s ease-out;  /* 마우스 커서 갖다대면 느리게. */
+    	}		
+    	.left_AAA a:hover {
+    		background-color:#131631;/* 네모박스 없앰 색이따로나오지않게 */
+			color: #01b2d1;
+			cursor: pointer; /*폰트오버 태그 */
+		}
+		.right_AAA {
+			margin:9px 0px 0px 0px;
+			float:right;
+		}
+		.right_AAA li {
+			display:inline;
+			padding:10px; 		
+        }
+        .right_AAA a {
+    		text-decoration:none;
+    		text-align:right;
+    		font-weight:14;
+    		color: #FFFFFF; /*폰트 하얀색 */
+    		-webkit-transition: all 0.3s ease-out; /* 크롬,사파리호환 */ 
+    		-moz-transition: all 0.3s ease-out; /* 파이어폭스,모질라호환 */ 
+    		-ms-transition: all 0.3s ease-out; /* 익스플로러호환 */
+    		-o-transition: all 0.3s ease-out; /* 오페라호환 */
+    		transition: all 0.3s ease-out;  /* 마우스 커서 갖다대면 느리게.*/
+    	}		
+    	.right_AAA a:hover {
+    		background-color:#131631;/* 네모박스 없앰 색이따로나오지않게 */
+			color: #01b2d1;
+			cursor: pointer; /*폰트오버 태그 */
+		}
+		.box_bottom {
+			height:60px;
+		}
+		.addre {
+			padding-top: 20px;
+			float:right;
+			color: white;
+		}
+
+	</style>
+<script type="text/javascript">
+	function VAVA(num) {
+
+		var GNode = "<br> <br> <br> &nbsp &nbsp &nbsp &nbsp <img src='good.png'>"
+		var ANode = "<br> <br> <br> &nbsp &nbsp &nbsp &nbsp안녕하세요 반갑습니다. <br> &nbsp &nbsp &nbsp저는 잠자는 것을 좋아하며 취미는 없지만 어떤 일을 계속 해보는것을 좋아하며, <br> &nbsp &nbsp &nbsp한번 파고들면 헤어나올수 없을만큼 깊은?..; 집념을 가지고 있습니다. 대학에 와서 많은 <br> &nbsp &nbsp &nbsp친구들을 만나고 새로운것도 배우고 아직은 배울께많고 미숙한 기술들이 많지만 <br> &nbsp &nbsp &nbsp제 자신에게 독기를 품으며 어려운 일을 해내보고 싶은것이 제꿈입니다. "
+
+		var ENode = "<img src='ffad.png'>"
+		var Zz = "<br> <br> <br> &nbsp &nbsp &nbsp &nbsp <img src='Zzz.png'>"
+		var DaA = "<br> <br> <h1> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 강의 시간표</H1>"
+
+		var DaS = "&nbsp <img src='calendar.png'>"
+
+		if (num==0) {
+			document.getElementById("rebat").innerHTML = Zz + ANode;
+		} else if (num==1) {
+		document.getElementById("rebat").innerHTML = DaA + GNode;
+	} else if (num==2) {
+		document.getElementById("rebat").innerHTML = ENode;
+	} else if (num==3) {
+		document.getElementById("rebat").innerHTML = DaS;
+	}
+}
+</script>
+</head>
+<body>
+	<div id="frame"> <!--전체 골격 조절-->
+		<div class="header">
+					<div class="enoughB">
+					<div class="headerA">
+					<div class="headerText"><a href="1201256.html" target="_blank">JAVA Script</a></div>
+					</div> <!--headerA-->
+					</div> <!--enoughB 폰트와 함께움직임 -->
+					<div class="enoughA"></div> <!--개별적으로 움직이는 박스 상하조절-->
+					<div class="menu">
+					<div class="fontS">
+					<div class="layer1">
+						<ul>
+        					<li><a href="#" id="cacaca1">레이아웃</a></li>
+        					<li><a href="#" id="cacaca2">디자인</a></li>
+        					<li><a href="#" id="cacaca3">구조</a></li>
+        					<li><a href="#" id="cacaca4">지식</a></li>
+        					<li><a href="#" id="cacaca5">색상</a></li>
+        					<li><a href="#" id="cacaca6">유동성</a></li>
+        				</ul>
+        					<script type="text/javascript">
+        					document.getElementById("cacaca1").onclick=function()
+        					{
+        					alert("준비중입니다...");
+					    	}
+        					document.getElementById("cacaca2").onclick=function()
+        					{
+        					alert("준비중입니다...");
+					    	}
+        					document.getElementById("cacaca3").onclick=function()
+        					{
+        					alert("준비중입니다...");
+					    	}
+        					document.getElementById("cacaca4").onclick=function()
+        					{
+        					alert("준비중입니다...");
+					    	}
+        					document.getElementById("cacaca5").onclick=function()
+        					{
+        					alert("준비중입니다...");
+					    	}
+        					document.getElementById("cacaca6").onclick=function()
+        					{
+        					alert("준비중입니다...");
+					    	}
+							</script>
+        			</div>
+      				</div>
+					</div> <!-- layer1 End -->
+		</div> <!-- header가 끝나는곳 -->
+		<div id="wrap_img">
+		<div class="wrap">
+			<div class="aside">
+				<div class="aside_A">
+					<div class="aside_A_top">
+						<ul>
+        					<li><a href="#" id='mypage' onclick="VAVA(0)">자기소개</a></li>
+        					<li><a href="#" class="mypage_a"onclick="VAVA(1)">시간표</a></li>
+        					<li><a href="#" class="mypage_b" onclick="VAVA(2)">이미지</a></li>
+        					<li><a href="#"	class="mypage_c" onclick="VAVA(3)">달력</a></li>
+        					<li><a href="#"	class="mypage_d" id="ccca">클릭클릭!!</a></li>
+        					<script type="text/javascript">
+        						document.getElementById("ccca").onclick=function()
+        						{
+        							alert("Welcome!!!");
+        						}
+        					</script>
+						</ul>
+					</div> <!--aside_A_TOP 끝-->
+					<div class="aside_A_center">
+					<div class="Time"></div>
+						<div class="Timee" id="What_Day">
+						<script>
+						var day;
+						switch (new Date().getDay()) {
+						    case 0:
+						        day = "Sunday";
+						        break;
+						    case 1:
+						        day = "Monday";
+						        break;
+						    case 2:
+						        day = "Tuesday";
+						        break;
+						    case 3:
+						        day = "Wednesday";
+						        break;
+						    case 4:
+						        day = "Thursday";
+						        break;
+						    case 5:
+						        day = "Friday";
+						        break;
+						    case  6:
+						        day = "Saturday";
+						        break;
+						}
+						document.getElementById("What_Day").innerHTML ="&nbsp;" + "&nbsp;" + "&nbsp;" +"&nbsp;" + "&nbsp;" +  "Today is " + day;
+						</script>
+						</div>
+					<div class="Time2">
+						<script type="text/javascript" charset="utf-8">
+							var wqwq = new Date()
+							document.write("&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + (1900 + wqwq.getYear()) + "년 " + 
+								wqwq.getMonth() + "월 " + wqwq.getDate() + "일 ");
+							document.write("<br>"+ "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + wqwq.getHours() + "시 " + wqwq.getMinutes() + "분");
+						</script>
+					</div> <!--Time2-->
+					</div> 
+					<div class="aside_A_bottom">
+					<div class="bottom_controller">
+						<ul>
+						<li><a href="https://www.google.co.kr"><img src="google.png"></a></li>
+        				<li><a href="https://www.youtube.com/"><img src="youtube.png"></a></li>
+        				<li><a href="https://twitter.com"><img src="twitter.png"></a></li>
+        				<li><a href="https://www.facebook.com/"><img src="facebook.png"></a></li>
+        				</ul>
+        			</div> 
+					</div> 
+				</div> <!--aside_A 안쪽골격 --> 
+			</div>
+		<div class="contens">
+			<div class="section_body" id="rebat"><br><br><img src="Cat.png">
+			<div class="body_A" id=""></div>
+			</div>
+		</div>
+		</div> <!-- wrap 끝나는곳 --> 
+		</div> <!--wrap_img End -->
+		<div class="wrap_footer">
+		<div class="footer">
+		<div class="box_top"></div>
+		<div class="box_center">
+			<div class="left_AAA">
+				<ul> <!--왼쪽 내용-->
+        			<li><a href="#">준비중</a></li>
+        			<li><a href="#">준비중</a></li>
+        			<li><a href="#">준비중</a></li>
+        			<li><a href="#">준비중</a></li>
+        			<li><a href="#">준비중</a></li>
+        			<li><a href="http://blog.naver.com/dariane">블로그!!!</a></li>
+        		</ul>
+			</div> <!--내용을 왼쪽방향으로 -->
+			 <div class="right_AAA">
+			 	<ul>
+        			<!--<li><a href="#">내용</a></li>-->
+        			<!--<li><a href="#">내용</a></li>-->
+        			<li><a href="http://www.w3schools.com">Good Site</a></li>
+        		</ul>
+			 </div>  <!--내용을 오른쪽방향으로 -->
+		</div> <!--box_center -->  
+		<div class="box_bottom">
+		<div calss="boxdd"></div> 
+			<address class="addre"><h5>주소 : 경상북도 대구광역시 복현동 </h5></address>
+		</div>  
+		</div> <!-- footer rayout End -->
+		</div> <!-- wrap_footer rayout End -->
+		</div>
+	</div> <!-- frame End-->
+</body>
+</html>

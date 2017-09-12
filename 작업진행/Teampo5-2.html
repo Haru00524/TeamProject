@@ -1,0 +1,841 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>TeamPo</title>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <style type="text/css">
+
+/************************************** Library 영역 **************************************/
+
+/* Slideshow container */
+.slideshow-container {max-width:100%; height:700px; position: relative; margin: 0px auto;}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  top: 45%;
+  width: auto;
+  padding: 50px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {right: 0; border-radius: 3px 0 0 3px;}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {background-color: rgba(255,255,255,0.2);}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Slide box 영역 추가 @@@ 수정 */
+.Slide_Box {text-align:center; width:100%; height:20px; margin:16px; auto;}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor:pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border:2px solid  #CBC1C1;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {background-color: #444141;}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name:fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .slprev, .slnext,.text {font-size: 11px}
+}
+
+/************************************** Library 영역 **************************************/
+
+*{margin:0; padding:0;} /* 초기화 */
+        
+html,body{width:100%; height:100%; overflow-x:hidden; float:left;}
+
+#wrap {width:100%; height:100%; background-color:#070707;}
+#header {width:100%; height:60px; background-color:#111111; border-bottom:1px solid #353535;} /* ( +100 ) */
+#section {width:100%; height:2500px; background-color:#4641D9;} /* ( total_2500 ) */
+#footer {width:100%; height:150px; background-color:#070707; border-top:1px solid #353535; clear:both;} /* ( +150 ) */
+
+#logo{margin-left: 100px;}
+
+/************************************** jquery 위한 CSS **************************************/
+
+#header span {position:fixed; left:0; top:7px; float:left; z-index: 20;}  /* 포지션 픽스 스크롤내려도 고정*/
+.nav{width:15%; height:100%; position:absolute; left:0; top:5%; z-index:5; background:#e8ebf0; 
+border-right:1px solid #bbbbbb; float:left; margin:1px 0 0 -1px; }
+.nav span {position:absolute; cursor:pointer; right:-17px; top:8px;} /* 개인홈페이지부분*/
+
+
+::selection {background:transparent;}
+@-webkit-keyframes 'an_box1' {
+  0% {opacity:0;}
+  50% {opacity:1.0;}
+  100% {opacity:0;}
+}
+.an_box1 {
+  width:230px; height:100px; background:#ccc;
+  border-radius:20px;
+  position:absolute; left:50%; top:60%; margin:-100px 0 0 -100px;
+  -webkit-animation-name:'an_box1';
+  -webkit-animation-duration:1s;
+  -webkit-animation-timing-function:ease;
+  -webkit-animation-iteration-count:infinite;
+}
+
+/************************************** jquery 위한 CSS **************************************/
+
+
+/************************************** 동영상 툴 CSS **************************************/
+
+.L_img{ /*재생 버튼 정지 버튼의 css*/
+  position: absolute;
+  width: 900px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  margin-top: -350px;
+  margin-left: -450px;
+  z-index: 2;
+  opacity: 0.7;
+
+}
+.L_click{ /*재생과 정지버튼이 안보이는데*/
+  opacity: 0;
+  transition: 0.5s;
+}
+.L_click:hover{ /*hover시 보인다.*/
+  opacity: 1;
+}
+.L_hide{
+  display: none;
+}
+.L_hight{
+  height: 700px;
+  background-size:100% 700px;
+}
+
+/************************************** 동영상 툴 CSS **************************************/
+
+/************************************** Menu 메뉴부분 **************************************/
+
+.dropbtn {
+    background-color: #111111;
+    color: #9f9f9f;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right:0px;
+    width:150px;
+}
+
+.dropdown {
+    display: inline-block;
+
+}
+
+.dropdown-content {
+    display:none;
+    background-color: rgba(17,17,17,0.6);
+    width:150px;
+    color:white;
+    position:relative;
+    z-index:4;
+
+  }
+
+.dropdown-content a {
+    color: #9f9f9f; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align:center;
+
+  }
+
+
+
+.dropdown:hover {
+  background-color:;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+
+}
+
+  .underline {
+    display:inline-block;
+    border-bottom-width:1px;
+    border-bottom-color:rgba(17,17,17,0);
+    border-bottom-style:solid;
+    color: #9f9f9f; 
+    font-style:vertical-align:middle;
+    text-align:center;
+  }
+
+/* 버튼을 눌렀을 때의 동작에 대한 속성을 주는 CSS */
+.underline:hover {
+  transition:  0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  border-bottom-color:white;
+  color:white;
+
+}
+.pic_width {
+  width:20px;
+  height:20px;
+  margin-right: 8px; 
+  vertical-align:middle;
+}
+
+.menuA {
+  float:left;
+  margin: 9px 0px 0px 0px;
+}
+
+.Search {
+  position:fixed;
+  width: 250px;
+  height: 30px;
+  background-color: #ffffff;
+  margin:0px 0px 0px 750px;
+}
+
+
+.Rank {
+  position:fixed;
+  clear:both;
+  margin:30px 0px 0px 750px;
+  width:250px;
+  height:30px;
+  background-color: #111111;
+}
+
+.gap_left {padding:0px 0px 5px 8px}
+.gap_rank {margin:10px 0px 10px 45px}
+
+
+.num {
+   color:white;
+}
+  li{
+      display: none;
+      list-style-type: none;
+      color:#9f9f9f;  
+    }
+    li:hover{
+      color: white;
+      border-bottom: 1px solid white;
+    }
+    .hide{
+      display: block;
+    }
+    .num_pop{
+      display: block;
+    }
+    .num_display{
+      display: none;
+    }
+
+#other_box{
+  background-color: #111111;
+  position:relative;
+    z-index:4;
+}
+.font_color{
+   color:white;
+}
+
+.auto{
+  line-height : 30px;
+}
+
+.bar {
+  height: 11px;
+  border-left:1px solid #eaeaea;
+}
+
+
+
+
+/*************검색 CSS *************/
+
+.input {
+  background-image: url('./menu/search.png');
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position:10px 3px;
+
+
+  font-size: 16px;
+  padding-left:40px;
+  width:0px;
+  height:26px;
+  transition:  0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  border: 2px solid #ccc;
+  line-height:20px;
+  float:left;
+
+} 
+.input:hover, .input:focus, .input:active {
+  width:62%;
+
+}
+.search_CSS {
+  float:left;
+  margin:0px 0px 0px 0px;
+  position:relative;
+  height:30px;
+  border: 2px solid #ccc;
+  background-color:#fff;
+  cursor:pointer;
+  color:#888888;
+  width:50px;
+  line-height:10px;
+
+}
+
+.form {
+  float:left;
+  height:30px;
+}
+
+
+
+
+/************************************** Menu 메뉴부분 **************************************/
+
+.centers {width:1300px; height:60px; margin:0px auto; /*border:1px solid white;*/}
+.positionA {width:98.79%; height:60px; position:fixed; z-index:6; background-color:#111111; top:0;}
+.Menu {width:1000px; height:60px; float:right; margin:0px 150px 0px 0px; background-color:#123456; /*border:1px solid white;*/}
+
+
+.Box_A {width:100%; height:700px;} /* ( +700 ) 메인동영상 부분 */
+		
+.Box_B {width:100%; height:50px; background-color:#111111; border-top:1px solid #353535;} /* ( +50 ) */ 
+.push_Box {width:1000px; height:49px; margin:0px auto; color:white; /*border:1px solid white;*/} /* 섹션 중앙정렬박스  */		
+
+.Box_C {width:100%; height:600px; background-color:#111111;} /* 600 */
+.Onbox_A {width:1000px; height:600px; margin:0px auto; border:1px solid white; color:white;}
+
+.Box_D {width:100%; height:900px; background-color:#111111; background-image:url(수정.png); 
+        background-position:10% 10%; background-repeat:repeat; overflow:hidden; background-size:cover;} /* 600 */
+.Onbox_B {width:1000px; height:900px; margin:0px auto; border:1px solid white; color:white;}
+
+
+
+.AddressPage {width:1000px; height:150px; margin:0px auto; border:1px solid white; color:white;} /* 푸터 중앙정렬 박스 */
+
+
+
+</style>
+</head>
+<body>
+    <div class="an_box1"><img src="logo.png"></div>
+    <div class="an_box2"></div>  <!--버튼-->
+    <div id="wrap">
+        <div id="header">
+          <span><img src="http://static1.naver.net/w9/btn_next10.gif" alt=""></span>
+          <div class="nav"> <!-- 개인홈페이지 부분--></div>
+          <div class="positionA">
+            <div class="centers">
+            <img src="logo.png" id="logo">
+            		<div class="Menu"> <!-- 메뉴부분 -->
+
+                 <div class="menuA">
+                  <button href="#Link" class="dropbtn"><img src="./menu/home.png" class="pic_width homes effect"><a class="underline home">Home</a></button>
+                </div>
+
+                <div class="menuA">
+                  <div class="dropdown">
+                   <button class="dropbtn" id="movie"><img src="./menu/movie.png" class="pic_width movies"><a class="underline movie">Movie</a></button>
+                    <div class="dropdown-content">
+                        <a href="#Link1"><div class="underline">액션</div></a>
+                        <a href="#Link2"><div class="underline">느와르</div></a>
+                        <a href="#Link3"><div class="underline">재난 영화</div></a>
+                        <a href="#Link4"><div class="underline">SF</div></a>
+                        <a href="#Link5"><div class="underline">공포</div></a>
+                        <a href="#Link6"><div class="underline">코미디</div></a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn"><img src="./menu/tips.png" class="pic_width tips"><a class="underline tip">Tips</a></button>  
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn"><img src="./menu/about.png" class="pic_width abouts"><a class="underline about">About US</a></button>  
+                </div>
+
+                <div class="menuA">
+                 <button href="#Link" class="dropbtn"><img src="./menu/event.png" class="pic_width events"><a class="underline event">Events</a></button>  
+                </div> <!--menuA End-->
+                  
+                  <!-- 메뉴 스크립트 구현  -->
+                   <script>
+                
+                $(document).ready(function(){
+                    $("#movie").mouseenter(function(){
+                        $(".dropdown-content").slideDown("slow");                    
+                    });
+                    $(".dropdown").mouseleave(function(){
+                        $(".dropdown-content").slideUp("slow");
+                    });
+                });
+               
+                $('.home').hover(function() {
+                    $('.homes').attr('src', './menu/home_hover.png');
+                  }, function() {
+                    $('.homes').attr('src', './menu/home.png');
+                  });
+                $('.movie').hover(function() {
+                    $('.movies').attr('src', './menu/movie_hover.png');
+                  }, function() {
+                    $('.movies').attr('src', './menu/movie.png');
+                  });
+                $('.tip').hover(function() {
+                    $('.tips').attr('src', './menu/tips_hover.png');
+                  }, function() {
+                    $('.tips').attr('src', './menu/tips.png');
+                  });
+                $('.about').hover(function() {
+                    $('.abouts').attr('src', './menu/about_hover.png');
+                  }, function() {
+                    $('.abouts').attr('src', './menu/about.png');
+                  });
+                $('.event').hover(function() {
+                    $('.events').attr('src', './menu/event_hover.png');
+                  }, function() {
+                    $('.events').attr('src', './menu/event.png');
+                  });
+                
+                </script> <!-- 메뉴 스크립트 구현  -->
+
+
+                  <div class="Search"> <!--검색 바 -->
+                    <input type='text' class='input' placeholder="검색해보세요..">
+                    
+                    <button class="search_CSS" onclick="result()">검색</button>
+                    
+                  </div>
+
+                  <div class="Rank">
+                      <div>
+                        <ul class="auto">
+                          <li class="num hide gap_left"> 1위 : 베테랑</li>
+                          <li class="num gap_left"> 2위 : 암살</li>
+                          <li class="num gap_left"> 3위 : 어벤져스:에이지오브울트론</li>
+                          <li class="num gap_left"> 4위 : 국제시장</li>
+                          <li class="num gap_left"> 5위 : 내부자들</li>
+                          <li class="num gap_left"> 6위 : 사도</li>
+                          <li class="num gap_left"> 7위 : 킹스맨:시크릿에이전트</li>
+                          <li class="num gap_left"> 8위 : 미션임파셔블:로그네이션</li>
+                          <li class="num gap_left"> 9위 : 연평해전</li>
+                          <li class="num gap_left"> 10위 : 쥬라기월드</li>
+                        </ul>
+                      </div>
+                      <div id="other_box">
+                        <ul class="other num_display">
+                          <p class="font_color gap_rank">2015 박스오피스 순위</p>
+                          <li class="hide gap_left"> 1위 : 베테랑</li>
+                          <li class="hide gap_left"> 2위 : 암살</li>
+                          <li class="hide gap_left"> 3위 : 어벤져스:에이지오브울트론</li>
+                          <li class="hide gap_left"> 4위 : 국제시장</li>
+                          <li class="hide gap_left"> 5위 : 내부자들</li>
+                          <li class="hide gap_left"> 6위 : 사도</li>
+                          <li class="hide gap_left"> 7위 : 킹스맨:시크릿에이전트</li>
+                          <li class="hide gap_left"> 8위 : 미션임파셔블:로그네이션</li>
+                          <li class="hide gap_left"> 9위 : 연평해전</li>
+                          <li class="hide gap_left"> 10위 : 쥬라기월드</li>
+                        </ul>
+                      </div>
+                    </div>
+              	</div>
+                <script>
+                    var showrank=1;
+                    nointer=setInterval('rank()',2000);
+                     non=setInterval('numbers()',2000);
+                    function rank(){
+                      var ranking=document.getElementsByClassName('num');
+                      if(showrank>=ranking.length){
+                        showrank=0;
+                      }
+                      for (i = 0; i < ranking.length; i++) {
+                        ranking[i].style.display = "none";
+                      }
+                      showrank++;
+                      ranking[showrank-1].style.display = "block";
+                    }
+
+                    $(document).ready(function(){
+                      $(".Rank").mouseenter(function(){
+                        clearInterval(nointer);
+                        clearInterval(non);
+                          $(".auto").addClass("num_display");
+                          $(".other").removeClass("num_display");
+
+                      });
+                      $(".Rank").mouseleave(function(){
+                        clearInterval(nointer);
+                        clearInterval(non);
+                        nointer=setInterval('rank()',2000);
+                        non=setInterval('numbers()',2000);
+                          $(".auto").removeClass("num_display");
+                          $(".other").addClass("num_display");
+
+                          
+                      });
+                  });
+                  function numbers(){
+                      $('.num').animate({opacity:'0'},-1000);
+                      $('.num').animate({opacity:'1'},1000);
+                      $('.num').toggle(aa,bb); // 토글 반복
+                      function aa(){
+                          $('.num').animate({opacity:'+=1'},1000);
+                      }
+                      function bb(){
+                          $('.num').animate({opacity:'0'},-1000);
+                      }
+                  }
+
+             </script>
+            </div> <!-- centers End 헤더중앙메뉴부분 -->
+          </div> <!-- positionA 헤더중앙메뉴부분 -->
+      	</div> <!-- header End -->
+        <div id="section">
+        
+        	<div class="Box_A"> 
+                   <div class="slideshow-container">
+                        <div class="mySlides fade">
+                          <img src="sivilwar.jpg" id="L_pic1" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played1" onclick="playMovie(1)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused1" onclick="pauseMovie(1)"> <!--스탑시 비디오 정지-->
+                          </div>
+                          <div id="L_hight1" class="L_hide L_hight " style="background-image: url(sivilwar.jpg)"> <!--비디오 div-->
+                            <video id="L_video1" height="100%" width="100%" preload="none"> <!--비디오 div-->
+                            <source src="sivilwar.mp4" type="video/mp4"></source><!--비디오 파일 재생 -->
+                            </video>
+                          </div>
+                          
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="Inception.jpg" id="L_pic2" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played2" onclick="playMovie(2)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused2" onclick="pauseMovie(2)">
+                          </div>
+                          <div id="videoeffect">
+                          </div>
+                          <div id="L_hight2" class="L_hide L_hight " style="background-image: url(Inception.jpg)">
+                            <video id="L_video2" height="100%" width="100%" preload="none">
+                           
+                            <source src="Inception.mp4" type="video/mp4"></source>
+                            
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="베테랑.jpeg" id="L_pic3" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played3" onclick="playMovie(3)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused3" onclick="pauseMovie(3)">
+                          </div>
+                          <div id="L_hight3" class="L_hide L_hight " style="background-image: url(베테랑.jpeg)">
+                            <video id="L_video3" height="100%" width="100%" preload="none">
+                            <source src="베테랑.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="conjuring.jpg" id="L_pic4" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played4" onclick="playMovie(4)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused4" onclick="pauseMovie(4)">
+                          </div>
+                          <div id="L_hight4" class="L_hide L_hight " style="background-image: url(conjuring.jpg)">
+                            <video id="L_video4" height="100%" width="100%" preload="none">
+                            <source src="CONJURING.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="bonil.jpg" id="L_pic5" style="width:100%; height:700px;">
+                          <div>
+                            <img src="재생.png"  class="L_img L_click" id="L_played5" onclick="playMovie(5)">
+                            <img src="정지.png"  class="L_img L_hide L_click" id="L_paused5" onclick="pauseMovie(5)">
+                          </div>
+                          <div id="L_hight5" class="L_hide L_hight " style="background-image: url(bonil.jpg)">
+                            <video id="L_video5" height="100%" width="100%" preload="none">
+                            <source src="bonil.mp4" type="video/mp4"></source>
+                            </video>
+                          </div>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <img src="A_6.jpg" style="width:100%; height:700px;">
+                          <div class="text">Caption 6</div>
+                        </div>
+                        
+                        <a class="prev" id="changeimg" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" id="changeimg1" onclick="plusSlides(1)">❯</a>
+                        
+                        </div>
+                
+                        <div class="Slide_Box">
+                          <span class="dot" id="dot1" onclick="currentSlide(1)"></span> 
+                          <span class="dot" id="dot2" onclick="currentSlide(2)"></span> 
+                          <span class="dot" id="dot3" onclick="currentSlide(3)"></span> 
+                          <span class="dot" id="dot4" onclick="currentSlide(4)"></span> 
+                          <span class="dot" id="dot5" onclick="currentSlide(5)"></span> 
+                          <span class="dot" id="dot6" onclick="currentSlide(6)"></span> 
+                        </div>
+				<script>
+                var slideIndex = 1;
+                var i=1;
+                showSlides(slideIndex);
+                
+                function plusSlides(n) {
+                  showSlides(slideIndex += n);
+                }
+                
+                function currentSlide(n) {
+                  showSlides(slideIndex = n);
+                }
+                
+                function showSlides(n) {
+                  var i;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (n > slides.length) {slideIndex = 1}    
+                  if (n < 1) {slideIndex = slides.length} ;
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  slides[slideIndex-1].style.display = "block";  
+                  dots[slideIndex-1].classList.add("active");
+                  
+                 
+                }
+
+                
+                /************* 비디오 재생 화면  전환한다. **************/
+                noplay=setInterval('autoSlides()',4000);
+                  function playMovie(i) { //재생 이미지 클릭시 함수 작동 
+                   switch(i){
+                    case 1:
+                    case 2:
+				            case 3: 
+                    case 4:
+                    case 5:{
+                        clearInterval(noplay);
+                        document.getElementById('L_video'+i).play();  // 비디오를 재생하는 것
+                        document.getElementById('L_video'+i).style.display='block'; //비디오를 재생햇을때 비디오가 보이게
+                        document.getElementById('L_paused'+i).style.display='block'; //비디오를 재생했을때 정지 이미지 소환
+                        document.getElementById('L_played'+i).style.display='none'; //비디오를 재생했을때 재생 이미지 삭제
+                        document.getElementById('L_pic'+i).style.display='none'; //그림이 들어가는 div 삭제
+                        document.getElementById('L_hight'+i).style.display='block'; //비디오를 재생했을때 비디오 밖 div 소환
+                        document.getElementById('changeimg').style.display='none';   //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        document.getElementById('changeimg1').style.display='none'; //동영상 재생시 이미지 넘기는 아이콘 사라짐
+                        for(n=1; n<7; n++)
+                          document.getElementById('dot'+ n).style.display='none';
+                        
+                        //영상 재생시제이쿼리가 들어감
+                    break;
+
+                    }
+
+
+                  }
+                }
+                  function pauseMovie(i) { //정지 이미지 클릭시 함수 적용
+                    
+                    switch(i){
+                      case 1:
+                      case 2:
+					            case 3: 
+                      case 4:
+                      case 5:{
+                        clearInterval(noplay);
+                        noplay=setInterval('autoSlides()',4000);
+                          document.getElementById('L_video'+i).pause(); // 비디오를 멈추는거
+                          document.getElementById('L_video'+i).style.display='none'; //비디오를 멈첫을때 비디오가 안보이게
+                          document.getElementById('L_paused'+i).style.display='none'; //비디오가 멈첬을때 정지 이미지 삭제
+                          document.getElementById('L_played'+i).style.display='block'; //비디오가 정지했을때 재생 이미지 소환
+                          document.getElementById('L_pic'+i).style.display='block'; //비디오가 정지 했을때 이미지 div 소환
+                          document.getElementById('L_hight'+i).style.display='none'; //비디오가 정지했을때 비디오 밖 div 삭제
+                          document.getElementById('changeimg').style.display='block';  //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          document.getElementById('changeimg1').style.display='block'; //동영상 정지시 이미지 넘기는 아이콘 나타남
+                          for(n=1; n<7; n++)
+                            document.getElementById('dot'+ n).style.display='inline-block';
+                           //영상을 정지하면 제이쿼리로 만든 화면이 다시 나옴 
+                    break;
+                      }
+
+                    }
+                  }
+                  /************* 스크립트제작 자동으로 슬라이드 화면을 3초마다 전환한다. **************/
+              
+                function autoSlides() {
+                  var i;
+                  var cnt;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (slideIndex == slides.length) {
+                    slideIndex = 0; 
+                    cnt=0;
+                  } 
+                  for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                     dots[i].classList.remove("active");
+                  }
+                  cnt++;
+                  slideIndex++;
+                  slides[slideIndex-1].style.display = "block";
+                  dots[slideIndex-1].classList.add("active");
+                }
+                /************* 스크립트제작 **************/
+
+                /************* 제이쿼리 부분 *************/
+
+                    $(document).ready(function() {
+                      $('.nav').animate({opacity:'0%'}); //처음에 띄워진걸 숨김
+                      $('.nav').css('background-color','#070707');
+                      $('.nav').css('border-radius','10px');
+                      $('.nav').css('border','10px');
+                      $('#header span').toggle(first,second);  // 토글 반복
+                  });
+                  function first(){
+                      $('.nav').animate({opacity:'0.5'}); //숨긴걸 보여줌
+                      $('.nav').animate({left:'0px'},200);
+                      $('#header span').animate({width:'20px'},200); // 사이즈조정 
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_pre10.gif');
+                  }
+                  function second(){
+                      $('.nav').animate({left:'-2000px'},200); //다시 숨김
+                      $('#header span').animate({width:'-20px'},200); // 사이즈조정
+                      $('span img').attr('src','http://static1.naver.net/w9/btn_next10.gif');
+                  }   // 개인홈페이지 슬라이드
+
+
+                  $('#logo').animate({opacity:'0'});
+                  $('#header').hide();
+                  $('#footer').slideUp(-1);
+                  $('#section').hide();
+                   $('#section').animate({opacity:'0'});
+                  $('body').css('background-color','#111111')
+                $('.an_box1 img').click(function(){
+                  $('#header').show(1000);
+                  $('#footer').slideDown(2000);
+                  $('#section').show(1000);
+                  $('#section').animate({opacity:'+=1'},2000);
+                  $('#logo').css('background-color','white');
+                  $('#logo').css('border-radius','10px');
+                  $('#logo').css('margin','20px 0px');
+                  $('#logo').css('width','140px');
+                  $('#logo').animate({opacity:'+=1'},4000);
+                  $('.an_box1 , .an_box1 img').hide(1000);
+                });  //도입부분
+
+
+                  /************* 제이쿼리 부분 *************/
+                </script>
+
+			</div> <!-- Box_A End -->
+             <div class="Box_B"> 
+            	<div class="push_Box"> 긴버튼 메뉴얼 </div>
+            </div> <!-- Box_B End -->
+
+            <div class="Box_C"> 
+              <div class="Onbox_A"> 메뉴얼 </div>
+            </div> <!-- Box_C End -->
+
+            <div class="Box_D"> 
+              <div class="Onbox_B"> 메뉴얼 </div>
+            </div> <!-- Box_D End -->
+
+
+
+
+
+
+
+        </div> 
+        <div id="footer">
+        	<div class="AddressPage">  <ul>
+                  <li><a href="#" target="_blank">ABC</a></li>
+                  <li><a href="#" target="_blank">ABC</a></li>
+                  <li><a href="#" target="_blank">ABC</a></li>
+                </ul></div>
+        </div> <!-- footer End -->
+    </div> <!-- wrap End -->
+</body>
+</html>
